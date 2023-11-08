@@ -32,8 +32,8 @@ dependencies:
     sdk: flutter
   # Arch
   auto_route: null
-  flutter_bloc: 
   get_it: null
+  flutter_bloc: 
   
   # Deps
   cached_network_image: ^3.3.0
