@@ -7,15 +7,19 @@ class GalleryViewComponent extends StatelessWidget {
   const GalleryViewComponent({
     super.key,
     required this.cards,
+    required this.scrollController,
   });
 
   final List<GalleryCardEntity> cards;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      controller: scrollController,
+      padding: const EdgeInsets.symmetric(horizontal: 2),
       primary: false,
-      itemCount: 29,
+      itemCount: cards.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 1,
         crossAxisCount: 3,

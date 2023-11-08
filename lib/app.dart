@@ -9,6 +9,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const CupertinoApp(
+      debugShowCheckedModeBanner: false,
       title: 'DreamPuppy - Gallery',
       home: GalleryPage(),
       theme: CupertinoThemeData(brightness: Brightness.light),
