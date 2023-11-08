@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # gallery
 
 A new Flutter project.
@@ -14,3 +15,13 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Gallery-DreamPuppy
+Galeria de filhotes a venda
+
+## Arquitetura
+Navegação: auto_route
+IoC: get_it 
+Gerencia de estado: flutter_bloc
+Folder Structure: Clean Dart
+>>>>>>> main
