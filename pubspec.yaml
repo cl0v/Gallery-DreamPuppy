@@ -28,16 +28,14 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
-  # Arch
   auto_route: null
-  get_it: null
-  flutter_bloc: 
-  
-  # Deps
   cached_network_image: ^3.3.0
   cupertino_icons: ^1.0.6
+  flutter:
+    sdk: flutter
+  flutter_bloc: null
+  get_it: null
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0

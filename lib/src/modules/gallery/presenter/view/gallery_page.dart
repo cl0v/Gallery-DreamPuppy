@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
-import '../../domain/gallery_card_entity.dart';
 import '../components/gallery_view.dart';
 
 class GalleryPage extends StatefulWidget {
@@ -15,14 +14,12 @@ class GalleryPage extends StatefulWidget {
 class _GalleryPageState extends State<GalleryPage> {
   final bloc = GalleryPageBloc();
 
-  final List<GalleryCardEntity> _items = [];
-
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     onScrollReachEnd();
-    bloc.add(FetchGalleryCards(amount: 15));
+    bloc.add(FetchGalleryCards(amount: 31));
     super.initState();
   }
 
@@ -50,10 +47,9 @@ class _GalleryPageState extends State<GalleryPage> {
                 child: CircularLoadingWidget(),
               );
             } else if (state is GalleryPageSuccessState) {
-              _items.addAll(state.cards);
               return GalleryViewComponent(
                 scrollController: _scrollController,
-                cards: _items,
+                cards: state.cards,
               );
             } else if (state is GalleryPageFailureState) {
               return Center(
@@ -61,6 +57,7 @@ class _GalleryPageState extends State<GalleryPage> {
               );
             } else {
               return const Center(
+                
                 child: Text('Ocorreu um erro incomum, contate o suporte'),
               );
             }

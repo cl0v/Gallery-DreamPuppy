@@ -1,5 +1,5 @@
 class GalleryCardEntity {
-  final String petId;
+  final int petId;
   final String imageUrl;
 
   GalleryCardEntity({

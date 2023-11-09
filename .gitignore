@@ -72,3 +72,4 @@ app.*.map.json
 /android/app/release
 *.lock
 ios/Flutter/Release.xcconfig
+*.lock

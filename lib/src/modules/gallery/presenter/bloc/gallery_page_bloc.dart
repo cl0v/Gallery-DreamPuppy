@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/src/http/client.dart';
+import 'package:gallery/src/modules/gallery/data/datasources/pet_cards_datasource.dart';
+import 'package:gallery/src/modules/gallery/infra/repositories/gallery_repository.dart';
 
 import '../../domain/gallery_card_entity.dart';
 
@@ -31,21 +34,22 @@ class GalleryPageFailureState implements GalleryPageState {
 }
 
 class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
+  List<GalleryCardEntity> cards = [];
+
   GalleryPageBloc() : super(GalleryPageLoadingState()) {
     on<FetchGalleryCards>(fetch);
   }
 
   FutureOr<void> fetch(
-      FetchGalleryCards event, Emitter<GalleryPageState> emit) {
-    print(event.amount);
-    emit(
-      GalleryPageSuccessState(List.generate(
-        event.amount,
-        (index) => GalleryCardEntity(
-          petId: index.toString(),
-          imageUrl: 'https://i.imgur.com/pCZ6okx.jpeg',
-        ),
-      )),
+      FetchGalleryCards event, Emitter<GalleryPageState> emit) async {
+    final repo = GalleryRepositoryImpl(
+      datasource: PetCardsDatasourceImpl(http: DefaultHttpConsumer()),
     );
+
+    var c = await repo.fetchCards(event.amount);
+    cards.addAll(c);
+    print(cards.length);
+    
+    emit(GalleryPageSuccessState(cards));
   }
 }
