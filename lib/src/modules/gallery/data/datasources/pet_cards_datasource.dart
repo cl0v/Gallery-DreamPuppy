@@ -13,8 +13,10 @@ class PetCardsDatasourceImpl implements PetCardsDatasource {
 
   @override
   Future<List<GalleryCardEntity>> getPetCards(int amount) async {
-    var response =
-        await http.get(path: '/gallery', query: {"amount": amount.toString()});
+    var response = await http.get(
+      path: '/gallery',
+      query: {"amount": amount.toString()},
+    );
     var body = jsonDecode(response.body);
     if (body is List) {
       return body.map<GalleryCardEntity>(GalleryCardMapper.map).toList();

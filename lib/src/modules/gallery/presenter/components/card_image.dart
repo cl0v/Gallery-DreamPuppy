@@ -7,7 +7,7 @@ class CardImageWidget extends StatelessWidget {
     Key? key,
     this.height,
     this.width,
-    this.fit,
+    this.fit = BoxFit.cover,
     required this.radius,
     required this.imageUrl,
   }) : super(key: key);

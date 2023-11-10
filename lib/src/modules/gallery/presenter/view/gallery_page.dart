@@ -19,7 +19,7 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   void initState() {
     onScrollReachEnd();
-    bloc.add(FetchGalleryCards(amount: 31));
+    bloc.add(FetchGalleryCards(amount: 30));
     super.initState();
   }
 
