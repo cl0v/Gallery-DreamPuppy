@@ -14,7 +14,7 @@ class CardImageWidget extends StatelessWidget {
 
   final double? height;
   final double? width;
-  final BoxFit? fit;
+  final BoxFit fit;
   final double radius;
   final String imageUrl;
 
