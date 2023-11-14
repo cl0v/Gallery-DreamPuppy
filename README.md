@@ -1,12 +1,18 @@
 # Gallery-DreamPuppy
-Galeria de filhotes a venda
+Galeria de filhotes a venda <br>
 
 ## Arquitetura
-Navegação: auto_route
-IoC: get_it 
-Gerencia de estado: flutter_bloc
-Folder Structure: Clean Dart
+Navegação: auto_route <br>
+IoC: get_it <br>
+Gerencia de estado: flutter_bloc <br>
+Folder Structure: Clean Dart <br>
 
 
-## Recomendações
-$ dart run build_runner watch --delete-conflicting-outputs
+# Branch (Monetization)
+v00: Não cobrar pelos serviços.<br>
+v01: Subscrição mensal ou pagar por quantidade que anunciar.<br>
+v02: ...<br>
+```
+// O app removerá o contato facilitado do cliente com o canil ao longo do tempo.
+```
+vXX: Cobrar taxa percentual sobre a venda.<br>
