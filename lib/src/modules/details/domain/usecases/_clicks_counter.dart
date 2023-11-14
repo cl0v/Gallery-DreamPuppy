@@ -10,6 +10,7 @@ class ShouldShowReviewerPopUpUsecase {
   /// Conta a quantidade de vezes que o user clicou no botão de compra
   bool call() {
     counter++;
-    return counter % limit == 0;
+    var tmp = counter % limit == 0;
+    return tmp;
   }
 }

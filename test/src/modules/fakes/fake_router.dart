@@ -4,6 +4,7 @@ import 'package:gallery/router.dart';
 class FakeRouter extends AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: DetailsRoute.page, path: '/auth'),
+        AutoRoute(page: LoginRoute.page, path: '/auth'),
+        AutoRoute(page: CanilRoute.page, path: '/canil'),
       ];
 }

@@ -33,27 +33,56 @@ void main() {
       );
 
       group('redirect', () {
-        test('first call', () {
-          usecase = OnGetContactPressedUsecase();
-          expect(() => usecase.call(1), returnsNormally);
-          expect(usecase.lastPath, equals('/auth'));
+        group('unit', () {
+          test('first call', () {
+            usecase = OnGetContactPressedUsecase();
+            expect(() => usecase.call(1), returnsNormally);
+            expect(usecase.lastPath, equals('/auth'));
+          });
         });
-        test('navigate to store diff id', () {
-          usecase = OnGetContactPressedUsecase();
-          expect(() => usecase.call(1), returnsNormally);
-          authIoC.registerSingleton<UserInfo>(UserInfo(jwt: 'Bearer 123'));
+        group('integration', () {
+          test('navigate to store diff id', () {
+            usecase = OnGetContactPressedUsecase();
+            expect(() => usecase.call(1), returnsNormally);
+            expect(usecase.lastPath, RedirectFoward.auth().path);
+            expect(usecase.lastPath, '/auth');
+            // Não deve contar uma contagem quando a página seguinte a ser exibida é a autenticação.
+            expect(usecase.showReview.counter, equals(0));
+            authIoC.registerSingleton<UserInfo>(UserInfo(jwt: 'Bearer 123'));
+            expect(() => usecase.call(1), returnsNormally);
+            expect(usecase.lastPath, '/canil?review=false');
+            expect(usecase.showReview.counter, equals(1));
 
-          expect(() => usecase.call(2), returnsNormally);
-          expect(usecase.lastPath, getRouteName(RedirectFoward.storeDetails)!);
-          expect(() => usecase.call(1), returnsNormally);
-          expect(usecase.lastPath, getRouteName(RedirectFoward.storeDetails)!);
-          expect(() => usecase.call(1), returnsNormally);
-          expect(() => usecase.call(1), returnsNormally);
-          expect(() => usecase.call(1), returnsNormally);
-          expect(() => usecase.call(1), returnsNormally);
-          expect(
-              usecase.lastPath, getRouteName(RedirectFoward.storeWithReview)!);
+            expect(() => usecase.call(2), returnsNormally);
+            expect(usecase.lastPath, RedirectFoward.store().path);
+            expect(usecase.lastPath, '/canil?review=false');
+
+            //TODO: Decidir qual a rota que será chamado quando a pessoa acessar outra rota e a opção de remind choise
+            //todo: Estiver ativada, evitando confusão.
+            // INIT
+            expect(usecase.lastPath, RedirectFoward.store(params: '').path,
+                skip: true, reason: 'Unimplemented');
+            expect(usecase.lastPath, '/canil',
+                skip: true, reason: 'Unimplemented');
+            // END
+
+            expect(() => usecase.call(1), returnsNormally);
+            expect(() => usecase.call(1), returnsNormally);
+            expect(() => usecase.call(1), returnsNormally);
+            expect(() => usecase.call(3), returnsNormally);
+            expect(() => usecase.call(1), returnsNormally);
+            expect(
+              usecase.showReview.counter,
+              equals(usecase.showReview.limit),
+            );
+            expect(
+              usecase.lastPath,
+              RedirectFoward.store(params: 'review=true').path,
+            );
+            expect(usecase.lastPath, '/canil?review=true');
+          });
         });
+
         test('navigate to store same id', skip: true, () {
           usecase = OnGetContactPressedUsecase();
           expect(() => usecase.call(1), returnsNormally);
