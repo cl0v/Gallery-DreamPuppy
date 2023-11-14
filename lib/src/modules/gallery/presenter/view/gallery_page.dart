@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import '../components/gallery_view.dart';
 
+
+@RoutePage()   
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
 

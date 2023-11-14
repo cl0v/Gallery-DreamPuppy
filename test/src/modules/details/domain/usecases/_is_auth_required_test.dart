@@ -5,9 +5,8 @@ import 'package:gallery/src/modules/auth/module.dart';
 import 'package:gallery/src/modules/details/domain/entities/user_info.dart';
 import 'package:gallery/src/modules/details/domain/usecases/on_get_contact_pressed.dart';
 
-class FakeAuthModule extends AuthModule {
-  FakeAuthModule(super.ioc);
-}
+import '../../../fakes/auth_module.dart';
+
 
 void main() {
   group(

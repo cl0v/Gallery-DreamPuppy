@@ -1,43 +1,47 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gallery/widget.dart';
-import '../../../../../modules.dart';
+import 'package:gallery/router.dart';
+import 'package:gallery/src/modules/auth/module.dart';
 import '../entities/redirect_foward.dart';
 import '../entities/user_info.dart';
-import 'package:auto_route/auto_route.dart';
-
 part '_first_time_id.dart';
 part '_is_auth_required.dart';
 part '_clicks_counter.dart';
 
 class OnGetContactPressedUsecase {
-  /// Instanciado apenas 1 vez, no início.
   FirstTimeCanilIdUsecase firstTime = FirstTimeCanilIdUsecase();
   ShouldShowReviewerPopUpUsecase showReview = ShouldShowReviewerPopUpUsecase();
 
+  OnGetContactPressedUsecase();
+
   void call(int idCanil) {
     RedirectFoward path = RedirectFoward.stay;
-    if (IsAuthRequiredUsecase().call()) {
+    var isUserRequired = IsAuthRequiredUsecase().call();
+    if (isUserRequired) {
       path = RedirectFoward.auth;
-    }
-    if (firstTime.call(idCanil)) {
-      path = RedirectFoward.storeDetails;
-      if (showReview.call()) {
+    } else {
+      if (firstTime.call(idCanil)) {
+        path = RedirectFoward.storeDetails;
+      } else if (showReview.call()) {
         path = RedirectFoward.storeWithReview;
       }
+      path = RedirectFoward.storeDetails;
     }
     return redirect(path);
   }
 
   @visibleForTesting
+  String lastPath = '';
+
+  @visibleForTesting
   void redirect(RedirectFoward path) {
     var routeName = getRouteName(path);
-    // router.pushNamed('/books');
-    //TODO: Verificar se a navegação foi executada corretamente.
-    /*
+    /* *!* Verificar se a navegação foi executada corretamente.
       > Existe a possibilidade do user voltar da tela, após ter enfrentado uma tela de autenticação.
     */
-
-    // Navega para a rota.
-    // nav(path);
+    if (routeName == null) {
+      return;
+    }
+    lastPath = routeName;
+    appRouter.pushNamed(routeName);
   }
 }

@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'ioc.dart';
 import 'router.dart';
-import 'main.dart';
 import 'modules.dart';
 import 'package:get_it/get_it.dart';
 import 'src/modules/auth/module.dart';
-import 'src/modules/gallery/presenter/view/gallery_page.dart';
-import 'package:auto_route/auto_route.dart';
 
 final appIoC = GetIt.asNewInstance();
 

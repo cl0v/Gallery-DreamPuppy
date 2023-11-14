@@ -10,6 +10,10 @@ enum RedirectFoward {
 
   /// Redireciona para a tela de dados do canil. Porém o pop-up de avaliação do App
   storeWithReview,
+
+  /// Redireciona para a tela de dados do canil. Porém o pop-up de avaliação do App
+  storeWithRemember,
+}
 }
 
 String? getRouteName(RedirectFoward redir) {
@@ -19,7 +23,9 @@ String? getRouteName(RedirectFoward redir) {
     case RedirectFoward.storeDetails:
       return '/canil';
     case RedirectFoward.storeWithReview:
-      return '/canil?review=true';
+      return '/canil?review=';
+    case RedirectFoward.storeWithRemember:
+      return '/canil?remember=';
     default:
       return null;
   }

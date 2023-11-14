@@ -1,0 +1,8 @@
+name: gallery
+
+scripts:
+  watch:
+    run: dart run build_runner watch --delete-conflicting-outputs
+
+  build:
+    run: dart run build_runner build --delete-conflicting-outputs
