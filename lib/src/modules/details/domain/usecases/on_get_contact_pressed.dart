@@ -6,13 +6,15 @@ import '../entities/redirect_foward.dart';
 import '../entities/user_info.dart';
 part '_first_time_id.dart';
 part '_is_auth_required.dart';
-part '_clicks_counter.dart';
+part '_show_review_popup.dart';
 
 class OnGetContactPressedUsecase {
   //TODO: Esse firstTime não será usado até que tenha a possibilidade de marcar pra retornar
-  
-  // FirstTimeCanilIdUsecase firstTime = FirstTimeCanilIdUsecase();
-  ShouldShowReviewerPopUpUsecase showReview = ShouldShowReviewerPopUpUsecase();
+
+  // FirstTimeCanilIdUsecase firstTimeCallingCanilId = FirstTimeCanilIdUsecase();
+  // InstantRedirectUsecase instantRedirectUsecase = InstantRedirectUsecase();
+  // InstantRedirectUsecase instantRedirectUsecase = InstantRedirectUsecase();
+  ShowReviewerPopUpUsecase showReview = ShowReviewerPopUpUsecase();
 
   OnGetContactPressedUsecase();
 
@@ -24,14 +26,17 @@ class OnGetContactPressedUsecase {
       path = RedirectFoward.auth();
       // TODO: O que acontece se o proprio auth invocar novamente esse metodo depois da auth?
     } else {
-      // if (firstTime.call(idCanil)) {
+      // if (firstTimeCallingCanilId.call(idCanil) && instantRedirectUsecase(idCanil)) {
       //   path = RedirectFoward.store(params: 'remember=false');
       // }
       var params = <String, dynamic>{};
       var entries = <MapEntry<String, dynamic>>[];
       var shouldShowReview = showReview.call();
+      // var a = firstTimeCallingCanilId.call(idCanil) &&
+      //     getUserPreferences.call(idCanil);
 
       entries.add(MapEntry('review', shouldShowReview));
+      entries.add(MapEntry('', shouldShowReview));
       params.addEntries(entries);
       path = RedirectFoward.store(
         params: RedirectParams(params: params).params,

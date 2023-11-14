@@ -3,12 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group(
-    ShouldShowReviewerPopUpUsecase,
+    ShowReviewerPopUpUsecase,
     () {
       test(
         'Verifica o funcionamento dos clicks',
         () async {
-          final usecase = ShouldShowReviewerPopUpUsecase(3);
+          final usecase = ShowReviewerPopUpUsecase(3);
           expect(usecase(), false);
           expect(usecase(), false);
           expect(usecase(), true, reason: 'At (3*) click, should redirect');
