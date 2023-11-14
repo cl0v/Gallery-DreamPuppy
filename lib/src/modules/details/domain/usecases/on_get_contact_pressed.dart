@@ -14,17 +14,19 @@ class OnGetContactPressedUsecase {
   OnGetContactPressedUsecase();
 
   void call(int idCanil) {
-    RedirectFoward path = RedirectFoward.stay;
+    RedirectFoward path = RedirectFoward.stay();
     var isUserRequired = IsAuthRequiredUsecase().call();
     if (isUserRequired) {
-      path = RedirectFoward.auth;
+      // IMP: O user irá entrar e precisará retornar, no lugar de ir pra frente. 
+      path = RedirectFoward.auth();
+      // TODO: O que acontece se o proprio auth invocar novamente esse metodo depois da auth?
     } else {
       if (firstTime.call(idCanil)) {
-        path = RedirectFoward.storeDetails;
+        path = RedirectFoward.store(params: 'remember=false');
       } else if (showReview.call()) {
-        path = RedirectFoward.storeWithReview;
+        path = RedirectFoward.store();
       }
-      path = RedirectFoward.storeDetails;
+      path = RedirectFoward.store();
     }
     return redirect(path);
   }
@@ -33,15 +35,14 @@ class OnGetContactPressedUsecase {
   String lastPath = '';
 
   @visibleForTesting
-  void redirect(RedirectFoward path) {
-    var routeName = getRouteName(path);
+  void redirect(RedirectFoward redir) {
     /* *!* Verificar se a navegação foi executada corretamente.
       > Existe a possibilidade do user voltar da tela, após ter enfrentado uma tela de autenticação.
     */
-    if (routeName == null) {
+    if (redir.path == null) {
       return;
     }
-    lastPath = routeName;
-    appRouter.pushNamed(routeName);
+    lastPath = redir.path ?? lastPath;
+    appRouter.pushNamed(lastPath);
   }
 }

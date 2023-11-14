@@ -1,32 +1,20 @@
-enum RedirectFoward {
+class RedirectFoward {
+  String? path;
+
+  RedirectFoward(this.path);
+
   /// Não redireciona, pode receber um erro.
-  stay,
+  factory RedirectFoward.stay({String? path}) => RedirectFoward(path);
 
   /// Redireciona para a tela de login
-  auth,
+  factory RedirectFoward.auth({String path = '/auth', String params = ''}) =>
+      RedirectFoward(
+        '$path?$params',
+      );
 
   /// Redireciona para a tela de dados do canil
-  storeDetails,
-
-  /// Redireciona para a tela de dados do canil. Porém o pop-up de avaliação do App
-  storeWithReview,
-
-  /// Redireciona para a tela de dados do canil. Porém o pop-up de avaliação do App
-  storeWithRemember,
-}
-}
-
-String? getRouteName(RedirectFoward redir) {
-  switch (redir) {
-    case RedirectFoward.auth:
-      return '/auth';
-    case RedirectFoward.storeDetails:
-      return '/canil';
-    case RedirectFoward.storeWithReview:
-      return '/canil?review=';
-    case RedirectFoward.storeWithRemember:
-      return '/canil?remember=';
-    default:
-      return null;
-  }
+  factory RedirectFoward.store({String path = '/canil', String params = ''}) =>
+      RedirectFoward(
+        '$path?$params',
+      );
 }
