@@ -8,11 +8,10 @@ void main() {
       test(
         'Verifica o funcionamento dos clicks',
         () async {
-          final usecase = ShowReviewerPopUpUsecase(3);
-          expect(usecase(), false);
-          expect(usecase(), false);
-          expect(usecase(), true, reason: 'At (3*) click, should redirect');
-          expect(usecase(), false);
+          final usecase = ShowReviewerPopUpUsecase(2, 3);
+          expect(usecase(), PopUpType.none);
+          expect(usecase(), PopUpType.show);
+          expect(usecase(), PopUpType.store);
         },
       );
     },

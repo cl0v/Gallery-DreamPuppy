@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'ioc.dart';
 import 'router.dart';
 import 'modules.dart';
@@ -34,6 +36,23 @@ class _AppWidgetState extends State<AppWidget> {
         primaryColor: Color(0xF1B1B3FF),
         // primaryColor: Color(0xFFF1B1B3),
         brightness: Brightness.light,
+      ),
+    );
+  }
+}
+
+@RoutePage()
+class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => appRouter.pushNamed('/canil'),
+          child: const Text('Nav'),
+        ),
       ),
     );
   }

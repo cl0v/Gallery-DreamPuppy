@@ -1,15 +1,17 @@
 part of 'on_get_contact_pressed.dart';
 
 enum PopUpType {
-  none,
+  none('false'),
 
   /// Meu proprio tracker
-  show(),
+  show('true'),
 
   /// Loja do app
-  store();
+  store('store');
 
-  const PopUpType();
+  const PopUpType(this.value);
+
+  final String value;
 }
 
 class ShowReviewerPopUpUsecase {
@@ -18,7 +20,7 @@ class ShowReviewerPopUpUsecase {
   /// Adiciona limite para as Lojas
   int limitStores;
 
-  ShowReviewerPopUpUsecase([this.limit = 7, this.limitStores = 45]);
+  ShowReviewerPopUpUsecase([this.limit = 7, this.limitStores = 30]);
 
   int counter = 0;
   //TODO: Garantee only one review per user, save the review note.

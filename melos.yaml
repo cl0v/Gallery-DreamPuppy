@@ -1,6 +1,10 @@
-# Várias opções de config no link[]
+# Várias opções de config no link [https://github.com/invertase/melos/issues/142]
 
 name: gallery
+
+packages:
+  - packages/*
+
 
 scripts:
   watch:

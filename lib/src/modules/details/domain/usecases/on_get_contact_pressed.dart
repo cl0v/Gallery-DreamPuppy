@@ -31,12 +31,10 @@ class OnGetContactPressedUsecase {
       // }
       var params = <String, dynamic>{};
       var entries = <MapEntry<String, dynamic>>[];
-      var shouldShowReview = showReview.call();
       // var a = firstTimeCallingCanilId.call(idCanil) &&
       //     getUserPreferences.call(idCanil);
 
-      entries.add(MapEntry('review', shouldShowReview));
-      entries.add(MapEntry('', shouldShowReview));
+      entries.add(MapEntry('review', showReview.call().value));
       params.addEntries(entries);
       path = RedirectFoward.store(
         params: RedirectParams(params: params).params,
