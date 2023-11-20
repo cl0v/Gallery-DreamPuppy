@@ -7,6 +7,30 @@ packages:
 
 
 scripts:
+  clearIOS:
+    run:  cd ios/ && rm -rf Podfile.lock Pods .symlinks && cd ../
+  
+  clearAll:
+    run: flutter clean && rm pubspec.lock && flutter pub cache repair && melos run clearIOS && flutter pub get
+
+  fixIOS:
+    run: cd ios/ && pod cache clean --all && pod repo update && pod install
+
+  fixAndroid:
+    run: cd android/ && ./gradlew clean
+
+  fixAll:
+    run: melos run fixIOS && melos run fixAndroid
+
+  upgrade:
+    run: flutter channel stable && flutter upgrade --force
+
+  build_runner:
+    run: dart run build_runner build --delete-conflicting-outputs
+
+  configure:
+    run: melos run clearAll && melos run fixAll && melos run upgrade && flutter pub get
+
   watch:
     run: dart run build_runner watch --delete-conflicting-outputs
 
