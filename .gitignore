@@ -74,3 +74,4 @@ app.*.map.json
 ios/Flutter/Release.xcconfig
 *.lock
 ios/Flutter/Debug.xcconfig
+ios/Runner.xcodeproj/project.pbxproj
