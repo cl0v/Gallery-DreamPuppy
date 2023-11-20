@@ -11,3 +11,7 @@ class Module {
 abstract class AuthModule extends Module {
   AuthModule(super.ioc);
 }
+
+abstract class CanilModule extends Module {
+  CanilModule(super.ioc);
+}

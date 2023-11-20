@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gallery/ioc.dart';
 import 'package:gallery/modules.dart';
 import 'package:gallery/router.dart';
-import 'package:gallery/src/modules/auth/module.dart';
+import 'package:gallery/src/modules/auth/auth_module.dart';
 import 'package:gallery/src/modules/details/domain/entities/redirect_foward.dart';
 import 'package:gallery/src/modules/details/domain/entities/user_info.dart';
 import 'package:gallery/src/modules/details/domain/usecases/on_get_contact_pressed.dart';

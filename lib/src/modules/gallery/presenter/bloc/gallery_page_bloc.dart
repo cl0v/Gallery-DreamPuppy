@@ -1,9 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery/src/http/client.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/pet_cards_datasource.dart';
 import 'package:gallery/src/modules/gallery/infra/repositories/gallery_repository.dart';
+import 'package:http/http.dart';
 
 import '../../domain/gallery_card_entity.dart';
 
@@ -43,13 +42,11 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
   FutureOr<void> fetch(
       FetchGalleryCards event, Emitter<GalleryPageState> emit) async {
     final repo = GalleryRepositoryImpl(
-      datasource: PetCardsDatasourceImpl(http: DefaultHttpConsumer()),
+      datasource: PetCardsDatasourceImpl(client: Client()),
     );
 
     var c = await repo.fetchCards(event.amount);
     cards.addAll(c);
-    print(cards.length);
-    
     emit(GalleryPageSuccessState(cards));
   }
 }

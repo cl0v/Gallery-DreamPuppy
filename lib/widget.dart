@@ -1,11 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'ioc.dart';
 import 'router.dart';
 import 'modules.dart';
 import 'package:get_it/get_it.dart';
-import 'src/modules/auth/module.dart';
+import 'src/modules/auth/auth_module.dart';
 
 final appIoC = GetIt.asNewInstance();
 
@@ -21,6 +22,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     // Start loading important things.
     appIoC.registerSingleton<AuthModule>(DefaultAuthModule(authIoC));
+    appIoC.registerSingleton<Client>(Client());
     appIoC.get<AuthModule>().init();
     super.initState();
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/router.dart';
 import 'package:gallery/src/commons/utils/routes_helper.dart';
-import 'package:gallery/src/modules/auth/module.dart';
+import 'package:gallery/src/modules/auth/auth_module.dart';
 import '../entities/redirect_foward.dart';
 import '../entities/user_info.dart';
 part '_first_time_id.dart';

@@ -23,11 +23,19 @@ class CanilPage extends StatefulWidget {
 class _CanilPageState extends State<CanilPage> {
   Future<CanilDetails> fc = Future.delayed(
     const Duration(seconds: 2),
-    () => CanilDetails(name: 'Canil Beira Mar', contacts: [
-      CanilContactInfo(type: ContactType.whatsapp, contact: '5533998525199'),
-      CanilContactInfo(
-          type: ContactType.instagram, contact: 'dreampuppy.com.br')
-    ]),
+    () => CanilDetails(
+        name: 'Canil Beira Mar',
+        address: 'Vitória da Conquista - BA',
+        contacts: [
+          CanilContactInfo(
+            type: ContactType.whatsapp,
+            contact: '5533998525199',
+          ),
+          CanilContactInfo(
+            type: ContactType.instagram,
+            contact: 'dreampuppy.com.br',
+          )
+        ]),
   );
 
   CanilContactInfo? availableContact(
@@ -86,7 +94,7 @@ class _CanilPageState extends State<CanilPage> {
                           .copyWith(fontSize: 24),
                     )),
                     const Gap(8),
-                    const Text('Localizado em Vitória da Conquista - BA'),
+                    Text('Localizado em ${canil.address}'),
                     const MaxGap(32),
                     SocialButtonWidget(
                       icon: Assets.icons.icons8Whatsapp48.image(height: 26),
@@ -101,7 +109,6 @@ class _CanilPageState extends State<CanilPage> {
                       onPressed: instagramBtn,
                       color: const Color.fromARGB(0xFF, 0xbc, 0x2a, 0x8d),
                     ),
-                   
                     const Spacer(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,8 +127,9 @@ class _CanilPageState extends State<CanilPage> {
                                     OnCreditsTapUsecase().call();
                                   },
                                 style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.blue),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.blue,
+                                ),
                               )
                             ],
                           ),
