@@ -14,9 +14,10 @@ AppRouter get appRouter => getIt.get<AppRouter>();
 class AppRouter extends _$AppRouter {
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(page: DetailsRoute.page, path: '/:id'),
         // AutoRoute(page: GalleryRoute.page, path: '/'), //TODO: Gallery Deverá ser a primeira página
-        AutoRoute(page: GalleryRoute.page, path: '/'),
-        AutoRoute(page: DetailsRoute.page, path: '/details/:id'),
+        AutoRoute(page: GalleryRoute.page, path: '/g'),
+        // AutoRoute(page: DetailsRoute.page, path: '/details/:id'),
         AutoRoute(page: LoginRoute.page, path: '/auth'),
         AutoRoute(
           page: CanilRoute.page, /*path: '/canil'*/
