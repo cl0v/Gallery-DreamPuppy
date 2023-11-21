@@ -36,3 +36,19 @@ scripts:
 
   build:
     run: dart run build_runner build --delete-conflicting-outputs
+  
+  intbuild:
+    run: flutter build ios --debug --simulator
+
+  intconfig:
+    run: xcrun simctl install Booted build/ios/iphonesimulator/Runner.app
+  
+  intclean:
+    run: xcrun simctl uninstall Booted com.dreampuppy.gallery
+  
+  inttest:
+    run: maestro test maestro/flow.yaml
+
+  intflow:
+    run: melos run intbuild && melos run intconfig && melos run inttest && melos run intclean
+  

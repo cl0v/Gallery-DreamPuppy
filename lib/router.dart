@@ -1,23 +1,34 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gallery/src/modules/auth/presenter/view/login.dart';
+import 'package:gallery/src/modules/gallery/presenter/view/gallery_page.dart';
 import 'package:go_router/go_router.dart';
 import 'src/modules/canil/presenter/view/canil_page.dart';
-import 'src/modules/gallery/presenter/view/gallery_page.dart';
 import 'src/modules/details/presenter/view/details_page.dart';
 
 GoRouter appRouter = GoRouter(
+  debugLogDiagnostics: kDebugMode,
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => const DetailsPage(),
+      builder: (context, state) => const GalleryPage(),
+    ),
+    GoRoute(
+      name: 'pet',
+      path: '/pet/:id',
+      builder: (context, state) => DetailsPage(
+        petId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
+      ),
     ),
     GoRoute(
       path: '/canil',
-      builder: (context, state) => const CanilPage(),
+      builder: (context, state) => CanilPage(
+        canilId:
+            int.tryParse(state.uri.queryParameters['canilId'].toString()) ?? 0,
+      ),
     ),
     GoRoute(
       path: '/auth',
-      builder: (context, state) => const CanilPage(),
+      builder: (context, state) => const SizedBox(),
     ),
   ],
 );

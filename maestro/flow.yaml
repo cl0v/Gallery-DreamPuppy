@@ -1,0 +1,7 @@
+appId: com.dreampuppy.gallery
+---
+- launchApp
+- tapOn: ".*onGoToCanilPage.*"
+
+# - tapOn: "Falar com Canil"
+- assertVisible: "Contate o Canil"

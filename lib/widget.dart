@@ -26,15 +26,17 @@ class _AppWidgetState extends State<AppWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp.router(
+    return CupertinoApp
+    .router(
       routerConfig: appRouter,
+
       debugShowCheckedModeBanner: false,
       title: 'DreamPuppy - Gallery',
       theme: const CupertinoThemeData(
         //todo ALTERAR a cor do tema
         // primaryColor: Color(0xFF000000),
         // primaryColor: Color(0xFFF1B1B3),
-        brightness: Brightness.light,
+        // brightness: Brightness.light,
       ),
     );
   }

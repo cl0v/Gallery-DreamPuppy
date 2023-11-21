@@ -9,11 +9,16 @@ import 'package:gallery/src/modules/canil/domain/usecases/on_credits_tap_usecase
 import 'package:gallery/src/modules/canil/domain/usecases/on_redirect_contact_usecase.dart';
 import 'package:gallery/src/modules/canil/presenter/components/social_button.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
 //TODO: Get canil id from previous route.
 class CanilPage extends StatefulWidget {
-  const CanilPage({super.key});
+  const CanilPage({
+    super.key,
+    required this.canilId,
+  });
 
+  final int canilId;
   @override
   State<CanilPage> createState() => _CanilPageState();
 }
@@ -43,8 +48,10 @@ class _CanilPageState extends State<CanilPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar:
-          const CupertinoNavigationBar(middle: Text('Contate o Canil')),
+      navigationBar: const CupertinoNavigationBar(
+        middle: Text('Contate o Canil'),
+        previousPageTitle: 'Pet',
+      ),
       child: SafeArea(
         child: FutureBuilder<CanilDetails>(
             future: fc,

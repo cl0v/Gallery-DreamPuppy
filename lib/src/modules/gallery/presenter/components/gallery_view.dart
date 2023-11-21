@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
+import 'package:go_router/go_router.dart';
 
 import 'card_image.dart';
 
@@ -29,7 +30,15 @@ class GalleryViewComponent extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          onTap: () => print('Imagem de cachorro $index'),
+          // onTap: () => Navigator.push(
+          //   context,
+          //   CupertinoPageRoute(
+          //     settings: CupertinoPage(child: DetailsPage(petId: index), name: 'Pet'),
+          //     title: 'Pet',
+          //     builder: (context) => DetailsPage(petId: index),
+          //   ),
+          // ),
+          onTap: () => context.pushNamed('pet', pathParameters: {'id': '$index'}),
           child: CardImageWidget(
             imageUrl: cards[index].imageUrl,
             radius: 5,

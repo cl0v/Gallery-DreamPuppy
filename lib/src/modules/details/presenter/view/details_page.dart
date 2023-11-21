@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/design/colors.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
+import 'package:gallery/src/modules/canil/presenter/view/canil_page.dart';
 import 'package:gallery/src/modules/details/domain/entities/pet_details.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -18,12 +20,12 @@ var l = [
 
 var breed = 'Labrador';
 var gender = PetGender.male;
-var canil_id = 0;
+var canilId = 0;
 // Adicionar a primeira imagem para carregamento mais rápido.
 var firstImg = "https://i.imgur.com/ajzXLgu.jpeg";
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key, this.petId = 0});
+  const DetailsPage({super.key, required this.petId});
 
   final int petId;
 
@@ -41,6 +43,11 @@ class _DetailsPageState extends State<DetailsPage> {
     final size = MediaQuery.of(context).size;
 
     return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(
+        previousPageTitle: 'Galeria',
+        automaticallyImplyLeading: true,
+        middle: Text('Pet'),
+      ),
       child: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -120,14 +127,17 @@ class _DetailsPageState extends State<DetailsPage> {
                             ),
                           ),
                         ])),
-                    CupertinoButton.filled(
-                      onPressed: () {
-                        OnGetContactPressedUsecase(
-                            (uri) => context.go(uri.toString())).call(canil_id);
-                      },
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: const Text(
-                        'Falar com Canil',
+                    Semantics(
+                      label: 'onGoToCanilPage',
+                      child: CupertinoButton.filled(
+                        onPressed: () {
+                          OnGetContactPressedUsecase(
+                              (uri) => context.push(uri.path)).call(canilId);
+                        },
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: const Text(
+                          'Falar com Canil',
+                        ),
                       ),
                     ),
                   ],
