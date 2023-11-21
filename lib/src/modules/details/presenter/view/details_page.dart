@@ -24,6 +24,8 @@ var canilId = 0;
 // Adicionar a primeira imagem para carregamento mais rápido.
 var firstImg = "https://i.imgur.com/ajzXLgu.jpeg";
 
+const borderRadius = Radius.circular(10);
+
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key, required this.petId});
 
@@ -46,7 +48,7 @@ class _DetailsPageState extends State<DetailsPage> {
       navigationBar: const CupertinoNavigationBar(
         previousPageTitle: 'Galeria',
         automaticallyImplyLeading: true,
-        middle: Text('Pet'),
+        middle: Text('Detalhes'),
       ),
       child: SafeArea(
         child: SingleChildScrollView(
@@ -60,8 +62,8 @@ class _DetailsPageState extends State<DetailsPage> {
                     3,
                     (index) => ClipRRect(
                       borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(16),
-                        bottomRight: Radius.circular(16),
+                        bottomLeft: borderRadius,
+                        bottomRight: borderRadius,
                       ),
                       child: CachedNetworkImage(
                         placeholderFadeInDuration: Duration.zero,
@@ -132,7 +134,8 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: CupertinoButton.filled(
                         onPressed: () {
                           OnGetContactPressedUsecase(
-                              (uri) => context.push(uri.path)).call(canilId);
+                                  (uri) => context.push(uri.toString()))
+                              .call(canilId);
                         },
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         child: const Text(
@@ -218,8 +221,8 @@ class ImageLoadingPlaceholder extends StatelessWidget {
       decoration: const BoxDecoration(
         color: hexGreyBackgroundColor,
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(16),
-          bottomRight: Radius.circular(16),
+          bottomLeft: borderRadius,
+          bottomRight: borderRadius,
         ),
       ),
       child: const Center(

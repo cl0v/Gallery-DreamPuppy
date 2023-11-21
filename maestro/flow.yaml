@@ -1,7 +1,9 @@
 appId: com.dreampuppy.gallery
 ---
 - launchApp
+- assertVisible: "Filhotes disponíveis"
+- tapOn: ".*petCardImg1.*"
+- assertVisible: "Detalhes"
 - tapOn: ".*onGoToCanilPage.*"
-
 # - tapOn: "Falar com Canil"
 - assertVisible: "Contate o Canil"

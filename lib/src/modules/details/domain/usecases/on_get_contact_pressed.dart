@@ -19,7 +19,7 @@ class OnGetContactPressedUsecase {
   void call(int idCanil) {
     var path = '';
     var params = <String, dynamic>{};
-    if (IsAuthRequiredUsecase().call()) {
+    if (IsAuthRequiredUsecase().call() && false) {
       // IMP: O user irá entrar e precisará retornar, no lugar de ir pra frente.
       path = '/auth';
       // TODO: O que acontece se o proprio auth invocar novamente esse metodo depois da auth?

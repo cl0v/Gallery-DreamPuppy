@@ -25,7 +25,7 @@ class CanilPage extends StatefulWidget {
 
 class _CanilPageState extends State<CanilPage> {
   Future<CanilDetails> fc = Future.delayed(
-    const Duration(seconds: 2),
+    const Duration(seconds: 0),
     () => CanilDetails(
         name: 'Canil DreamPuppy',
         address: 'Vitória da Conquista - BA',
