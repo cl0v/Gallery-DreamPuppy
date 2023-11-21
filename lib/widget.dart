@@ -1,8 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'ioc.dart';
 import 'router.dart';
 import 'modules.dart';
 import 'package:get_it/get_it.dart';
@@ -30,31 +27,14 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return CupertinoApp.router(
-      routerConfig: getIt<AppRouter>().config(),
+      routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
       title: 'DreamPuppy - Gallery',
       theme: const CupertinoThemeData(
         //todo ALTERAR a cor do tema
-        primaryColor: Color(0xFF000000),
+        // primaryColor: Color(0xFF000000),
         // primaryColor: Color(0xFFF1B1B3),
         brightness: Brightness.light,
-      ),
-    );
-  }
-}
-
-@RoutePage()
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () => appRouter.pushNamed('/canil'),
-          child: const Text('Nav'),
-        ),
       ),
     );
   }

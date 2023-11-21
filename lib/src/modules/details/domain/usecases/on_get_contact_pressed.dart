@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gallery/router.dart';
-import 'package:gallery/src/commons/utils/routes_helper.dart';
 import 'package:gallery/src/modules/auth/auth_module.dart';
-import '../entities/redirect_foward.dart';
 import '../entities/user_info.dart';
 part '_first_time_id.dart';
 part '_is_auth_required.dart';
@@ -16,46 +13,40 @@ class OnGetContactPressedUsecase {
   // InstantRedirectUsecase instantRedirectUsecase = InstantRedirectUsecase();
   ShowReviewerPopUpUsecase showReview = ShowReviewerPopUpUsecase();
 
-  Function(String name) navigate;
+  Function(Uri uri) navigate;
   OnGetContactPressedUsecase(this.navigate);
 
   void call(int idCanil) {
-    RedirectFoward path = RedirectFoward.stay();
-    var isUserRequired = IsAuthRequiredUsecase().call();
-    if (isUserRequired) {
+    var path = '';
+    var params = <String, dynamic>{};
+    if (IsAuthRequiredUsecase().call()) {
       // IMP: O user irá entrar e precisará retornar, no lugar de ir pra frente.
-      path = RedirectFoward.auth();
+      path = '/auth';
       // TODO: O que acontece se o proprio auth invocar novamente esse metodo depois da auth?
     } else {
-      // if (firstTimeCallingCanilId.call(idCanil) && instantRedirectUsecase(idCanil)) {
-      //   path = RedirectFoward.store(params: 'remember=false');
-      // }
-      var params = <String, dynamic>{};
       var entries = <MapEntry<String, dynamic>>[];
-      // var a = firstTimeCallingCanilId.call(idCanil) &&
-      //     getUserPreferences.call(idCanil);
 
       entries.add(MapEntry('review', showReview.call().value));
       params.addEntries(entries);
-      path = RedirectFoward.store(
-        params: RedirectParams(params: params).params,
-      );
+      
+      path = '/canil';
     }
-    return redirect(path);
+
+    return redirect(path, params);
   }
 
   @visibleForTesting
   String lastPath = '';
 
   @visibleForTesting
-  void redirect(RedirectFoward redir) {
+  void redirect(String path, Map<String, dynamic> parameters) {
     /* *!* Verificar se a navegação foi executada corretamente.
       > Existe a possibilidade do user voltar da tela, após ter enfrentado uma tela de autenticação.
     */
-    if (redir.path == null) {
+    if (path.isEmpty) {
+      //TODO: Tratar quando o path for nul (apontando pra ele mesmo)
       return;
     }
-    lastPath = redir.path ?? lastPath;
-    appRouter.pushNamed(lastPath);
+    navigate.call(Uri(path: path, queryParameters: parameters));
   }
 }

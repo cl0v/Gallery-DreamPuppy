@@ -4,18 +4,28 @@ import 'package:go_router/go_router.dart';
 import 'src/modules/canil/presenter/view/canil_page.dart';
 import 'src/modules/gallery/presenter/view/gallery_page.dart';
 import 'src/modules/details/presenter/view/details_page.dart';
-import 'widget.dart';
 
-part 'router.gr.dart';
-
-GoRouter get appRouter =>  GoRouter(
+GoRouter appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) => HomeScreen(),
+      builder: (context, state) => const DetailsPage(),
+    ),
+    GoRoute(
+      path: '/canil',
+      builder: (context, state) => const CanilPage(),
+    ),
+    GoRoute(
+      path: '/auth',
+      builder: (context, state) => const CanilPage(),
     ),
   ],
 );
+
+
+
+
+/*
 
 @AutoRouterConfig(replaceInRouteName: 'Page,Route')
 class AppRouter extends _$AppRouter {
@@ -31,3 +41,4 @@ class AppRouter extends _$AppRouter {
         ),
       ];
 }
+*/

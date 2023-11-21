@@ -1,13 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/design/colors.dart';
-import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/details/domain/entities/pet_details.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../domain/usecases/on_get_contact_pressed.dart';
 import '../formaters/birth_date.dart';
 
 var l = [
@@ -18,10 +18,10 @@ var l = [
 
 var breed = 'Labrador';
 var gender = PetGender.male;
+var canil_id = 0;
 // Adicionar a primeira imagem para carregamento mais rápido.
 var firstImg = "https://i.imgur.com/ajzXLgu.jpeg";
 
-@RoutePage()
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key, this.petId = 0});
 
@@ -121,8 +121,10 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                         ])),
                     CupertinoButton.filled(
-                      onPressed: () {},
-                      
+                      onPressed: () {
+                        OnGetContactPressedUsecase(
+                            (uri) => context.go(uri.toString())).call(canil_id);
+                      },
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: const Text(
                         'Falar com Canil',
@@ -172,20 +174,21 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               const Gap(4),
               InfoWithIconWidget(
-                                icon: Tooltip(
-                                  preferBelow: false,
-                                  message: 'Genética | Linhagem',
-                                  child: SizedBox(
-                                      height: 24,
-                                      child: 
-                                      Assets.icons.cpu.image()
-                                      
-                                      ),
-                                ),
-                                child: Text(
-                                  Placeholder().runtimeType.toString(),
-                                ),
-                              ),
+                icon: Tooltip(
+                  preferBelow: false,
+                  message: 'Genética | Linhagem',
+                  child: SizedBox(
+                    height: 24,
+                    child: Image.asset(
+                      'assets/icons/cpu.png',
+                      color: Colors.green.shade500,
+                    ),
+                  ),
+                ),
+                child: Text(
+                  const Placeholder().runtimeType.toString(),
+                ),
+              ),
             ],
           ),
         ),
