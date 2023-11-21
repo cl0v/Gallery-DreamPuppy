@@ -75,3 +75,4 @@ ios/Flutter/Release.xcconfig
 *.lock
 ios/Flutter/Debug.xcconfig
 ios/Runner.xcodeproj/project.pbxproj
+test/widget_test.dart

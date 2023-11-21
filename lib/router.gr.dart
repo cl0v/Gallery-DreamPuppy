@@ -22,9 +22,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     DetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailsRouteArgs>(
+          orElse: () => const DetailsRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DetailsPage(),
+        child: DetailsPage(
+          key: args.key,
+          petId: args.petId,
+        ),
       );
     },
     FirstRoute.name: (routeData) {
@@ -64,16 +69,40 @@ class CanilRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [DetailsPage]
-class DetailsRoute extends PageRouteInfo<void> {
-  const DetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class DetailsRoute extends PageRouteInfo<DetailsRouteArgs> {
+  DetailsRoute({
+    Key? key,
+    int petId = 0,
+    List<PageRouteInfo>? children,
+  }) : super(
           DetailsRoute.name,
+          args: DetailsRouteArgs(
+            key: key,
+            petId: petId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'DetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<DetailsRouteArgs> page =
+      PageInfo<DetailsRouteArgs>(name);
+}
+
+class DetailsRouteArgs {
+  const DetailsRouteArgs({
+    this.key,
+    this.petId = 0,
+  });
+
+  final Key? key;
+
+  final int petId;
+
+  @override
+  String toString() {
+    return 'DetailsRouteArgs{key: $key, petId: $petId}';
+  }
 }
 
 /// generated route for
