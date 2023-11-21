@@ -35,7 +35,7 @@ class _AppWidgetState extends State<AppWidget> {
       title: 'DreamPuppy - Gallery',
       theme: const CupertinoThemeData(
         //todo ALTERAR a cor do tema
-        primaryColor: Color(0xF1B1B3FF),
+        primaryColor: Color(0xFF000000),
         // primaryColor: Color(0xFFF1B1B3),
         brightness: Brightness.light,
       ),

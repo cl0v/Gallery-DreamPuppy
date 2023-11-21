@@ -12,6 +12,16 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/cpu.png
+  AssetGenImage get cpu => const AssetGenImage('assets/icons/cpu.png');
+
+  /// File path: assets/icons/dna_icon.png
+  AssetGenImage get dnaIcon => const AssetGenImage('assets/icons/dna_icon.png');
+
+  /// File path: assets/icons/drug_medecine_syringue_icon.png
+  AssetGenImage get drugMedecineSyringueIcon =>
+      const AssetGenImage('assets/icons/drug_medecine_syringue_icon.png');
+
   /// File path: assets/icons/icons8-instagram-48.png
   AssetGenImage get icons8Instagram48 =>
       const AssetGenImage('assets/icons/icons8-instagram-48.png');
@@ -20,8 +30,28 @@ class $AssetsIconsGen {
   AssetGenImage get icons8Whatsapp48 =>
       const AssetGenImage('assets/icons/icons8-whatsapp-48.png');
 
+  /// File path: assets/icons/logo512.png
+  AssetGenImage get logo512Png =>
+      const AssetGenImage('assets/icons/logo512.png');
+
+  /// File path: assets/icons/logo512.svg
+  String get logo512Svg => 'assets/icons/logo512.svg';
+
+  /// File path: assets/icons/registered_trademark_icon.png
+  AssetGenImage get registeredTrademarkIcon =>
+      const AssetGenImage('assets/icons/registered_trademark_icon.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [icons8Instagram48, icons8Whatsapp48];
+  List<dynamic> get values => [
+        cpu,
+        dnaIcon,
+        drugMedecineSyringueIcon,
+        icons8Instagram48,
+        icons8Whatsapp48,
+        logo512Png,
+        logo512Svg,
+        registeredTrademarkIcon
+      ];
 }
 
 class Assets {

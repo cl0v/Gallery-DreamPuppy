@@ -16,7 +16,8 @@ class OnGetContactPressedUsecase {
   // InstantRedirectUsecase instantRedirectUsecase = InstantRedirectUsecase();
   ShowReviewerPopUpUsecase showReview = ShowReviewerPopUpUsecase();
 
-  OnGetContactPressedUsecase();
+  Function(String name) navigate;
+  OnGetContactPressedUsecase(this.navigate);
 
   void call(int idCanil) {
     RedirectFoward path = RedirectFoward.stay();
