@@ -27,7 +27,7 @@ class _CanilPageState extends State<CanilPage> {
   Future<CanilDetails> fc = Future.delayed(
     const Duration(seconds: 2),
     () => CanilDetails(
-        name: 'Canil Beira Mar',
+        name: 'Canil DreamPuppy',
         address: 'Vitória da Conquista - BA',
         contacts: [
           CanilContactInfo(
@@ -119,7 +119,7 @@ class _CanilPageState extends State<CanilPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text('Versão 1.0.0 (1)'),
-                        const Text('© 2021-2023 DreamPuppy Ltda.'),
+                        Text('© 2021-${DateTime.now().year} DreamPuppy Ltda.'),
                         RichText(
                           text: TextSpan(
                             text: 'Icons by ',
