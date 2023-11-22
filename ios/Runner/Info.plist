@@ -50,5 +50,7 @@
 			<string>whatsapp</string>
 			<string>instagram</string>
 		</array>
+		<key>UIStatusBarHidden</key>
+		<false/>
 	</dict>
 </plist>
