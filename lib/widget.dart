@@ -31,7 +31,7 @@ class _AppWidgetState extends State<AppWidget> {
       routerConfig: appRouter,
 
       debugShowCheckedModeBanner: false,
-      title: 'DreamPuppy - Gallery',
+      title: 'DreamPuppy - Galeria de Filhotes',
       theme: const CupertinoThemeData(
         //todo ALTERAR a cor do tema
         // primaryColor: Color(0xFF000000),

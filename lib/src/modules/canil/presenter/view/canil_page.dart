@@ -9,7 +9,6 @@ import 'package:gallery/src/modules/canil/domain/usecases/on_credits_tap_usecase
 import 'package:gallery/src/modules/canil/domain/usecases/on_redirect_contact_usecase.dart';
 import 'package:gallery/src/modules/canil/presenter/components/social_button.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 
 //TODO: Get canil id from previous route.
 class CanilPage extends StatefulWidget {

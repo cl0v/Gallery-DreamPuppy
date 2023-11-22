@@ -1,4 +1,4 @@
-part of 'on_get_contact_pressed.dart';
+part of 'on_contact_canil_pressed.dart';
 
 class FirstTimeCanilIdUsecase {
   List<int> ids = [];

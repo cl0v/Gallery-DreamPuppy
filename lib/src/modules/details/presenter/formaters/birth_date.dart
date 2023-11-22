@@ -19,7 +19,8 @@ class BirthDateFormatter{
     final hourS = _put0OnTime(date.hour.toString());
     final minuteS = _put0OnTime(date.minute.toString());
 
-    return 'Nascimento: $dayS $monthS as $hourS:$minuteS';
+    String time = hourS == '00' && minuteS == '00' ? '' :  ' as $hourS:$minuteS';
+    return '$dayS $monthS$time';
   }
 
   String _put0OnTime(String time) {

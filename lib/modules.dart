@@ -2,10 +2,12 @@ import 'package:get_it/get_it.dart';
 
 class Module {
   final GetIt ioc;
-  Module(this.ioc);
 
-  get binds => [];
-  void init() {}
+  Module(this.ioc);
+  
+  void init() => throw UnimplementedError('Implemente o init');
+
+  List get binds => throw UnimplementedError('Implemente o os Binds do módulo');
 }
 
 abstract class AuthModule extends Module {

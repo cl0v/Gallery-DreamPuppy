@@ -1,15 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/design/colors.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
-import 'package:gallery/src/modules/canil/presenter/view/canil_page.dart';
 import 'package:gallery/src/modules/details/domain/entities/pet_details.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../domain/usecases/on_get_contact_pressed.dart';
+import '../../domain/usecases/on_contact_canil_pressed.dart';
 import '../formaters/birth_date.dart';
 
 var l = [
@@ -20,11 +18,14 @@ var l = [
 
 var breed = 'Labrador';
 var gender = PetGender.male;
-var canilId = 0;
+var idCanil = 0;
+var microchip = false;
 // Adicionar a primeira imagem para carregamento mais rápido.
 var firstImg = "https://i.imgur.com/ajzXLgu.jpeg";
+var bornAt = DateTime(2023, 11, 12, 2);
 
 const borderRadius = Radius.circular(10);
+const fontSize = 17.0;
 
 class DetailsPage extends StatefulWidget {
   const DetailsPage({super.key, required this.petId});
@@ -79,8 +80,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                         const ImageLoadingPlaceholder(),
                                   ),
                                 )
-                            : (_, __) =>
-                                const ImageLoadingPlaceholder(), // OU um loading com um fundo bonito e intuitivo
+                            : (_, __) => const ImageLoadingPlaceholder(),
                         imageUrl: l[index],
                         fit: BoxFit.cover,
                       ),
@@ -132,15 +132,21 @@ class _DetailsPageState extends State<DetailsPage> {
                     Semantics(
                       label: 'onGoToCanilPage',
                       child: CupertinoButton.filled(
-                        onPressed: () {
-                          OnGetContactPressedUsecase(
-                                  (uri) => context.push(uri.toString()))
-                              .call(canilId);
+                        onPressed: () async {
+                          var usecase =
+                              OnGetContactPressedUsecase().call(idCanil);
+                          var shouldRedirect = false;
+                          do {
+                            shouldRedirect = await context.pushNamed<bool>(
+                                  usecase.name,
+                                  pathParameters: usecase.params,
+                                  queryParameters: usecase.query,
+                                ) ??
+                                false;
+                          } while (shouldRedirect);
                         },
                         padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: const Text(
-                          'Falar com Canil',
-                        ),
+                        child: const Text('Falar com Canil'),
                       ),
                     ),
                   ],
@@ -156,8 +162,18 @@ class _DetailsPageState extends State<DetailsPage> {
                     color: Colors.brown.shade100,
                   ),
                 ),
-                child: Text(
-                  'Raça: $breed',
+                child: RichText(
+                  text: TextSpan(
+                      text: 'Raça: ',
+                      style: const TextStyle(
+                          color: Colors.black, fontSize: fontSize),
+                      children: [
+                        TextSpan(
+                            text: breed,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        const TextSpan(text: '.'),
+                      ]),
                 ),
               ),
               const Gap(4),
@@ -167,8 +183,18 @@ class _DetailsPageState extends State<DetailsPage> {
                   message: 'Gênero do filhote',
                   child: getGenderIcon(gender),
                 ),
-                child: Text(
-                  'Gênero: ${gender.text}',
+                child: RichText(
+                  text: TextSpan(
+                      text: 'Gênero: ',
+                      style: const TextStyle(
+                          color: Colors.black, fontSize: fontSize),
+                      children: [
+                        TextSpan(
+                            text: gender.text,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        const TextSpan(text: '.'),
+                      ]),
                 ),
               ),
               const Gap(4),
@@ -181,8 +207,18 @@ class _DetailsPageState extends State<DetailsPage> {
                     color: Colors.pink.shade100,
                   ),
                 ),
-                child: Text(
-                  BirthDateFormatter().call(DateTime(2023, 11, 12)),
+                child: RichText(
+                  text: TextSpan(
+                      text: 'Nascimento: ',
+                      style: const TextStyle(
+                          color: Colors.black, fontSize: fontSize),
+                      children: [
+                        TextSpan(
+                            text: BirthDateFormatter().call(bornAt),
+                            style:
+                                const TextStyle(fontWeight: FontWeight.bold)),
+                        const TextSpan(text: '.'),
+                      ]),
                 ),
               ),
               const Gap(4),
@@ -194,12 +230,26 @@ class _DetailsPageState extends State<DetailsPage> {
                     height: 24,
                     child: Image.asset(
                       'assets/icons/cpu.png',
-                      color: Colors.green.shade500,
+                      color: microchip
+                          ? Colors.green.shade500
+                          : Colors.red.shade500,
                     ),
                   ),
                 ),
-                child: Text(
-                  const Placeholder().runtimeType.toString(),
+                child: RichText(
+                  text: TextSpan(
+                      text: 'Microchip',
+                      style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                      children: [
+                        microchip
+                            ? const TextSpan(text: ' ')
+                            : const TextSpan(
+                                text: ' NÃO ',
+                                style: TextStyle(fontWeight: FontWeight.bold)),
+                        const TextSpan(text: 'incluso.'),
+                      ]),
+
+                  // const Placeholder().runtimeType.toString(),
                 ),
               ),
             ],
@@ -210,6 +260,7 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
+/// load de imagem com um fundo bonito e intuitivo
 class ImageLoadingPlaceholder extends StatelessWidget {
   const ImageLoadingPlaceholder({
     super.key,
