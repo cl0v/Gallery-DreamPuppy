@@ -11,7 +11,8 @@ Folder Structure: Clean Dart <br>
 # Branch (Monetization)
 v00: Não cobrar pelos serviços.<br>
 v01: Subscrição mensal ou pagar por quantidade que anunciar.<br>
-v02: ...<br>
+v02: Promover anúncios.
+v03: ...<br>
 ```
 // O app removerá o contato facilitado do cliente com o canil ao longo do tempo.
 ```
