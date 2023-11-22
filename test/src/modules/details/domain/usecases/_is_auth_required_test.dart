@@ -3,7 +3,7 @@ import 'package:gallery/widget.dart';
 import 'package:gallery/modules.dart';
 import 'package:gallery/src/modules/auth/auth_module.dart';
 import 'package:gallery/src/modules/details/domain/entities/user_info.dart';
-import 'package:gallery/src/modules/details/domain/usecases/on_get_contact_pressed.dart';
+import 'package:gallery/src/modules/details/domain/usecases/on_contact_canil_pressed.dart';
 
 import '../../../fakes/auth_module.dart';
 
