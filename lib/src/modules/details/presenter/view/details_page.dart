@@ -159,19 +159,23 @@ class _DetailsPageState extends State<DetailsPage> {
                   message: 'Raça do filhote',
                   child: Icon(
                     Icons.pets,
-                    color: Colors.brown.shade100,
+                    color: Colors.brown.shade400,
                   ),
                 ),
                 child: RichText(
                   text: TextSpan(
                       text: 'Raça: ',
                       style: const TextStyle(
-                          color: Colors.black, fontSize: fontSize),
+                        color: Colors.black,
+                        fontSize: fontSize,
+                      ),
                       children: [
                         TextSpan(
-                            text: breed,
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
+                          text: breed,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         const TextSpan(text: '.'),
                       ]),
                 ),
@@ -230,16 +234,15 @@ class _DetailsPageState extends State<DetailsPage> {
                     height: 24,
                     child: Image.asset(
                       'assets/icons/cpu.png',
-                      color: microchip
-                          ? Colors.green.shade500
-                          : Colors.red.shade500,
+                      color: Colors.green.shade500,
                     ),
                   ),
                 ),
                 child: RichText(
                   text: TextSpan(
                       text: 'Microchip',
-                      style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                      style: const TextStyle(
+                          color: Colors.black, fontSize: fontSize),
                       children: [
                         microchip
                             ? const TextSpan(text: ' ')

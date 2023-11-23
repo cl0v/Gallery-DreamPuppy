@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.topRight,
                   //TODO: Implementar esqueci minha senha
                   child: CupertinoButton(
                     onPressed: () => showCupertinoDialog(
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: const Key('btnForgotPassword'),
                     // onTap: onForgotPassword,
                     child: Text(
-                      'Esqueceu a senha?',
+                      'Esqueceu sua senha?',
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
