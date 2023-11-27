@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/design/colors.dart';
+import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
 import 'package:gap/gap.dart';
@@ -20,6 +21,10 @@ var breed = 'Labrador';
 var gender = PetGender.male;
 var idCanil = 0;
 var microchip = false;
+
+var description =
+    "Um verdadeiro ladrão de chinelos, não pode dar bobeira que você sempre vai achar seu chinelo em cima do sofá.";
+
 // Adicionar a primeira imagem para carregamento mais rápido.
 var firstImg = "https://i.imgur.com/ajzXLgu.jpeg";
 var bornAt = DateTime(2023, 11, 12, 2);
@@ -110,7 +115,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 fontSize: 28,
                                 color: Colors.black,
                                 fontWeight: FontWeight.w300,
-                                letterSpacing: -3),
+                                letterSpacing: -2.5),
                           ),
                           TextSpan(
                             text: '3900',
@@ -125,7 +130,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             text: ',00',
                             style: TextStyle(
                               fontSize: 12,
-                              fontStyle: FontStyle.italic,
+                              // fontStyle: FontStyle.normal,
                             ),
                           ),
                         ])),
@@ -152,7 +157,12 @@ class _DetailsPageState extends State<DetailsPage> {
                   ],
                 ),
               ),
-              const Gap(18),
+              const Gap(12),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(description, style: DefaultTextStyle.of(context).style.copyWith(fontSize: 16),),
+              ),
+              const Gap(12),
               InfoWithIconWidget(
                 icon: Tooltip(
                   preferBelow: false,
@@ -229,28 +239,91 @@ class _DetailsPageState extends State<DetailsPage> {
               InfoWithIconWidget(
                 icon: Tooltip(
                   preferBelow: false,
+                  message: 'Histórico de vacinação',
+                  child: SizedBox(
+                    height: 24,
+                    child: Assets.icons.drugMedecineSyringueIcon
+                        .image(height: 24, color: Colors.red.shade300),
+                  ),
+                ),
+                child: RichText(
+                  overflow: TextOverflow.fade,
+                  text: const TextSpan(
+                    text: 'Vacinas: ',
+                    style: TextStyle(color: Colors.black, fontSize: fontSize),
+                    children: [
+                      TextSpan(
+                        text: '2x ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Pfizer',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: '.'),
+                    ],
+                  ),
+                  // child: Text(formatVaccinationRecordUsecase(
+                  //     pet.vaccineRecord)),
+                ),
+              ),
+              const Gap(4),
+              InfoWithIconWidget(
+                icon: Tooltip(
+                  preferBelow: false,
+                  message: 'Vermífugos aplicados',
+                  child: SizedBox(
+                      height: 24,
+                      child: Icon(
+                        Icons.bug_report,
+                        color: Colors.green.shade300,
+                      )),
+                ),
+                child: RichText(
+                  overflow: TextOverflow.fade,
+                  text: const TextSpan(
+                    text: 'Vermífugos: ',
+                    style: TextStyle(color: Colors.black, fontSize: fontSize),
+                    children: [
+                      TextSpan(
+                        text: '2x ',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(
+                        text: 'Pfizer',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      TextSpan(text: '.'),
+                    ],
+                  ),
+                  // child: Text(formatVaccinationRecordUsecase(
+                  //     pet.vaccineRecord)),
+                ),
+              ),
+              const Gap(4),
+              InfoWithIconWidget(
+                icon: Tooltip(
+                  preferBelow: false,
                   message: 'Genética | Linhagem',
                   child: SizedBox(
                     height: 24,
-                    child: Image.asset(
-                      'assets/icons/cpu.png',
-                      color: Colors.green.shade500,
-                    ),
+                    child: Assets.icons.cpu
+                        .image(height: 24, color: Colors.amber.shade300),
                   ),
                 ),
                 child: RichText(
                   text: TextSpan(
-                      text: 'Microchip',
-                      style: const TextStyle(
-                          color: Colors.black, fontSize: fontSize),
-                      children: [
-                        microchip
-                            ? const TextSpan(text: ' ')
-                            : const TextSpan(
-                                text: ' NÃO ',
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                        const TextSpan(text: 'incluso.'),
-                      ]),
+                    text: 'Microchip: ',
+                    style: const TextStyle(
+                        color: Colors.black, fontSize: fontSize),
+                    children: [
+                      TextSpan(
+                        text: microchip ? 'incluso' : 'NÃO incluso',
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      const TextSpan(text: '.'),
+                    ],
+                  ),
 
                   // const Placeholder().runtimeType.toString(),
                 ),
