@@ -24,6 +24,7 @@ GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      name: 'canil',
       path: '/canil',
       builder: (context, state) => CanilPage(
         canilId:
