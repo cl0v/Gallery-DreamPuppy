@@ -5,8 +5,8 @@ import 'src/modules/canil/presenter/view/canil_page.dart';
 import 'src/modules/puppy/presenter/view/details_page.dart';
 
 abstract class AppRouter {
- List<String> get names => [];
- List<GoRoute> get routes => [];
+  List<String> get names => [];
+  List<GoRoute> get routes => [];
 }
 
 GoRouter appRouter = GoRouter(
