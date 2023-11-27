@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import '../components/gallery_view.dart';
-
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -36,8 +36,9 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Filhotes disponíveis'),
+      navigationBar: CupertinoNavigationBar(
+        leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
+        middle: const Text('Filhotes disponíveis'),
       ),
       child: SafeArea(
         child: BlocBuilder(
@@ -58,7 +59,6 @@ class _GalleryPageState extends State<GalleryPage> {
               );
             } else {
               return const Center(
-                
                 child: Text('Ocorreu um erro incomum, contate o suporte'),
               );
             }
