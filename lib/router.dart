@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:gallery/src/modules/gallery/presenter/view/gallery_page.dart';
 import 'package:go_router/go_router.dart';
-import 'src/modules/auth/auth_routes.dart';
 import 'src/modules/canil/presenter/view/canil_page.dart';
-import 'src/modules/details/presenter/view/details_page.dart';
+import 'src/modules/puppy/presenter/view/details_page.dart';
 
 abstract class AppRouter {
  List<String> get names => [];
@@ -18,8 +17,8 @@ GoRouter appRouter = GoRouter(
       builder: (context, state) => const GalleryPage(),
     ),
     GoRoute(
-      name: 'pet',
-      path: '/pet/:id',
+      name: 'puppy',
+      path: '/puppy/:id',
       builder: (context, state) => DetailsPage(
         petId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
       ),
@@ -31,7 +30,7 @@ GoRouter appRouter = GoRouter(
             int.tryParse(state.uri.queryParameters['canilId'].toString()) ?? 0,
       ),
     ),
-    ...AuthRouter.instance.routes,
+    // ...AuthRouter.instance.routes,
   ],
 );
 

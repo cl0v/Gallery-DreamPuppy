@@ -2,13 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gallery/ioc.dart';
 import 'package:gallery/modules.dart';
 import 'package:gallery/src/modules/auth/auth_module.dart';
-import 'package:gallery/src/modules/details/domain/usecases/on_contact_canil_pressed.dart';
+import 'package:gallery/src/modules/puppy/domain/usecases/on_contact_canil_pressed.dart';
 import 'package:gallery/widget.dart';
 
 import '../../../fakes/auth_module.dart';
 
 void main() {
-
   setUp(() async {
     appIoC.registerSingleton<AuthModule>(FakeAuthModule(authIoC));
   });

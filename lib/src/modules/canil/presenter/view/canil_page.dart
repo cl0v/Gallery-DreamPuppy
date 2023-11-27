@@ -49,7 +49,7 @@ class _CanilPageState extends State<CanilPage> {
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         middle: Text('Contate o Canil'),
-        previousPageTitle: 'Pet',
+        previousPageTitle: 'Detalhes',
       ),
       child: SafeArea(
         child: FutureBuilder<CanilDetails>(

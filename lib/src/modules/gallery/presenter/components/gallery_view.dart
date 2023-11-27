@@ -38,8 +38,10 @@ class GalleryViewComponent extends StatelessWidget {
           //     builder: (context) => DetailsPage(petId: index),
           //   ),
           // ),
-          onTap: () =>
-              context.pushNamed('pet', pathParameters: {'id': '$index'}),
+          onTap: () => context.pushNamed(
+            'puppy',
+            pathParameters: {'id': '$index'},
+          ),
           child: Semantics(
             label: 'petCardImg$index',
             child: CardImageWidget(

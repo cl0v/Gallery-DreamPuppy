@@ -13,25 +13,26 @@ class OnGetContactPressedUsecase {
 
   OnGetContactPressedUsecase();
 
-  ({String name, Map<String, String> params, Map<String, dynamic> query}) call(int idCanil) {
+  ({String name, Map<String, String> params, Map<String, dynamic> query}) call(
+      int idCanil) {
     var name = '';
     var queryParams = <String, dynamic>{};
     var pathParams = <String, String>{};
 
-    queryParams.addEntries(const [
-      MapEntry('fromTitle', detailsPageTitle),
-    ]);
+    // queryParams.addEntries(const [
+    //   MapEntry('fromTitle', detailsPageTitle),
+    // ]);
 
-    if (IsAuthRequiredUsecase().call()) {
-      name = AuthRouter.instance.names.first;
-      pathParams.addEntries(const [
-        MapEntry('redirect', 'true'),
-      ]);
-    } else {
-      // entries.add(MapEntry('review', showReview.call().value));
+    // if (IsAuthRequiredUsecase().call()) {
+    //   name = AuthRouter.instance.names.first;
+    //   pathParams.addEntries(const [
+    //     MapEntry('redirect', 'true'),
+    //   ]);
+    // } else {
+    // entries.add(MapEntry('review', showReview.call().value));
 
-      name = 'canil';
-    }
+    name = 'canil';
+    // }
 
     return (name: name, params: pathParams, query: queryParams);
   }

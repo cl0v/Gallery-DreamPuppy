@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gallery/src/modules/details/domain/usecases/on_contact_canil_pressed.dart';
+import 'package:gallery/src/modules/puppy/domain/usecases/on_contact_canil_pressed.dart';
 
 void main() {
   group(

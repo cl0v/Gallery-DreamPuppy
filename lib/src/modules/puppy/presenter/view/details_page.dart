@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/design/colors.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
-import 'package:gallery/src/modules/details/domain/entities/pet_details.dart';
+import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
