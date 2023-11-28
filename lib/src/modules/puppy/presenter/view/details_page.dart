@@ -12,9 +12,10 @@ import '../../domain/usecases/on_contact_canil_pressed.dart';
 import '../formaters/birth_date.dart';
 
 var l = [
-  "https://i.imgur.com/ajzXLgu.jpeg",
-  "https://i.imgur.com/4nusSJC.jpeg",
-  "https://i.imgur.com/jIFeQdT.jpeg"
+  "https://devapigallery.blob.core.windows.net/cc5c276fa4f14adfb6392c9e52dcc4b3/07c1e718fd2f4995a3d91e7478f9838d.jpeg",
+  "https://devapigallery.blob.core.windows.net/ae4888a3465944b382b30fa444eff6aa/e8c039d278654a3fa59653dbcf80cb71.jpeg",
+  "https://devapigallery.blob.core.windows.net/fc424cb08670490fa5d7c698a4aacef0/d457a9e840df4a0fb7a913a98bca52c8.jpeg",
+  "https://devapigallery.blob.core.windows.net/da6f39e9103c4ceaacc04e25cd12d2fb/209a4b96eb0649c8a9c224035b99b659.jpeg",
 ];
 
 var breed = 'Labrador';
@@ -64,8 +65,9 @@ class _DetailsPageState extends State<DetailsPage> {
               SizedBox(
                 height: size.height / 2.3,
                 child: PageView(
+                  allowImplicitScrolling: true,
                   children: List<Widget>.generate(
-                    3,
+                    l.length,
                     (index) => ClipRRect(
                       borderRadius: const BorderRadius.only(
                         bottomLeft: borderRadius,
@@ -75,6 +77,12 @@ class _DetailsPageState extends State<DetailsPage> {
                         placeholderFadeInDuration: Duration.zero,
                         fadeOutDuration: Duration.zero,
                         fadeInDuration: Duration.zero,
+                        errorWidget: (_, __, ___) => Center(
+                          child: Icon(
+                            CupertinoIcons.exclamationmark_triangle_fill,
+                            color: Colors.red.shade300,
+                          ),
+                        ),
                         placeholder: index == 0
                             ? (c, _) => Hero(
                                   tag: firstImg,
@@ -160,7 +168,11 @@ class _DetailsPageState extends State<DetailsPage> {
               const Gap(12),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text(description, style: DefaultTextStyle.of(context).style.copyWith(fontSize: 16),),
+                child: Text(
+                  description,
+                  style:
+                      DefaultTextStyle.of(context).style.copyWith(fontSize: 16),
+                ),
               ),
               const Gap(12),
               InfoWithIconWidget(

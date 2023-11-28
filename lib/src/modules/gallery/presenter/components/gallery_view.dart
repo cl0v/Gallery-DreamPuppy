@@ -30,14 +30,6 @@ class GalleryViewComponent extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
-          // onTap: () => Navigator.push(
-          //   context,
-          //   CupertinoPageRoute(
-          //     settings: CupertinoPage(child: DetailsPage(petId: index), name: 'Pet'),
-          //     title: 'Pet',
-          //     builder: (context) => DetailsPage(petId: index),
-          //   ),
-          // ),
           onTap: () => context.pushNamed(
             'puppy',
             pathParameters: {'id': '$index'},

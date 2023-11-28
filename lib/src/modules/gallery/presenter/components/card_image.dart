@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 
 class CardImageWidget extends StatelessWidget {
@@ -30,9 +31,19 @@ class CardImageWidget extends StatelessWidget {
         placeholder: (_, __) => const Center(
           child: CircularLoadingWidget(),
         ),
-        errorWidget: (_, __, ___) => const Icon(
-          CupertinoIcons.photo,
-        ),
+        errorWidget: (_, __, err) {
+          //TODO: Implementar log de erro quando a imagem não carrega, exemplo de imagem [https://devapigallery.blob.core.windows.net/ae4888a3465944b382b30fa444eff6aa/e8c039d278654a3fa59653dbcf80cb71.jpeg]
+          return GestureDetector(
+            onTap: () => debugPrint('Deu probleminha'),
+            child: Container(
+              color: Colors.red.shade50,
+              child: Icon(
+                CupertinoIcons.exclamationmark_triangle_fill,
+                color: Colors.red.shade300,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
