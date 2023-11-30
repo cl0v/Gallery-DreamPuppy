@@ -12,7 +12,7 @@ import 'datasource_test.mocks.dart';
 @GenerateNiceMocks([MockSpec<Client>()])
 void main() {
   var client = MockClient();
-  var datasource = PuppyDetailsDatasource(client);
+  var datasource = PuppyDetailsDatasourceImpl(client);
   group(
     'on succ',
     () {
