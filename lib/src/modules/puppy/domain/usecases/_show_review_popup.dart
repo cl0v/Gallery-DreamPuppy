@@ -1,4 +1,4 @@
-part of 'on_contact_canil_pressed.dart';
+part of 'on_contact_kennel_pressed.dart';
 
 enum PopUpType {
   none('false'),

@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import 'router.dart';
 import 'package:get_it/get_it.dart';
 
+import 'src/modules/puppy/puppy_module.dart';
+
 final appIoC = GetIt.asNewInstance();
 
 class AppWidget extends StatefulWidget {
@@ -17,9 +19,11 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
-    appIoC.registerSingleton<Client>(Client());
+    appIoC.registerFactory<Client>(() => Client());
     appIoC.registerSingleton<GalleryModule>(DefaultGalleryModule());
+    appIoC.registerSingleton<PuppyModule>(DefaultPuppyModule());
     appIoC.get<GalleryModule>().init();
+    appIoC.get<PuppyModule>().init();
     //! TODO: DONT WASTE TIME
     // TODO: Usar o modulo de autenticação ja pronto no arquive
     // appIoC.registerSingleton<AuthModule>(DefaultAuthModule(authIoC));

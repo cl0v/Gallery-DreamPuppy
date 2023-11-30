@@ -4,21 +4,27 @@ import 'dart:convert';
 import 'package:gallery/src/http/url.dart';
 import '../domain/entities/pet_details.dart';
 
-class PuppyDetailsDatasource {
+abstract class PuppyDetailsDatasource {
+  Future<(PuppyDetailsEntity?, PuppyDetailsException?)> get(int id);
+}
+
+class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
   final Client client;
 
-  PuppyDetailsDatasource(
+  PuppyDetailsDatasourceImpl(
     this.client,
   );
 
+  @override
   Future<(PuppyDetailsEntity?, PuppyDetailsException?)> get(int id) async {
     var response = await client.get(Uri.parse('$baseUrl/puppies/$id'));
-    
+
     client.close();
 
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
-      return (PuppyDetailsEntity.fromJson(body), null);
+      var puppy = PuppyDetailsEntity.fromJson(body);
+      return (puppy, null);
     }
 
     return (

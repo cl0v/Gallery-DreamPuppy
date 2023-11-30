@@ -9,7 +9,9 @@ class OnGetContactPressedUsecase {
   OnGetContactPressedUsecase();
 
   ({String name, Map<String, String> params, Map<String, dynamic> query}) call(
-      int idCanil) {
+    int puppyId,
+  ) {
+    // TODO: Rename to kennel
     var name = 'canil';
     var queryParams = <String, dynamic>{};
     var pathParams = <String, String>{};

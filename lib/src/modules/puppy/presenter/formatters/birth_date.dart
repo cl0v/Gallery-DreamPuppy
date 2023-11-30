@@ -1,5 +1,6 @@
-class BirthDateFormatter{
-  String call(DateTime date) {
+class BirthDateFormatter {
+  String call(String dateStr) {
+    var date = DateTime.parse(dateStr);
     final month = date.month;
     final monthS = [
       "Jan",
@@ -19,7 +20,7 @@ class BirthDateFormatter{
     final hourS = _put0OnTime(date.hour.toString());
     final minuteS = _put0OnTime(date.minute.toString());
 
-    String time = hourS == '00' && minuteS == '00' ? '' :  ' às $hourS:$minuteS';
+    String time = hourS == '00' && minuteS == '00' ? '' : ' às $hourS:$minuteS';
     return '$dayS $monthS$time';
   }
 
