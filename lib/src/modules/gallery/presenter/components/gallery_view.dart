@@ -32,7 +32,7 @@ class GalleryViewComponent extends StatelessWidget {
         return GestureDetector(
           onTap: () => context.pushNamed(
             'puppy',
-            pathParameters: {'id': '$index'},
+            pathParameters: {'id': cards[index].id.toString()},
           ),
           child: Semantics(
             label: 'petCardImg$index',
