@@ -19,7 +19,7 @@ class BirthDateFormatter{
     final hourS = _put0OnTime(date.hour.toString());
     final minuteS = _put0OnTime(date.minute.toString());
 
-    String time = hourS == '00' && minuteS == '00' ? '' :  ' as $hourS:$minuteS';
+    String time = hourS == '00' && minuteS == '00' ? '' :  ' às $hourS:$minuteS';
     return '$dayS $monthS$time';
   }
 
