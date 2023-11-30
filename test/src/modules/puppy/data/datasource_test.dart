@@ -17,11 +17,17 @@ void main() {
     'on succ',
     () {
       test('get details', () async {
-        var response = Response(jsonEncode(exit_json), 200);
+        var response = Response(jsonEncode(exitJson), 200);
+        var id = 11;
+
         when(
-          client.get(Uri.parse('$baseUrl/puppies/11')),
-        ).thenAnswer((_) async => response);
-        var (data, err) = await datasource.get(11);
+          client.get(Uri.parse('$baseUrl/puppies/$id')),
+        ).thenAnswer(
+          (_) async => response,
+        );
+
+        var (data, err) = await datasource.get(id);
+
         expect(err, equals(null));
         data = data!;
         expect(data.breed, equals("Pug"));
@@ -31,7 +37,7 @@ void main() {
   );
 }
 
-final exit_json = {
+final exitJson = {
   "id": 11,
   "breed": "Pug",
   "price": 3000,
