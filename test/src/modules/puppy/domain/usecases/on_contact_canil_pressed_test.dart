@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gallery/ioc.dart';
 import 'package:gallery/modules.dart';
-import 'package:gallery/src/modules/auth/auth_module.dart';
+
 import 'package:gallery/src/modules/puppy/domain/usecases/on_contact_canil_pressed.dart';
 import 'package:gallery/widget.dart';
 
