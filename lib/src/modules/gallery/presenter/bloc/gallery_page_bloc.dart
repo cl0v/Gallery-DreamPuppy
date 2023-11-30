@@ -1,9 +1,6 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gallery/src/modules/gallery/data/datasources/pet_cards_datasource.dart';
-import 'package:gallery/src/modules/gallery/infra/repositories/gallery_repository.dart';
-import 'package:http/http.dart';
-
+import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
 import '../../domain/gallery_card_entity.dart';
 
 class FetchGalleryCards {
@@ -35,7 +32,9 @@ class GalleryPageFailureState implements GalleryPageState {
 class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
   List<GalleryCardEntity> cards = [];
 
-  GalleryPageBloc() : super(GalleryPageLoadingState()) {
+  final GalleryCardsDatasource datasource;
+
+  GalleryPageBloc(super.initialState, {required this.datasource}) {
     on<FetchGalleryCards>(fetch);
   }
 
@@ -43,11 +42,9 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
     FetchGalleryCards event,
     Emitter<GalleryPageState> emit,
   ) async {
-    final repo = GalleryRepositoryImpl(
-      datasource: PetCardsDatasourceImpl(client: Client()),
-    );
+    emit(GalleryPageLoadingState());
 
-    var (c, err) = await repo.fetchCards(event.amount);
+    var (c, err) = await datasource.fillCards(event.amount);
     if (err != null) {
       return emit(
           GalleryPageFailureState(message: err.messsage, code: err.code));

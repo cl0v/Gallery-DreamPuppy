@@ -3,15 +3,18 @@ import 'package:gallery/src/http/url.dart';
 import 'package:gallery/src/modules/gallery/domain/exceptions.dart';
 import 'package:http/http.dart';
 import '../../domain/gallery_card_entity.dart';
-import '../../infra/datasources/pet_cards.dart';
 
-class PetCardsDatasourceImpl implements PetCardsDatasource {
+abstract class GalleryCardsDatasource {
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> fillCards(int amount);
+}
+
+class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
   final Client client;
 
-  PetCardsDatasourceImpl({required this.client});
+  GalleryCardsDatasourceImpl({required this.client});
 
   @override
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> getPetCards(
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> fillCards(
     int amount,
   ) async {
     var response = await client.get(

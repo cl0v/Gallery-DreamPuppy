@@ -5,15 +5,12 @@ part 'gallery_card_entity.freezed.dart';
 part 'gallery_card_entity.g.dart';
 
 @freezed
-
-class GalleryCardEntity with _$GalleryCardEntity{
- 
+class GalleryCardEntity with _$GalleryCardEntity {
   const factory GalleryCardEntity({
     required int id,
     required String url,
   }) = _GalleryCardEntity;
 
-  factory GalleryCardEntity.fromJson(dynamic json)
-      => _$GalleryCardEntityFromJson(json);
-
+  factory GalleryCardEntity.fromJson(dynamic json) =>
+      _$GalleryCardEntityFromJson(json);
 }

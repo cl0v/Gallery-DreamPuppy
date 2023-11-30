@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
+import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
+import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import '../components/gallery_view.dart';
 
@@ -13,24 +15,30 @@ class GalleryPage extends StatefulWidget {
 }
 
 class _GalleryPageState extends State<GalleryPage> {
-  final bloc = GalleryPageBloc();
+  final bloc = GalleryPageBloc(
+    GalleryPageLoadingState(),
+    datasource: galleryIoC.get<GalleryCardsDatasource>(),
+  );
 
   final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
-    onScrollReachEnd();
+    addScrollListener();
     bloc.add(FetchGalleryCards(amount: 30));
     super.initState();
   }
 
-  onScrollReachEnd() {
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >=
-          _scrollController.position.maxScrollExtent - 10) {
-        bloc.add(FetchGalleryCards(amount: 4));
-      }
-    });
+  addScrollListener() {
+    /// Quando chega no final da página, ele chama novamente o bloc.add
+    _scrollController.addListener(
+      () {
+        if (_scrollController.position.pixels >=
+            _scrollController.position.maxScrollExtent - 10) {
+          bloc.add(FetchGalleryCards(amount: 4));
+        }
+      },
+    );
   }
 
   @override
