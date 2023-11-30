@@ -35,20 +35,23 @@ dependencies:
   flutter_bloc: null
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.6
-  freezed: ^2.4.5
+  freezed_annotation: ^2.4.1
   gap: ^3.0.1
   get_it: any
   go_router: ^12.1.1
   http: ^1.1.0
+  json_annotation: ^4.8.1
   url_launcher: ^6.2.1
 
 dev_dependencies:
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
   build_test: ^2.0.0
   flutter_gen_runner: ^5.3.2
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
   melos: ^3.2.0
 
 # For information on the generic Dart part of this file, see the

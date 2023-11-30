@@ -37,7 +37,7 @@ class GalleryViewComponent extends StatelessWidget {
           child: Semantics(
             label: 'petCardImg$index',
             child: CardImageWidget(
-              imageUrl: cards[index].imageUrl,
+              imageUrl: cards[index].url,
               radius: 5,
             ),
           ),

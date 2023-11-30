@@ -55,7 +55,7 @@ class _GalleryPageState extends State<GalleryPage> {
               );
             } else if (state is GalleryPageFailureState) {
               return Center(
-                child: Text('${state.message} [${state.code}]}'),
+                child: Text(state.message),
               );
             } else {
               return const Center(

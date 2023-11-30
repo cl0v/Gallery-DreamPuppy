@@ -40,13 +40,20 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
   }
 
   FutureOr<void> fetch(
-      FetchGalleryCards event, Emitter<GalleryPageState> emit) async {
+    FetchGalleryCards event,
+    Emitter<GalleryPageState> emit,
+  ) async {
     final repo = GalleryRepositoryImpl(
       datasource: PetCardsDatasourceImpl(client: Client()),
     );
 
-    var c = await repo.fetchCards(event.amount);
+    var (c, err) = await repo.fetchCards(event.amount);
+    if (err != null) {
+      return emit(
+          GalleryPageFailureState(message: err.messsage, code: err.code));
+    }
+
     cards.addAll(c);
-    emit(GalleryPageSuccessState(cards));
+    return emit(GalleryPageSuccessState(cards));
   }
 }
