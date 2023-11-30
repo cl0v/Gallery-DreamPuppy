@@ -5,16 +5,18 @@ import 'package:http/http.dart';
 import '../../domain/gallery_card_entity.dart';
 
 abstract class GalleryCardsDatasource {
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> fillCards(int amount);
+  /// Fill the gallery with puppy (imgs) cards
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> get(int amount);
 }
 
 class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
   final Client client;
 
-  GalleryCardsDatasourceImpl({required this.client});
+  GalleryCardsDatasourceImpl(this.client);
 
+  //TODO: Provavelmente vou precisar deixar nulo a lista, caso algum erro seja lançado
   @override
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> fillCards(
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> get(
     int amount,
   ) async {
     var response = await client.get(
@@ -30,6 +32,7 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
         null
       );
     }
+    //TODO: Testar como se comporta quando está rolando até acabar (Antes tinha vários)
     return (
       <GalleryCardEntity>[],
       GalleryExceptions(

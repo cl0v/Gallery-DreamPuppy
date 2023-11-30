@@ -13,7 +13,7 @@ class DefaultGalleryModule extends GalleryModule {
   init() {
     galleryIoC.registerFactory<GalleryCardsDatasource>(
       () => GalleryCardsDatasourceImpl(
-        client: appIoC.get<Client>(),
+        appIoC.get<Client>(),
       ),
     );
   }

@@ -44,7 +44,7 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
   ) async {
     emit(GalleryPageLoadingState());
 
-    var (c, err) = await datasource.fillCards(event.amount);
+    var (c, err) = await datasource.get(event.amount);
     if (err != null) {
       return emit(
           GalleryPageFailureState(message: err.messsage, code: err.code));

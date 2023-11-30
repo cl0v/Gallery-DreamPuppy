@@ -26,6 +26,7 @@ class _GalleryPageState extends State<GalleryPage> {
   void initState() {
     addScrollListener();
     bloc.add(FetchGalleryCards(amount: 30));
+
     super.initState();
   }
 
