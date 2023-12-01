@@ -16,5 +16,6 @@ class DefaultPuppyModule extends PuppyModule {
         appIoC.get<Client>(),
       ),
     );
+    super.init();
   }
 }

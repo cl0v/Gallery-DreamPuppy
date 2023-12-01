@@ -16,5 +16,6 @@ class DefaultGalleryModule extends GalleryModule {
         appIoC.get<Client>(),
       ),
     );
+    super.init();
   }
 }

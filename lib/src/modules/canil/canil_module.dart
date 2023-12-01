@@ -5,4 +5,10 @@ final canilIoC = GetIt.asNewInstance();
 
 class DefaultCanilModule extends CanilModule {
   DefaultCanilModule(super.ioc);
+
+  @override
+  void init() {
+    UnimplementedError();
+    super.init();
+  }
 }
