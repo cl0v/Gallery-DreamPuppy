@@ -26,7 +26,7 @@ void main() {
           (_) async => response,
         );
 
-        var (data, err) = await datasource.get(amount);
+        var (data, err) = await datasource.getEntities(amount);
 
         expect(err, equals(null));
         expect(data.first.id, equals(11));

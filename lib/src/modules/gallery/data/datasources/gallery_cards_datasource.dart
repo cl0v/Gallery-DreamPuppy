@@ -6,7 +6,7 @@ import '../../domain/gallery_card_entity.dart';
 
 abstract class GalleryCardsDatasource {
   /// Fill the gallery with puppy (imgs) cards
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> get(int amount);
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> getEntities(int amount);
 }
 
 class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
@@ -16,7 +16,7 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
 
   //TODO: Provavelmente vou precisar deixar nulo a lista, caso algum erro seja lançado
   @override
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> get(
+  Future<(List<GalleryCardEntity>, GalleryExceptions?)> getEntities(
     int amount,
   ) async {
     var response = await client.get(
