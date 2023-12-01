@@ -14,12 +14,14 @@ class KennelDatasourceImpl implements KennelDatasource {
   final Client client;
 
   KennelDatasourceImpl(this.client);
-  
+
   @override
   Future<KennelDetails> fetch(int id) async {
     var response = await client.get(Uri.parse('$baseUrl/kennels/$id'));
 
-    var body = jsonDecode(response.body);
+    client.close();
+
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
 
     return KennelDetails.fromJson(body);
   }

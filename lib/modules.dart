@@ -5,7 +5,7 @@ class Module {
 
   Module(this.ioc);
 
-  void init() => throw UnimplementedError('Implemente o init');
+  void init() {}
 
   List get binds => throw UnimplementedError('Implemente o os Binds do módulo');
 }
@@ -15,7 +15,7 @@ abstract class AuthModule extends Module {
 }
 
 abstract class GalleryModule extends Module {
-  GalleryModule(super.ioc);
+GalleryModule(super.ioc);
 }
 
 abstract class PuppyModule extends Module {
