@@ -57,7 +57,8 @@ class PriceAndButtonBarComponent extends StatelessWidget {
           label: 'onGoToKennelPage',
           child: CupertinoButton.filled(
             onPressed: () async {
-              var usecase = await OnGetContactPressedUsecase().call(puppy.id);
+              var usecase =
+                  await OnGetKennelContactsPressedUsecase().call(puppy.id);
               var shouldRedirect = false;
               do {
                 if (!context.mounted) return;

@@ -1,39 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
-import 'package:gallery/src/modules/puppy/presenter/blocs/puppy_details_bloc.dart';
 import 'package:gallery/src/modules/puppy/presenter/components/price_n_button_bar.dart';
 import 'package:gallery/src/modules/puppy/puppy_module.dart';
 import 'package:gap/gap.dart';
-import '../../data/datasource.dart';
+import '../../data/puppy_datasource.dart';
 import '../components/imgs_carousel.dart';
 import '../components/info_icons.dart';
 
 var description =
     "Um verdadeiro ladrão de chinelos, não pode dar bobeira que você sempre vai achar seu chinelo em cima do sofá.";
 
-class DetailsPage extends StatefulWidget {
-  const DetailsPage({super.key, required this.petId});
-
+class DetailsPage extends StatelessWidget {
   final int petId;
 
-  @override
-  State<DetailsPage> createState() => _DetailsPageState();
-}
-
-class _DetailsPageState extends State<DetailsPage> {
-  final bloc = PuppyDetailsBloc(
-    FetchPuppyLoadingState(),
-    datasource: puppyIoC.get<PuppyDetailsDatasource>(),
-  );
-
-  @override
-  void initState() {
-    bloc.add(FetchPuppyEvent(id: widget.petId));
-
-    super.initState();
-  }
+  const DetailsPage({
+    super.key,
+    required this.petId,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,27 +29,34 @@ class _DetailsPageState extends State<DetailsPage> {
         middle: Text('Detalhes'),
       ),
       child: SafeArea(
-        child: BlocBuilder<PuppyDetailsBloc, PuppyDetailsState>(
-            bloc: bloc,
-            builder: (context, snapshot) {
-              switch (snapshot.runtimeType) {
-                case FetchPuppyLoadingState:
-                  return Container();
-                case FetchPuppySuccessState:
-                  var puppy = (snapshot as FetchPuppySuccessState).entity;
-                  return _SuccessBody(puppy);
-                default:
-                  return Container();
-              }
-            }),
+        child: FutureBuilder<PuppyDetailsEntity>(
+          future: puppyIoC.get<PuppyDetailsDatasource>().getEntity(petId),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularLoadingWidget(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else if (snapshot.hasData && snapshot.data != null) {
+              var puppy = snapshot.data as PuppyDetailsEntity;
+              return _SuccessBody(puppy);
+            } else {
+              return const Center(child: Text('Nothing to see here'));
+            }
+          },
+        ),
       ),
     );
   }
 }
 
 class _SuccessBody extends StatelessWidget {
-  const _SuccessBody(this.puppy);
   final PuppyDetailsEntity puppy;
+
+  const _SuccessBody(this.puppy);
 
   @override
   Widget build(BuildContext context) {
