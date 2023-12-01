@@ -5,5 +5,5 @@ appId: com.dreampuppy.gallery
 - tapOn: ".*petCardImg1.*"
 - assertVisible: "Detalhes"
 - tapOn: ".*onGoToCanilPage.*"
-# - tapOn: "Falar com Canil"
+# - tapOn: "Sobre o Canil"
 - assertVisible: "Contate o Canil"

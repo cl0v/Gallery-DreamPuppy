@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/gen/assets.gen.dart';
-import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../components/gallery_view.dart';
 
 class GalleryPage extends StatefulWidget {
@@ -54,8 +55,28 @@ class _GalleryPageState extends State<GalleryPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is GalleryPageLoadingState) {
-              return const Center(
-                child: CircularLoadingWidget(),
+              return Skeletonizer(
+                enabled: true,
+                child: GridView.builder(
+                  itemCount: 3 * 3 * 2,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 1,
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 5,
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 2),
+                  shrinkWrap: true,
+                  primary: false,
+                  itemBuilder: (_, __) => Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(5),
+                      ),
+                    ),
+                  ),
+                ),
               );
             } else if (state is GalleryPageSuccessState) {
               return GalleryViewComponent(
@@ -68,7 +89,9 @@ class _GalleryPageState extends State<GalleryPage> {
               );
             } else {
               return const Center(
-                child: Text('Ocorreu um erro incomum, contate o suporte'),
+                child: Text(
+                  'Ocorreu um erro incomum, contate o suporte',
+                ),
               );
             }
           },

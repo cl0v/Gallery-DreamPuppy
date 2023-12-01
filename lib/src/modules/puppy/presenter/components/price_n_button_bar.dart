@@ -69,7 +69,7 @@ class PriceAndButtonBarComponent extends StatelessWidget {
               } while (shouldRedirect);
             },
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: const Text('Falar com Canil'),
+            child: const Text('Sobre o Canil'),
           ),
         ),
       ],

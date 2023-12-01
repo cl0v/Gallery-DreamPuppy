@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'card_image.dart';
 
@@ -17,9 +18,6 @@ class GalleryViewComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      controller: scrollController,
-      padding: const EdgeInsets.symmetric(horizontal: 2),
-      primary: false,
       itemCount: cards.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 1,
@@ -27,7 +25,10 @@ class GalleryViewComponent extends StatelessWidget {
         mainAxisSpacing: 5,
         crossAxisSpacing: 5,
       ),
+      padding: const EdgeInsets.symmetric(horizontal: 2),
       shrinkWrap: true,
+      primary: false,
+      controller: scrollController,
       itemBuilder: (BuildContext context, int index) {
         return GestureDetector(
           onTap: () => context.pushNamed(
