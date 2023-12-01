@@ -34,7 +34,7 @@ class PuppyDetailsBloc extends Bloc<FetchPuppyEvent, PuppyDetailsState> {
     FetchPuppyEvent event,
     Emitter<PuppyDetailsState> emit,
   ) async {
-    var (res, err) = await datasource.get(event.id);
+    var (res, err) = await datasource.getDetails(event.id);
     if (err != null) {
       //TODO: Corrigir isso;
       return;

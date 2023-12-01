@@ -57,9 +57,10 @@ class PriceAndButtonBarComponent extends StatelessWidget {
           label: 'onGoToCanilPage',
           child: CupertinoButton.filled(
             onPressed: () async {
-              var usecase = OnGetContactPressedUsecase().call(puppy.id);
+              var usecase = await OnGetContactPressedUsecase().call(puppy.id);
               var shouldRedirect = false;
               do {
+                if (!context.mounted) return;
                 shouldRedirect = await context.pushNamed<bool>(
                       usecase.name,
                       pathParameters: usecase.params,
@@ -69,7 +70,7 @@ class PriceAndButtonBarComponent extends StatelessWidget {
               } while (shouldRedirect);
             },
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: const Text('Sobre o Canil'),
+            child: const Text('Sobre o Canil'), // "Falar com o Canil"
           ),
         ),
       ],

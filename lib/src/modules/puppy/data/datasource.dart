@@ -5,7 +5,9 @@ import 'package:gallery/src/http/url.dart';
 import '../domain/entities/pet_details.dart';
 
 abstract class PuppyDetailsDatasource {
-  Future<(PuppyDetailsEntity?, PuppyDetailsException?)> get(int id);
+  Future<(PuppyDetailsEntity?, PuppyDetailsException?)> getDetails(int id);
+
+  Future<(String?, TalkToKennelBtnException?)> getKennelId(int id);
 }
 
 class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
@@ -16,7 +18,8 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
   );
 
   @override
-  Future<(PuppyDetailsEntity?, PuppyDetailsException?)> get(int id) async {
+  Future<(PuppyDetailsEntity?, PuppyDetailsException?)> getDetails(
+      int id) async {
     var response = await client.get(Uri.parse('$baseUrl/puppies/$id'));
 
     client.close();
@@ -30,6 +33,18 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
     return (
       null,
       PuppyDetailsException(code: response.statusCode, messsage: 'Hmm...')
+    );
+  }
+
+  @override
+  Future<(String?, TalkToKennelBtnException?)> getKennelId(int id) async {
+    var response = await client.get(Uri.parse('$baseUrl/puppies/$id/kennel'));
+    if (response.statusCode == 200) {
+      return (response.body, null);
+    }
+    return (
+      null,
+      TalkToKennelBtnException(code: response.statusCode, messsage: 'Hmm...')
     );
   }
 }

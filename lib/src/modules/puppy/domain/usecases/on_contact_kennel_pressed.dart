@@ -1,3 +1,7 @@
+import 'package:gallery/src/modules/puppy/data/datasource.dart';
+
+import '../../puppy_module.dart';
+
 part '_first_time_id.dart';
 part '_show_review_popup.dart';
 
@@ -6,17 +10,30 @@ const String detailsPageTitle = 'Detalhes';
 class OnGetContactPressedUsecase {
   // ShowReviewerPopUpUsecase showReview = ShowReviewerPopUpUsecase();
 
-  OnGetContactPressedUsecase();
+  final PuppyDetailsDatasource datasource =
+      puppyIoC.get<PuppyDetailsDatasource>();
 
-  ({String name, Map<String, String> params, Map<String, dynamic> query}) call(
+  Future<
+      ({
+        String name,
+        Map<String, String> params,
+        Map<String, dynamic> query
+      })> call(
     int puppyId,
-  ) {
+  ) async {
     // TODO: Rename to kennel
     var name = 'canil';
     var queryParams = <String, dynamic>{};
     var pathParams = <String, String>{};
 
-    // queryParams.addEntries(const [
+    var (kennelId, err) = await datasource.getKennelId(puppyId);
+    if (err != null) {
+      throw UnimplementedError('What should i do??');
+    }
+    pathParams['id'] = kennelId ?? '0';
+
+
+    // queryParams.addEntries(const [z
     //   MapEntry('fromTitle', detailsPageTitle),
     // ]);
 

@@ -25,10 +25,9 @@ GoRouter appRouter = GoRouter(
     ),
     GoRoute(
       name: 'canil',
-      path: '/canil',
+      path: '/canil/:id',
       builder: (context, state) => CanilPage(
-        canilId:
-            int.tryParse(state.uri.queryParameters['canilId'].toString()) ?? 0,
+        canilId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
       ),
     ),
     // ...AuthRouter.instance.routes,

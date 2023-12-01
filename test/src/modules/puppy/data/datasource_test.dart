@@ -26,7 +26,7 @@ void main() {
           (_) async => response,
         );
 
-        var (data, err) = await datasource.get(id);
+        var (data, err) = await datasource.getDetails(id);
 
         expect(err, equals(null));
         data = data!;
