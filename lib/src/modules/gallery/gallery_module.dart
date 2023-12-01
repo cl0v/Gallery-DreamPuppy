@@ -1,6 +1,6 @@
+import 'package:gallery/ioc.dart';
 import 'package:gallery/modules.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
-import 'package:gallery/widget.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
