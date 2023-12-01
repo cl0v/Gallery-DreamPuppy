@@ -22,7 +22,7 @@ class OnGetContactPressedUsecase {
     int puppyId,
   ) async {
     // TODO: Rename to kennel
-    var name = 'canil';
+    var name = 'kennel';
     var queryParams = <String, dynamic>{};
     var pathParams = <String, String>{};
 

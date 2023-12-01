@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:gallery/src/modules/gallery/presenter/view/gallery_page.dart';
 import 'package:go_router/go_router.dart';
-import 'src/modules/canil/presenter/view/canil_page.dart';
+import 'src/modules/kennel/presenter/view/kennel_page.dart';
 import 'src/modules/puppy/presenter/view/details_page.dart';
 
 abstract class AppRouter {
@@ -24,10 +24,10 @@ GoRouter appRouter = GoRouter(
       ),
     ),
     GoRoute(
-      name: 'canil',
-      path: '/canil/:id',
-      builder: (context, state) => CanilPage(
-        canilId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
+      name: 'kennel',
+      path: '/kennel/:id',
+      builder: (context, state) => KennelPage(
+        kennelId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
       ),
     ),
     // ...AuthRouter.instance.routes,

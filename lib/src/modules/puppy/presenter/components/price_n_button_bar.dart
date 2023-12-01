@@ -54,7 +54,7 @@ class PriceAndButtonBarComponent extends StatelessWidget {
               ),
             ])),
         Semantics(
-          label: 'onGoToCanilPage',
+          label: 'onGoToKennelPage',
           child: CupertinoButton.filled(
             onPressed: () async {
               var usecase = await OnGetContactPressedUsecase().call(puppy.id);

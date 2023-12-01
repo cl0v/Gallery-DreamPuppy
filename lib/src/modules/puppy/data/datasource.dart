@@ -24,7 +24,7 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
 
     client.close();
 
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       var body = jsonDecode(response.body);
       var puppy = PuppyDetailsEntity.fromJson(body);
       return (puppy, null);
@@ -39,7 +39,7 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
   @override
   Future<(String?, TalkToKennelBtnException?)> getKennelId(int id) async {
     var response = await client.get(Uri.parse('$baseUrl/puppies/$id/kennel'));
-    if (response.statusCode == 200) {
+    if (response.statusCode >= 200 && response.statusCode < 300) {
       return (response.body, null);
     }
     return (

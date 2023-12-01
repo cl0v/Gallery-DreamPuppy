@@ -1,10 +1,9 @@
 import 'package:url_launcher/url_launcher.dart';
 
 class OnCreditsTapUsecase {
-  void call() {
-    const iconsUrl = 'https://icons8.com.br/license';
+  void call(String uri) {
     launchUrl(
-      Uri.parse(iconsUrl),
+      Uri.parse(uri),
       mode: LaunchMode.inAppWebView,
     );
   }

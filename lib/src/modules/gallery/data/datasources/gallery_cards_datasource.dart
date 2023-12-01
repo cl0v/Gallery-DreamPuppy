@@ -26,7 +26,9 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
     client.close();
 
     var body = jsonDecode(response.body);
-    if (response.statusCode == 200 && body is List && body.isNotEmpty) {
+    if ((response.statusCode >= 200 && response.statusCode < 300) &&
+        body is List &&
+        body.isNotEmpty) {
       return (
         body.map<GalleryCardEntity>(GalleryCardEntity.fromJson).toList(),
         null

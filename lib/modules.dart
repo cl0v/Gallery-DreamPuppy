@@ -22,6 +22,6 @@ abstract class PuppyModule extends Module {
   PuppyModule(super.ioc);
 }
 
-abstract class CanilModule extends Module {
-  CanilModule(super.ioc);
+abstract class KennelModule extends Module {
+  KennelModule(super.ioc);
 }

@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:gallery/src/modules/canil/domain/entities/canil_contact.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const webUrl = "https://www.instagram.com/";
+enum ContactType {
+  instagram,
+  whatsapp,
+}
 
 class OnRedirectContactUsecase {
-  void call(BuildContext context, CanilContactInfo contact) {
-    switch (contact.type) {
+  void call(BuildContext context, ContactType type, String contact) {
+    switch (type) {
       case ContactType.instagram:
-        launchInstagram(context, contact.contact!);
+        launchInstagram(context, contact);
         break;
       case ContactType.whatsapp:
-        launchWhatsapp(context, contact.contact!);
+        launchWhatsapp(context, contact);
         break;
       default:
         showAlert(context, 'Contato não cadastrado.');
@@ -44,7 +46,7 @@ class OnRedirectContactUsecase {
       context,
       nativeInstagram,
       webInstagram,
-      'Não foi possível redirecionar para o ${ContactType.instagram.value} do canil',
+      'Não foi possível redirecionar para o Instagram do canil',
       ContactType.instagram.index,
     );
   }
@@ -57,7 +59,7 @@ class OnRedirectContactUsecase {
       context,
       nativeInstagram,
       webInstagram,
-      'Não foi possível redirecionar para o ${ContactType.whatsapp.value} do canil',
+      'Não foi possível redirecionar para o WhatsApp do canil',
       ContactType.whatsapp.index,
     );
   }
