@@ -25,7 +25,13 @@ class KennelPage extends StatefulWidget {
 }
 
 class _KennelPageState extends State<KennelPage> {
-  final data = kennelIoC.get<KennelDatasource>();
+  late Future<KennelDetails> _future;
+  @override
+  void initState() {
+    // TODO: implement initState
+    _future = kennelIoC.get<KennelDatasource>().fetch(widget.kennelId);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class _KennelPageState extends State<KennelPage> {
       ),
       child: SafeArea(
         child: FutureBuilder<KennelDetails>(
-            future: data.fetch(widget.kennelId),
+            future: _future,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

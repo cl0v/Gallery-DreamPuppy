@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
 import 'package:gallery/modules.dart';
@@ -8,8 +9,6 @@ import 'ioc.dart';
 import 'router.dart';
 import 'src/modules/kennel/kennel_module.dart';
 import 'src/modules/puppy/puppy_module.dart';
-
-
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -31,6 +30,7 @@ class _AppWidgetState extends State<AppWidget> {
     //! TODO: DONT WASTE TIME
     // TODO: Usar o modulo de autenticação ja pronto no arquive
     // appIoC.registerSingleton<AuthModule>(DefaultAuthModule(authIoC));
+
     super.initState();
   }
 
@@ -38,7 +38,7 @@ class _AppWidgetState extends State<AppWidget> {
   Widget build(BuildContext context) {
     return CupertinoApp.router(
       routerConfig: appRouter,
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: kDebugMode,
       title: 'DreamPuppy - Galeria de Filhotes',
       theme: const CupertinoThemeData(),
     );

@@ -12,13 +12,27 @@ import '../components/info_icons.dart';
 var description =
     "Um verdadeiro ladrão de chinelos, não pode dar bobeira que você sempre vai achar seu chinelo em cima do sofá.";
 
-class DetailsPage extends StatelessWidget {
+class DetailsPage extends StatefulWidget {
   final int petId;
 
   const DetailsPage({
     super.key,
     required this.petId,
   });
+
+  @override
+  State<DetailsPage> createState() => _DetailsPageState();
+}
+
+class _DetailsPageState extends State<DetailsPage> {
+  late Future<PuppyDetailsEntity> _future;
+
+  @override
+  void initState() {
+    _future = puppyIoC.get<PuppyDetailsDatasource>().getEntity(widget.petId);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +44,8 @@ class DetailsPage extends StatelessWidget {
       ),
       child: SafeArea(
         child: FutureBuilder<PuppyDetailsEntity>(
-          future: puppyIoC.get<PuppyDetailsDatasource>().getEntity(petId),
+          future: _future,
+              
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -60,14 +75,12 @@ class _SuccessBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ImgsCarouselComponent(
-            height: size.height / 2.3,
+            height: 400,
             pictures: puppy.images,
           ),
           const Gap(8),

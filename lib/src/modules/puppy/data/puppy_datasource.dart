@@ -18,6 +18,7 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
 
   @override
   Future<PuppyDetailsEntity> getEntity(int id) async {
+    //TODO: Esta chamando novamente
     var response = await client.get(Uri.parse('$baseUrl/puppies/$id'));
 
     client.close();
