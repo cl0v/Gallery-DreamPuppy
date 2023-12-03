@@ -88,11 +88,11 @@ class _SuccessBody extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: PriceAndButtonBarComponent(puppy: puppy)),
           const Gap(16),
-          // const Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 12.0),
-          //   child: Divider(),
-          // ),
-          description.isEmpty
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            child: Divider(),
+          ),
+          description.isNotEmpty
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22.0),
                   child: Text(
@@ -106,10 +106,10 @@ class _SuccessBody extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 12.0),
                   child: Divider(),
                 ),
-          // const Padding(
-          //   padding: EdgeInsets.symmetric(horizontal: 12.0),
-          //   child: Divider(),
-          // ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 12.0),
+            child: Divider(),
+          ),
           const Gap(16),
           InfoIconsComponent(puppyDetails: puppy),
         ],

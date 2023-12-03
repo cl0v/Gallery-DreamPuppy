@@ -57,8 +57,8 @@ class _GalleryPageState extends State<GalleryPage> {
             if (state is GalleryPageLoadingState) {
               return Skeletonizer(
                 enabled: true,
-                child: GridView.builder(
-                  itemCount: 3 * 3 * 2,
+                child: GridView(
+                  // itemCount: 3 * 3 * 2,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: 1,
                     crossAxisCount: 3,
@@ -68,11 +68,14 @@ class _GalleryPageState extends State<GalleryPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 2),
                   shrinkWrap: true,
                   primary: false,
-                  itemBuilder: (_, __) => Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(5),
+                  children: List.generate(
+                    3 * 3 * 2,
+                    (i) => Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(5),
+                        ),
                       ),
                     ),
                   ),

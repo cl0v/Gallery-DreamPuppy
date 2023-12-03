@@ -21,13 +21,16 @@ class CardImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       child: CachedNetworkImage(
+        imageUrl: imageUrl,
+        fit: fit,
+        memCacheHeight: size.width.ceil() + 10,
+        memCacheWidth: size.width.ceil() + 10,
         height: height,
         width: width,
-        fit: fit,
-        imageUrl: imageUrl,
         placeholder: (_, __) => const Center(
           child: CircularLoadingWidget(),
         ),

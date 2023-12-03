@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
 import 'package:go_router/go_router.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import 'card_image.dart';
 
