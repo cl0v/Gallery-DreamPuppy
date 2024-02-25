@@ -72,3 +72,4 @@ app.*.map.json
 /android/app/release
 *.lock
 test/widget_test.dart
+assets/ca/lets-encrypt-r3.pem
