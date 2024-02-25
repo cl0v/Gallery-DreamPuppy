@@ -8,6 +8,13 @@ import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dar
 import 'package:skeletonizer/skeletonizer.dart';
 import '../components/gallery_view.dart';
 
+enum PageStates {
+  loading,
+  bottomReached,
+  idle,
+  error,
+}
+
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
 
@@ -22,6 +29,8 @@ class _GalleryPageState extends State<GalleryPage> {
   );
 
   final ScrollController _scrollController = ScrollController();
+
+  PageStates currentState = PageStates.loading;
 
   @override
   void initState() {
@@ -58,49 +67,70 @@ class _GalleryPageState extends State<GalleryPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is GalleryPageLoadingState) {
-              return Skeletonizer(
-                enabled: true,
-                child: GridView(
-                  // itemCount: 3 * 3 * 2,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1,
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  shrinkWrap: true,
-                  primary: false,
-                  children: List.generate(
-                    3 * 3 * 2,
-                    (i) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(5),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            } else if (state is GalleryPageSuccessState) {
-              return GalleryViewComponent(
+              return const GalleryPageLoadingWidget();
+            } else if (state is GalleryPageFailureState) {
+              return GalleryPageErrorWidget(state.message);
+            } else {
+              state = state as GalleryPageSuccessState;
+              return GalleryBody(
                 scrollController: _scrollController,
                 cards: state.cards,
-              );
-            } else if (state is GalleryPageFailureState) {
-              return Center(
-                child: Text(state.message),
-              );
-            } else {
-              return const Center(
-                child: Text(
-                  'Ocorreu um erro incomum, contate o suporte',
-                ),
+                onChangedState: changeState,
               );
             }
           },
+        ),
+      ),
+    );
+  }
+}
+
+class GalleryPageErrorWidget extends StatelessWidget {
+  final String message;
+
+  const GalleryPageErrorWidget(
+    this.message, {
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(message),
+    );
+  }
+}
+
+class GalleryPageLoadingWidget extends StatelessWidget {
+  const GalleryPageLoadingWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      enabled: true,
+      child: GridView(
+        // itemCount: 3 * 3 * 2,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 1,
+          crossAxisCount: 3,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 2),
+        shrinkWrap: true,
+        primary: false,
+        children: List.generate(
+          3 * 3 * 2,
+          (i) => Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+            ),
+          ),
         ),
       ),
     );
