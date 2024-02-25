@@ -6,7 +6,7 @@ import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datas
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../components/gallery_view.dart';
+import '../components/gallery_body.dart';
 
 enum PageStates {
   loading,
@@ -28,31 +28,14 @@ class _GalleryPageState extends State<GalleryPage> {
     datasource: galleryIoC.get<GalleryCardsDatasource>(),
   );
 
-  final ScrollController _scrollController = ScrollController();
-
   PageStates currentState = PageStates.loading;
 
   @override
   void initState() {
-    addScrollListener();
-
-    for (int i = 1; i <= 6; i++) {
-      bloc.add(FetchGalleryCards(pageNumber: i));
+    for (int i = 0; i <= 6; i++) {
+      bloc.add(FetchGalleryCards());
     }
-
     super.initState();
-  }
-
-  addScrollListener() {
-    /// Quando chega no final da página, ele chama novamente o bloc.add
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.maxScrollExtent == _scrollController.offset) {
-          // print('ola');
-          // bloc.add(FetchGalleryCards(pageNumber: 4));
-        }
-      },
-    );
   }
 
   @override
@@ -71,12 +54,7 @@ class _GalleryPageState extends State<GalleryPage> {
             } else if (state is GalleryPageFailureState) {
               return GalleryPageErrorWidget(state.message);
             } else {
-              state = state as GalleryPageSuccessState;
-              return GalleryBody(
-                scrollController: _scrollController,
-                cards: state.cards,
-                onChangedState: changeState,
-              );
+              return GalleryBody(bloc: bloc);
             }
           },
         ),

@@ -14,9 +14,15 @@ abstract class GalleryPageState {}
 class GalleryPageLoadingState implements GalleryPageState {}
 
 class GalleryPageSuccessState implements GalleryPageState {
+  // final List<GalleryCardEntity> cards;
+
+  GalleryPageSuccessState();
+}
+
+class UpdateGalleryPageSuccessState implements GalleryPageState {
   final List<GalleryCardEntity> cards;
 
-  GalleryPageSuccessState(this.cards);
+  UpdateGalleryPageSuccessState(this.cards);
 }
 
 class GalleryPageFailureState implements GalleryPageState {
@@ -30,7 +36,6 @@ class GalleryPageFailureState implements GalleryPageState {
 }
 
 class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
-  List<GalleryCardEntity> cards = [];
   int pageNumber = 0;
 
   final GalleryCardsDatasource datasource;
@@ -44,16 +49,19 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
     Emitter<GalleryPageState> emit,
   ) async {
     ++pageNumber;
-    // emit(GalleryPageLoadingState()); 
+    // emit(GalleryPageLoadingState());
 
     var (li, err) = await datasource.getEntities(pageNumber);
     if (err != null) {
+      
       return emit(GalleryPageFailureState(
         message: err.messsage,
         code: err.code,
       ));
     }
-    cards.addAll(li);
-    return emit(GalleryPageSuccessState(cards));
+    if (pageNumber <= 1) {
+      emit(GalleryPageSuccessState());
+    }
+    emit(UpdateGalleryPageSuccessState(li));
   }
 }
