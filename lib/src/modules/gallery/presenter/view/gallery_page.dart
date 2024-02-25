@@ -25,8 +25,9 @@ class _GalleryPageState extends State<GalleryPage> {
 
   @override
   void initState() {
-    // addScrollListener();
-    for(int i = 1; i <= 5; i++){
+    addScrollListener();
+
+    for (int i = 1; i <= 6; i++) {
       bloc.add(FetchGalleryCards(pageNumber: i));
     }
 
@@ -37,9 +38,9 @@ class _GalleryPageState extends State<GalleryPage> {
     /// Quando chega no final da página, ele chama novamente o bloc.add
     _scrollController.addListener(
       () {
-        if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 10) {
-          bloc.add(FetchGalleryCards(pageNumber: 4));
+        if (_scrollController.position.maxScrollExtent == _scrollController.offset) {
+          // print('ola');
+          // bloc.add(FetchGalleryCards(pageNumber: 4));
         }
       },
     );

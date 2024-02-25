@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +18,7 @@ class GalleryViewComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: cards.length,
+      itemCount: cards.length + 1,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 1,
         crossAxisCount: 3,
@@ -29,6 +30,9 @@ class GalleryViewComponent extends StatelessWidget {
       primary: false,
       controller: scrollController,
       itemBuilder: (BuildContext context, int index) {
+        if(index == cards.length){
+          return const CupertinoActivityIndicator();
+        }
         return GestureDetector(
           onTap: () => context.pushNamed(
             'puppy',
