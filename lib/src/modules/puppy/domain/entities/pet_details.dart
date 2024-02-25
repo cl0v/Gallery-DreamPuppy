@@ -17,8 +17,8 @@ class PuppyDetailsEntity with _$PuppyDetailsEntity {
     @JsonKey(name: 'minimum_age_departure_in_days')
     required int minimumAgeDepartureInDays,
     required List<String> images,
-    required List<Vermifuge> vermifuges,
-    required List<Vaccine> vaccines,
+    // required List<Vermifuge> vermifuges,
+    // required List<Vaccine> vaccines,
   }) = _PuppyDetailsEntity;
 
   factory PuppyDetailsEntity.fromJson(dynamic json) =>

@@ -30,8 +30,6 @@ mixin _$PuppyDetailsEntity {
   @JsonKey(name: 'minimum_age_departure_in_days')
   int get minimumAgeDepartureInDays => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
-  List<Vermifuge> get vermifuges => throw _privateConstructorUsedError;
-  List<Vaccine> get vaccines => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,9 +53,7 @@ abstract class $PuppyDetailsEntityCopyWith<$Res> {
       bool microchip,
       @JsonKey(name: 'minimum_age_departure_in_days')
       int minimumAgeDepartureInDays,
-      List<String> images,
-      List<Vermifuge> vermifuges,
-      List<Vaccine> vaccines});
+      List<String> images});
 }
 
 /// @nodoc
@@ -82,8 +78,6 @@ class _$PuppyDetailsEntityCopyWithImpl<$Res, $Val extends PuppyDetailsEntity>
     Object? microchip = null,
     Object? minimumAgeDepartureInDays = null,
     Object? images = null,
-    Object? vermifuges = null,
-    Object? vaccines = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -122,14 +116,6 @@ class _$PuppyDetailsEntityCopyWithImpl<$Res, $Val extends PuppyDetailsEntity>
           ? _value.images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      vermifuges: null == vermifuges
-          ? _value.vermifuges
-          : vermifuges // ignore: cast_nullable_to_non_nullable
-              as List<Vermifuge>,
-      vaccines: null == vaccines
-          ? _value.vaccines
-          : vaccines // ignore: cast_nullable_to_non_nullable
-              as List<Vaccine>,
     ) as $Val);
   }
 }
@@ -152,9 +138,7 @@ abstract class _$$PuppyDetailsEntityImplCopyWith<$Res>
       bool microchip,
       @JsonKey(name: 'minimum_age_departure_in_days')
       int minimumAgeDepartureInDays,
-      List<String> images,
-      List<Vermifuge> vermifuges,
-      List<Vaccine> vaccines});
+      List<String> images});
 }
 
 /// @nodoc
@@ -177,8 +161,6 @@ class __$$PuppyDetailsEntityImplCopyWithImpl<$Res>
     Object? microchip = null,
     Object? minimumAgeDepartureInDays = null,
     Object? images = null,
-    Object? vermifuges = null,
-    Object? vaccines = null,
   }) {
     return _then(_$PuppyDetailsEntityImpl(
       id: null == id
@@ -217,14 +199,6 @@ class __$$PuppyDetailsEntityImplCopyWithImpl<$Res>
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      vermifuges: null == vermifuges
-          ? _value._vermifuges
-          : vermifuges // ignore: cast_nullable_to_non_nullable
-              as List<Vermifuge>,
-      vaccines: null == vaccines
-          ? _value._vaccines
-          : vaccines // ignore: cast_nullable_to_non_nullable
-              as List<Vaccine>,
     ));
   }
 }
@@ -244,12 +218,8 @@ class _$PuppyDetailsEntityImpl
       required this.microchip,
       @JsonKey(name: 'minimum_age_departure_in_days')
       required this.minimumAgeDepartureInDays,
-      required final List<String> images,
-      required final List<Vermifuge> vermifuges,
-      required final List<Vaccine> vaccines})
-      : _images = images,
-        _vermifuges = vermifuges,
-        _vaccines = vaccines;
+      required final List<String> images})
+      : _images = images;
 
   factory _$PuppyDetailsEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$PuppyDetailsEntityImplFromJson(json);
@@ -279,25 +249,9 @@ class _$PuppyDetailsEntityImpl
     return EqualUnmodifiableListView(_images);
   }
 
-  final List<Vermifuge> _vermifuges;
-  @override
-  List<Vermifuge> get vermifuges {
-    if (_vermifuges is EqualUnmodifiableListView) return _vermifuges;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_vermifuges);
-  }
-
-  final List<Vaccine> _vaccines;
-  @override
-  List<Vaccine> get vaccines {
-    if (_vaccines is EqualUnmodifiableListView) return _vaccines;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_vaccines);
-  }
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PuppyDetailsEntity(id: $id, breed: $breed, price: $price, pedigree: $pedigree, gender: $gender, birth: $birth, microchip: $microchip, minimumAgeDepartureInDays: $minimumAgeDepartureInDays, images: $images, vermifuges: $vermifuges, vaccines: $vaccines)';
+    return 'PuppyDetailsEntity(id: $id, breed: $breed, price: $price, pedigree: $pedigree, gender: $gender, birth: $birth, microchip: $microchip, minimumAgeDepartureInDays: $minimumAgeDepartureInDays, images: $images)';
   }
 
   @override
@@ -314,9 +268,7 @@ class _$PuppyDetailsEntityImpl
       ..add(DiagnosticsProperty('microchip', microchip))
       ..add(DiagnosticsProperty(
           'minimumAgeDepartureInDays', minimumAgeDepartureInDays))
-      ..add(DiagnosticsProperty('images', images))
-      ..add(DiagnosticsProperty('vermifuges', vermifuges))
-      ..add(DiagnosticsProperty('vaccines', vaccines));
+      ..add(DiagnosticsProperty('images', images));
   }
 
   @override
@@ -336,10 +288,7 @@ class _$PuppyDetailsEntityImpl
             (identical(other.minimumAgeDepartureInDays,
                     minimumAgeDepartureInDays) ||
                 other.minimumAgeDepartureInDays == minimumAgeDepartureInDays) &&
-            const DeepCollectionEquality().equals(other._images, _images) &&
-            const DeepCollectionEquality()
-                .equals(other._vermifuges, _vermifuges) &&
-            const DeepCollectionEquality().equals(other._vaccines, _vaccines));
+            const DeepCollectionEquality().equals(other._images, _images));
   }
 
   @JsonKey(ignore: true)
@@ -354,9 +303,7 @@ class _$PuppyDetailsEntityImpl
       birth,
       microchip,
       minimumAgeDepartureInDays,
-      const DeepCollectionEquality().hash(_images),
-      const DeepCollectionEquality().hash(_vermifuges),
-      const DeepCollectionEquality().hash(_vaccines));
+      const DeepCollectionEquality().hash(_images));
 
   @JsonKey(ignore: true)
   @override
@@ -384,9 +331,7 @@ abstract class _PuppyDetailsEntity implements PuppyDetailsEntity {
       required final bool microchip,
       @JsonKey(name: 'minimum_age_departure_in_days')
       required final int minimumAgeDepartureInDays,
-      required final List<String> images,
-      required final List<Vermifuge> vermifuges,
-      required final List<Vaccine> vaccines}) = _$PuppyDetailsEntityImpl;
+      required final List<String> images}) = _$PuppyDetailsEntityImpl;
 
   factory _PuppyDetailsEntity.fromJson(Map<String, dynamic> json) =
       _$PuppyDetailsEntityImpl.fromJson;
@@ -410,10 +355,6 @@ abstract class _PuppyDetailsEntity implements PuppyDetailsEntity {
   int get minimumAgeDepartureInDays;
   @override
   List<String> get images;
-  @override
-  List<Vermifuge> get vermifuges;
-  @override
-  List<Vaccine> get vaccines;
   @override
   @JsonKey(ignore: true)
   _$$PuppyDetailsEntityImplCopyWith<_$PuppyDetailsEntityImpl> get copyWith =>

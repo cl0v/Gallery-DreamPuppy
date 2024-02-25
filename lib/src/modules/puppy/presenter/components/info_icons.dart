@@ -22,8 +22,8 @@ class InfoIconsComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var gender = GenderFromIntFormatter().call(puppyDetails.gender);
-    var vaccines = VaccinesFormatter().call(puppyDetails.vaccines);
-    var vermifuges = VermifugesFormatter().call(puppyDetails.vermifuges);
+    // var vaccines = VaccinesFormatter().call(puppyDetails.vaccines);
+    // var vermifuges = VermifugesFormatter().call(puppyDetails.vermifuges);
     var microchip = MicrochipFormatter().call(puppyDetails.microchip);
 
     return Padding(
@@ -102,7 +102,7 @@ class InfoIconsComponent extends StatelessWidget {
             ),
           ),
           const Gap(4),
-          InfoWithIconWidget(
+          /*InfoWithIconWidget(
             icon: Tooltip(
               preferBelow: false,
               message: 'Histórico de vacinação',
@@ -165,7 +165,7 @@ class InfoIconsComponent extends StatelessWidget {
               // child: Text(formatVaccinationRecordUsecase(
               //     pet.vaccineRecord)),
             ),
-          ),
+          ),*/
           const Gap(4),
           InfoWithIconWidget(
             icon: Tooltip(
