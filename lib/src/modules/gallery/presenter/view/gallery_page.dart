@@ -25,8 +25,10 @@ class _GalleryPageState extends State<GalleryPage> {
 
   @override
   void initState() {
-    addScrollListener();
-    bloc.add(FetchGalleryCards(amount: 30));
+    // addScrollListener();
+    for(int i = 1; i <= 5; i++){
+      bloc.add(FetchGalleryCards(pageNumber: i));
+    }
 
     super.initState();
   }
@@ -37,7 +39,7 @@ class _GalleryPageState extends State<GalleryPage> {
       () {
         if (_scrollController.position.pixels >=
             _scrollController.position.maxScrollExtent - 10) {
-          bloc.add(FetchGalleryCards(amount: 4));
+          bloc.add(FetchGalleryCards(pageNumber: 4));
         }
       },
     );

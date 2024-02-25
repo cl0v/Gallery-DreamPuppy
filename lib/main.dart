@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/widget.dart';
 
-void main() {
-  runApp(const AppWidget());/**/
-}/**/
-/**/
+Future<void> main() async {
+  
+  runApp(const AppWidget());
+}

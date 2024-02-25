@@ -8,4 +8,9 @@ String get uriPreffix => kReleaseMode
             ? 'dev.'
             : '';
 
-String get baseUrl => "${uriPreffix}api.dreampuppy.com.br";
+
+const prod = "https://api.dreampuppy.com.br";
+const uvicorn = "http://localhost:9900";
+const compose = "http://localhost:8080";
+
+String get baseUrl => kDebugMode ? uvicorn :  prod;
