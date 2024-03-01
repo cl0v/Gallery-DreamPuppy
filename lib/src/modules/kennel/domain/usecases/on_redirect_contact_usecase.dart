@@ -52,13 +52,14 @@ class OnRedirectContactUsecase {
   }
 
   Future<void> launchWhatsapp(BuildContext context, String whatsapp) async {
-    final nativeInstagram = Uri.parse("whatsapp://send?phone=$whatsapp");
-    final webInstagram =
-        Uri.parse("https://api.whatsapp.com/send?phone=$whatsapp");
+    print(whatsapp);
+    final nativeWhatsapp = Uri.parse("whatsapp://send/?phone=55$whatsapp");
+    final webWhatsapp =
+        Uri.parse("https://api.whatsapp.com/send/?phone=55$whatsapp");
     launch(
       context,
-      nativeInstagram,
-      webInstagram,
+      nativeWhatsapp,
+      webWhatsapp,
       'Não foi possível redirecionar para o WhatsApp do canil',
       ContactType.whatsapp.index,
     );
