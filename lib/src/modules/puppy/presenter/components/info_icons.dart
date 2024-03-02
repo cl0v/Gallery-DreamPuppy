@@ -69,7 +69,8 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                   text: 'Gênero: ',
-                  style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                  style:
+                      const TextStyle(color: Colors.black, fontSize: fontSize),
                   children: [
                     TextSpan(
                         text: gender.text,
@@ -91,14 +92,16 @@ class InfoIconsComponent extends StatelessWidget {
             child: RichText(
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
-                  text: 'Nascimento: ',
-                  style: const TextStyle(color: Colors.black, fontSize: fontSize),
-                  children: [
-                    TextSpan(
-                        text: BirthDateFormatter().call(puppyDetails.birth),
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
-                    const TextSpan(text: '.'),
-                  ]),
+                text: 'Nascimento: ',
+                style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                children: [
+                  TextSpan(
+                    text: BirthDateFormatter().call(puppyDetails.birth),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const TextSpan(text: '.'),
+                ],
+              ),
             ),
           ),
           const Gap(4),
