@@ -6,6 +6,7 @@ import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datas
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import '../../../kennel/domain/usecases/on_redirect_contact_usecase.dart';
 import '../components/gallery_body.dart';
 
 enum PageStates {
@@ -42,6 +43,13 @@ class _GalleryPageState extends State<GalleryPage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        trailing: IconButton(
+          icon: const Icon(Icons.support_agent),
+          onPressed: () async {
+            await OnRedirectContactUsecase()
+                .launchWhatsapp(context, '33997312898');
+          },
+        ),
         leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
         middle: const Text('Filhotes disponíveis'),
       ),
