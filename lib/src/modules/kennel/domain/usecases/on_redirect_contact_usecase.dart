@@ -56,7 +56,7 @@ class OnRedirectContactUsecase {
     final nativeWhatsapp = Uri.parse("whatsapp://send/?phone=55$whatsapp");
     final webWhatsapp =
         Uri.parse("https://api.whatsapp.com/send/?phone=55$whatsapp");
-    launch(
+    await launch(
       context,
       nativeWhatsapp,
       webWhatsapp,
