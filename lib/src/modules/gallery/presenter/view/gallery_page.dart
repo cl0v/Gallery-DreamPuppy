@@ -47,7 +47,7 @@ class _GalleryPageState extends State<GalleryPage> {
           icon: const Icon(Icons.support_agent),
           onPressed: () async {
             await OnRedirectContactUsecase()
-                .launchWhatsapp(context, '33997312898');
+                .launchWhatsapp(context, '33997312898', 'Olá, preciso de ajuda com o App!');
           },
         ),
         leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
