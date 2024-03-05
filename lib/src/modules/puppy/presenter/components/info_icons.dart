@@ -43,16 +43,15 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                   text: 'Raça: ',
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: fontSize,
-                  ),
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                        fontSize: fontSize,
+                      ),
                   children: [
                     TextSpan(
                       text: puppyDetails.breed,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: DefaultTextStyle.of(context).style.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                     ),
                     const TextSpan(text: '.'),
                   ]),
@@ -69,12 +68,16 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                   text: 'Gênero: ',
-                  style:
-                      const TextStyle(color: Colors.black, fontSize: fontSize),
+                  style: DefaultTextStyle.of(context).style.copyWith(
+                        fontSize: fontSize,
+                      ),
                   children: [
                     TextSpan(
-                        text: gender.text,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                      text: gender.text,
+                      style: DefaultTextStyle.of(context).style.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
                     const TextSpan(text: '.'),
                   ]),
             ),
@@ -93,11 +96,15 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Nascimento: ',
-                style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: fontSize,
+                    ),
                 children: [
                   TextSpan(
                     text: BirthDateFormatter().call(puppyDetails.birth),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const TextSpan(text: '.'),
                 ],
@@ -184,11 +191,15 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Microchip: ',
-                style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: fontSize,
+                    ),
                 children: [
                   TextSpan(
                     text: microchip,
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: DefaultTextStyle.of(context).style.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
                   const TextSpan(text: '.'),
                 ],

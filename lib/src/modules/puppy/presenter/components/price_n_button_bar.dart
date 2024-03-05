@@ -21,36 +21,39 @@ class PriceAndButtonBarComponent extends StatelessWidget {
         RichText(
             text: TextSpan(
                 text: '',
-                style: const TextStyle(
-                  fontSize: 28,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w200,
-                  fontStyle: FontStyle.italic,
-                ),
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w200,
+                      fontStyle: FontStyle.italic,
+                    ),
                 children: [
-              const TextSpan(
+              TextSpan(
                 text: 'R\$ ',
-                style: TextStyle(
+                style: DefaultTextStyle.of(context).style.copyWith(
                     fontSize: 28,
-                    color: Colors.black,
                     fontWeight: FontWeight.w300,
+                    fontStyle: FontStyle.italic,
                     letterSpacing: -2.5),
+                //  TextStyle(
+                //     fontSize: 28,
+                //     color: Colors.black,
+                //     fontWeight: FontWeight.w300,
+                //     letterSpacing: -2.5),
               ),
               TextSpan(
                 text: puppy.price.toString(),
-                style: const TextStyle(
-                  color: Colors.black87,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.normal,
-                  fontSize: 32,
-                ),
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.normal,
+                    ),
               ),
-              const TextSpan(
+              TextSpan(
                 text: ',00',
-                style: TextStyle(
-                  fontSize: 12,
-                  // fontStyle: FontStyle.normal,
-                ),
+                style: DefaultTextStyle.of(context).style.copyWith(
+                      fontSize: 12,
+                      // fontStyle: FontStyle.normal,
+                    ),
               ),
             ])),
         Semantics(
