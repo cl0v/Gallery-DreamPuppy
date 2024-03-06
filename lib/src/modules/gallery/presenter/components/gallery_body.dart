@@ -51,7 +51,7 @@ class _GalleryBodyState extends State<GalleryBody> {
           isFetchBlocked = true;
           // Chama o endpoint que será responsável por armazenar os cards.
           for (var i = 0; i < 2; i++) {
-            widget.bloc.add(FetchGalleryCards());
+            widget.bloc.add(AddOneLineToGalleryGrid());
           }
         }
       },

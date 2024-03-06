@@ -34,7 +34,7 @@ class _GalleryPageState extends State<GalleryPage> {
   @override
   void initState() {
     for (int i = 0; i <= 6; i++) {
-      bloc.add(FetchGalleryCards());
+      bloc.add(GalleryGridFetchCards(page: i+1));
     }
     super.initState();
   }

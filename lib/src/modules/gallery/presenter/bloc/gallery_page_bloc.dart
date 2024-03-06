@@ -3,11 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
 import '../../domain/gallery_card_entity.dart';
 
-class FetchGalleryCards {
-  // final int pageNumber;
+abstract class FetchCardsEvent {}
 
-  // FetchGalleryCards({required this.pageNumber});
+class GalleryGridFetchCards extends FetchCardsEvent {
+  final int page;
+
+  GalleryGridFetchCards({required this.page});
 }
+
+class AddOneLineToGalleryGrid extends FetchCardsEvent {}
 
 abstract class GalleryPageState {}
 
@@ -35,32 +39,50 @@ class GalleryPageFailureState implements GalleryPageState {
   });
 }
 
-class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
-  int pageNumber = 0;
+//TODO: Adicionar uma mensagem de Alerta para avisar que algo deu errado.
+class GalleryToastAlertState implements GalleryPageState {}
+
+class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
+  int lastPageNumber = 0;
 
   final GalleryCardsDatasource datasource;
 
   GalleryPageBloc(super.initialState, {required this.datasource}) {
-    on<FetchGalleryCards>(fetch);
+    on<GalleryGridFetchCards>(fetch);
+    on<AddOneLineToGalleryGrid>(addLine);
   }
 
   FutureOr<void> fetch(
-    FetchGalleryCards event,
+    GalleryGridFetchCards event,
     Emitter<GalleryPageState> emit,
   ) async {
-    ++pageNumber;
     // emit(GalleryPageLoadingState());
+    lastPageNumber = event.page;
 
-    var (li, err) = await datasource.getEntities(pageNumber);
+    var (li, err) = await datasource.getEntities(event.page);
     if (err != null) {
-      
       return emit(GalleryPageFailureState(
         message: err.messsage,
         code: err.code,
       ));
     }
-    if (pageNumber <= 1) {
-      emit(GalleryPageSuccessState());
+    if (event.page <= 1 && li.isEmpty) {
+      return;
+    }
+
+    emit(UpdateGalleryPageSuccessState(li));
+  }
+
+  FutureOr<void> addLine(
+    AddOneLineToGalleryGrid event,
+    Emitter<GalleryPageState> emit,
+  ) async {
+    lastPageNumber += 1;
+    if(lastPageNumber > 33) return;
+    var (li, err) = await datasource.getEntities(lastPageNumber);
+    if (err != null) {
+      emit(GalleryToastAlertState());
+      return;
     }
     emit(UpdateGalleryPageSuccessState(li));
   }
