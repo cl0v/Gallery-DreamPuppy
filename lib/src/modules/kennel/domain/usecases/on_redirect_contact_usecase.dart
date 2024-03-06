@@ -70,13 +70,13 @@ class OnRedirectContactUsecase {
   @visibleForTesting
   Uri getNativeWhatsAppUri(String number, String message) {
     number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
-    return Uri.parse("whatsapp://send/?phone=55$number");
+    return Uri.parse("whatsapp://send/?phone=55$number&text=$message");
   }
 
   @visibleForTesting
   Uri getWebWhatsAppUri(String number, String message) {
     number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
-    return Uri.parse("https://api.whatsapp.com/send/?phone=55$number");
+    return Uri.parse("https://api.whatsapp.com/send/?phone=55$number&text=$message");
   }
 
   @visibleForTesting
