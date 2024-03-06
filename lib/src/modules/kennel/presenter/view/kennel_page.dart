@@ -111,7 +111,7 @@ class _KennelPageState extends State<KennelPage> {
                               }
                               return const SizedBox();
                             }),
-                        Text('© 2021-${DateTime.now().year} DreamPuppy Ltda.'),
+                        Text('2021-${DateTime.now().year} DreamPuppy Ltda. ®'),
                         RichText(
                           text: TextSpan(
                             text: 'Icons by ',
