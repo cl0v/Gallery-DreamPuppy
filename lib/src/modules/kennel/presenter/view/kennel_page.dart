@@ -13,6 +13,8 @@ import '../../domain/usecases/on_redirect_contact_usecase.dart';
 import '../../kennel_module.dart';
 import '../../presenter/components/social_button.dart';
 
+import 'package:package_info_plus/package_info_plus.dart';
+
 class KennelPage extends StatefulWidget {
   const KennelPage({
     super.key,
@@ -99,7 +101,16 @@ class _KennelPageState extends State<KennelPage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        const Text('Versão 1.0.0 (1)'),
+                        FutureBuilder<PackageInfo>(
+                            future: PackageInfo.fromPlatform(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData && snapshot.data != null) {
+                                String version = snapshot.data!.version;
+                                String buildNumber = snapshot.data!.buildNumber;
+                                return Text('Versão $version ($buildNumber)');
+                              }
+                              return const SizedBox();
+                            }),
                         Text('© 2021-${DateTime.now().year} DreamPuppy Ltda.'),
                         RichText(
                           text: TextSpan(
