@@ -25,9 +25,9 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
     );
 
     var body = jsonDecode(response.body);
+
     if ((response.statusCode >= 200 && response.statusCode < 300) &&
-        body['items'] is List &&
-        body['items'].isNotEmpty) {
+        body['items'] is List) {
       return (
         (body['items'] as List)
             .map<GalleryCardEntity>(GalleryCardEntity.fromJson)
@@ -35,17 +35,19 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
         null
       );
     }
-    return (
-      <GalleryCardEntity>[],
-      GalleryExceptions(
-        messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
-        code: 200,
-      ),
-    );
+    //TODO: Verificar se a página é algo diferente da primeira página, caso seja a primeira, pode exibir o acabaram....
+      return (
+        <GalleryCardEntity>[],
+        GalleryExceptions(
+          messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
+          code: 200,
+        ),
+      );
+    
   }
 
   @override
-  dispose(){
+  dispose() {
     client.close();
   }
 }
