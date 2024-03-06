@@ -22,6 +22,8 @@ class _GalleryBodyState extends State<GalleryBody> {
 
   List<GalleryCardEntity> cards = [];
 
+  bool isFetchBlocked = false;
+
   @override
   initState() {
     addScrollListener();
@@ -32,6 +34,7 @@ class _GalleryBodyState extends State<GalleryBody> {
       }
       setState(() {
         cards.addAll(event.cards);
+        isFetchBlocked = false;
       });
     });
     super.initState();
@@ -41,12 +44,13 @@ class _GalleryBodyState extends State<GalleryBody> {
     /// Quando chega no final da página, ele chama novamente o bloc.add
     _scrollController.addListener(
       () {
-        if (_scrollController.position.maxScrollExtent ==
+        if (_scrollController.position.maxScrollExtent <
             _scrollController.offset) {
-          debugPrint('Bateu no fundo');
+          if (isFetchBlocked) return;
+          debugPrint('Bateu no fundo, chama 2x o fetch');
+          isFetchBlocked = true;
           // Chama o endpoint que será responsável por armazenar os cards.
           for (var i = 0; i < 2; i++) {
-            debugPrint('mais 3 plz $i');
             widget.bloc.add(FetchGalleryCards());
           }
         }
@@ -57,7 +61,7 @@ class _GalleryBodyState extends State<GalleryBody> {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: cards.length + 1,
+      itemCount: cards.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 1,
         crossAxisCount: 3,
@@ -69,13 +73,12 @@ class _GalleryBodyState extends State<GalleryBody> {
       primary: false,
       controller: _scrollController,
       itemBuilder: (BuildContext context, int index) {
-        if (index == cards.length) {
-          return const CupertinoActivityIndicator();
-        }
         return GestureDetector(
           onTap: () => context.pushNamed(
             'puppy',
-            pathParameters: {'id': cards[index].id.toString()},
+            pathParameters: {
+              'id': cards[index].id.toString(),
+            },
           ),
           child: Semantics(
             label: 'petCardImg$index',

@@ -21,7 +21,7 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
     int pageNumber,
   ) async {
     var response = await client.get(
-      Uri.parse('$baseUrl/gallery/?size=3&page=$pageNumber'),
+      Uri.parse('$baseUrl/gallery?size=3&page=$pageNumber'),
     );
 
     var body = jsonDecode(response.body);
@@ -36,14 +36,13 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
       );
     }
     //TODO: Verificar se a página é algo diferente da primeira página, caso seja a primeira, pode exibir o acabaram....
-      return (
-        <GalleryCardEntity>[],
-        GalleryExceptions(
-          messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
-          code: 200,
-        ),
-      );
-    
+    return (
+      <GalleryCardEntity>[],
+      GalleryExceptions(
+        messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
+        code: 200,
+      ),
+    );
   }
 
   @override
