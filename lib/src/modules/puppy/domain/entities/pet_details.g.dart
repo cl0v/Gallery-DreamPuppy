@@ -19,11 +19,6 @@ _$PuppyDetailsEntityImpl _$$PuppyDetailsEntityImplFromJson(
       minimumAgeDepartureInDays: json['minimum_age_departure_in_days'] as int,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      vermifuges: (json['vermifuges'] as List<dynamic>)
-          .map(Vermifuge.fromJson)
-          .toList(),
-      vaccines:
-          (json['vaccines'] as List<dynamic>).map(Vaccine.fromJson).toList(),
     );
 
 Map<String, dynamic> _$$PuppyDetailsEntityImplToJson(
@@ -38,8 +33,6 @@ Map<String, dynamic> _$$PuppyDetailsEntityImplToJson(
       'microchip': instance.microchip,
       'minimum_age_departure_in_days': instance.minimumAgeDepartureInDays,
       'images': instance.images,
-      'vermifuges': instance.vermifuges,
-      'vaccines': instance.vaccines,
     };
 
 _$VermifugeImpl _$$VermifugeImplFromJson(Map<String, dynamic> json) =>

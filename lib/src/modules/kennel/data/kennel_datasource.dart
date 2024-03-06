@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart';
 
-import 'package:gallery/src/http/url.dart';
+import 'package:gallery/src/http/endpoint.dart';
 
 import '../domain/entities/kennel_entity.dart';
 

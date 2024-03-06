@@ -40,8 +40,8 @@ class OnRedirectContactUsecase {
 
   @visibleForTesting
   Future<void> launchInstagram(BuildContext context, String instagram) async {
-    final nativeInstagram = Uri.parse("instagram://user?username=$instagram");
-    final webInstagram = Uri.parse("https://www.instagram.com/$instagram");
+    final nativeInstagram = getNativeInstagramUri(instagram);
+    final webInstagram = getWebInstagramUri(instagram);
     launch(
       context,
       nativeInstagram,
@@ -51,17 +51,44 @@ class OnRedirectContactUsecase {
     );
   }
 
-  Future<void> launchWhatsapp(BuildContext context, String whatsapp) async {
-    final nativeInstagram = Uri.parse("whatsapp://send?phone=$whatsapp");
-    final webInstagram =
-        Uri.parse("https://api.whatsapp.com/send?phone=$whatsapp");
-    launch(
+  Future<void> launchWhatsapp(BuildContext context, String whatsapp,
+      [String message =
+          'Olá, vim pela DreamPuppy. O filhote do anúncio ainda  está dosponível?']) async {
+    debugPrint(
+        '//TODO: Adicionar uma mensagem personalizada e de pedido de suporte');
+    final nativeWhatsapp = getNativeWhatsAppUri(whatsapp, message);
+    final webWhatsapp = getWebWhatsAppUri(whatsapp, message);
+    await launch(
       context,
-      nativeInstagram,
-      webInstagram,
+      nativeWhatsapp,
+      webWhatsapp,
       'Não foi possível redirecionar para o WhatsApp do canil',
       ContactType.whatsapp.index,
     );
+  }
+
+  @visibleForTesting
+  Uri getNativeWhatsAppUri(String number, String message) {
+    number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
+    return Uri.parse("whatsapp://send/?phone=55$number");
+  }
+
+  @visibleForTesting
+  Uri getWebWhatsAppUri(String number, String message) {
+    number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
+    return Uri.parse("https://api.whatsapp.com/send/?phone=55$number");
+  }
+
+  @visibleForTesting
+  Uri getNativeInstagramUri(String user) {
+    user = user.trim();
+    return Uri.parse("instagram://user?username=$user");
+  }
+
+  @visibleForTesting
+  Uri getWebInstagramUri(String user) {
+    user = user.trim();
+    return Uri.parse("https://www.instagram.com/$user");
   }
 
   @visibleForTesting

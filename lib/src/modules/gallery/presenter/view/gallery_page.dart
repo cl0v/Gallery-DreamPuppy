@@ -6,7 +6,15 @@ import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datas
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../components/gallery_view.dart';
+import '../../../kennel/domain/usecases/on_redirect_contact_usecase.dart';
+import '../components/gallery_body.dart';
+
+enum PageStates {
+  loading,
+  bottomReached,
+  idle,
+  error,
+}
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -21,32 +29,27 @@ class _GalleryPageState extends State<GalleryPage> {
     datasource: galleryIoC.get<GalleryCardsDatasource>(),
   );
 
-  final ScrollController _scrollController = ScrollController();
+  PageStates currentState = PageStates.loading;
 
   @override
   void initState() {
-    addScrollListener();
-    bloc.add(FetchGalleryCards(amount: 30));
-
+    for (int i = 0; i <= 6; i++) {
+      bloc.add(FetchGalleryCards());
+    }
     super.initState();
-  }
-
-  addScrollListener() {
-    /// Quando chega no final da página, ele chama novamente o bloc.add
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent - 10) {
-          bloc.add(FetchGalleryCards(amount: 4));
-        }
-      },
-    );
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
+        trailing: IconButton(
+          icon: const Icon(Icons.support_agent),
+          onPressed: () async {
+            await OnRedirectContactUsecase()
+                .launchWhatsapp(context, '33997312898', 'Olá, preciso de ajuda com o App!');
+          },
+        ),
         leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
         middle: const Text('Filhotes disponíveis'),
       ),
@@ -55,49 +58,65 @@ class _GalleryPageState extends State<GalleryPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is GalleryPageLoadingState) {
-              return Skeletonizer(
-                enabled: true,
-                child: GridView(
-                  // itemCount: 3 * 3 * 2,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1,
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5,
-                  ),
-                  padding: const EdgeInsets.symmetric(horizontal: 2),
-                  shrinkWrap: true,
-                  primary: false,
-                  children: List.generate(
-                    3 * 3 * 2,
-                    (i) => Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(5),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            } else if (state is GalleryPageSuccessState) {
-              return GalleryViewComponent(
-                scrollController: _scrollController,
-                cards: state.cards,
-              );
+              return const GalleryPageLoadingWidget();
             } else if (state is GalleryPageFailureState) {
-              return Center(
-                child: Text(state.message),
-              );
+              return GalleryPageErrorWidget(state.message);
             } else {
-              return const Center(
-                child: Text(
-                  'Ocorreu um erro incomum, contate o suporte',
-                ),
-              );
+              return GalleryBody(bloc: bloc);
             }
           },
+        ),
+      ),
+    );
+  }
+}
+
+class GalleryPageErrorWidget extends StatelessWidget {
+  final String message;
+
+  const GalleryPageErrorWidget(
+    this.message, {
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(message),
+    );
+  }
+}
+
+class GalleryPageLoadingWidget extends StatelessWidget {
+  const GalleryPageLoadingWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Skeletonizer(
+      enabled: true,
+      child: GridView(
+        // itemCount: 3 * 3 * 2,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 1,
+          crossAxisCount: 3,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 2),
+        shrinkWrap: true,
+        primary: false,
+        children: List.generate(
+          3 * 3 * 2,
+          (i) => Container(
+            decoration: BoxDecoration(
+              color: Colors.grey.shade200,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(5),
+              ),
+            ),
+          ),
         ),
       ),
     );

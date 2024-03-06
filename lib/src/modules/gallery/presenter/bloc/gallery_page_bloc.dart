@@ -4,9 +4,9 @@ import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datas
 import '../../domain/gallery_card_entity.dart';
 
 class FetchGalleryCards {
-  final int amount;
+  // final int pageNumber;
 
-  FetchGalleryCards({required this.amount});
+  // FetchGalleryCards({required this.pageNumber});
 }
 
 abstract class GalleryPageState {}
@@ -14,9 +14,15 @@ abstract class GalleryPageState {}
 class GalleryPageLoadingState implements GalleryPageState {}
 
 class GalleryPageSuccessState implements GalleryPageState {
+  // final List<GalleryCardEntity> cards;
+
+  GalleryPageSuccessState();
+}
+
+class UpdateGalleryPageSuccessState implements GalleryPageState {
   final List<GalleryCardEntity> cards;
 
-  GalleryPageSuccessState(this.cards);
+  UpdateGalleryPageSuccessState(this.cards);
 }
 
 class GalleryPageFailureState implements GalleryPageState {
@@ -30,7 +36,7 @@ class GalleryPageFailureState implements GalleryPageState {
 }
 
 class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
-  List<GalleryCardEntity> cards = [];
+  int pageNumber = 0;
 
   final GalleryCardsDatasource datasource;
 
@@ -42,15 +48,20 @@ class GalleryPageBloc extends Bloc<FetchGalleryCards, GalleryPageState> {
     FetchGalleryCards event,
     Emitter<GalleryPageState> emit,
   ) async {
-    emit(GalleryPageLoadingState());
+    ++pageNumber;
+    // emit(GalleryPageLoadingState());
 
-    var (c, err) = await datasource.getEntities(event.amount);
+    var (li, err) = await datasource.getEntities(pageNumber);
     if (err != null) {
-      return emit(
-          GalleryPageFailureState(message: err.messsage, code: err.code));
+      
+      return emit(GalleryPageFailureState(
+        message: err.messsage,
+        code: err.code,
+      ));
     }
-
-    cards.addAll(c);
-    return emit(GalleryPageSuccessState(cards));
+    if (pageNumber <= 1) {
+      emit(GalleryPageSuccessState());
+    }
+    emit(UpdateGalleryPageSuccessState(li));
   }
 }

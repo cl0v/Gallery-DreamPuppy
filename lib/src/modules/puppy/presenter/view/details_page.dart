@@ -9,8 +9,7 @@ import '../../data/puppy_datasource.dart';
 import '../components/imgs_carousel.dart';
 import '../components/info_icons.dart';
 
-var description =
-    "Um verdadeiro ladrão de chinelos, não pode dar bobeira que você sempre vai achar seu chinelo em cima do sofá.";
+var description = "Entre em contato com o Canil para mais informações.";
 
 class DetailsPage extends StatefulWidget {
   final int petId;
@@ -45,7 +44,6 @@ class _DetailsPageState extends State<DetailsPage> {
       child: SafeArea(
         child: FutureBuilder<PuppyDetailsEntity>(
           future: _future,
-              
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
