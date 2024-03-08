@@ -15,19 +15,19 @@ class BirthDateFormatter {
       "Out",
       "Nov",
       "Dez"
-    ][month];
+    ][month-1];
     final dayS = date.day.toString();
-    final hourS = _put0OnTime(date.hour.toString());
-    final minuteS = _put0OnTime(date.minute.toString());
+    // final hourS = _put0OnTime(date.hour.toString());
+    // final minuteS = _put0OnTime(date.minute.toString());
 
-    String time = hourS == '00' && minuteS == '00' ? '' : ' às $hourS:$minuteS';
-    return '$dayS $monthS$time';
+    // String time = hourS == '00' && minuteS == '00' ? '' : ' às $hourS:$minuteS';
+    return '$dayS $monthS';
   }
 
-  String _put0OnTime(String time) {
-    if (time.length == 1) {
-      return '0$time';
-    }
-    return time;
-  }
+  // String _put0OnTime(String time) {
+  //   if (time.length == 1) {
+  //     return '0$time';
+  //   }
+  //   return time;
+  // }
 }

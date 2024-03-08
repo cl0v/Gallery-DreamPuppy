@@ -42,7 +42,7 @@ class OnRedirectContactUsecase {
   Future<void> launchInstagram(BuildContext context, String instagram) async {
     final nativeInstagram = getNativeInstagramUri(instagram);
     final webInstagram = getWebInstagramUri(instagram);
-    launch(
+  launch(
       context,
       nativeInstagram,
       webInstagram,
