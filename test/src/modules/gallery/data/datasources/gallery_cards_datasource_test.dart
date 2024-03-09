@@ -21,7 +21,7 @@ void main() {
         int amount = 10;
 
         when(
-          client.get(Uri.parse('$baseUrl/gallery/?amount=$amount')),
+          client.get(Uri.parse('$baseUrl/gallery?size=3&page=1')),
         ).thenAnswer(
           (_) async => response,
         );
@@ -42,7 +42,7 @@ void main() {
   );
 }
 
-final exitJson = [
+final List<Map> exitJson = <Map>[
   {"id": 11, "url": "https://i.imgur.com/4nusSJC.jpeg"},
   {"id": 15, "url": "https://i.imgur.com/4nusSJC.jpeg"},
   {"id": 20, "url": "https://i.imgur.com/4nusSJC.jpeg"},

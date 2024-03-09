@@ -5,6 +5,7 @@ version: 1.0.3+10
 environment:
   sdk: '>=3.1.5 <4.0.0'
 dependencies:
+  bloc_test: ^9.1.6
   cached_network_image: ^3.3.0
   cupertino_icons: ^1.0.6
   flutter:
@@ -32,6 +33,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   melos: ^3.2.0
   mockito: ^5.4.3
+  
 flutter:
   uses-material-design: true
   assets:
