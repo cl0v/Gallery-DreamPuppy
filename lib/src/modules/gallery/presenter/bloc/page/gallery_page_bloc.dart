@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
-import '../../domain/gallery_card_entity.dart';
+import '../../../domain/gallery_card_entity.dart';
+import 'gallery_page_states.dart';
 
 abstract class FetchCardsEvent {}
 
@@ -13,37 +15,18 @@ class GalleryGridFetchCards extends FetchCardsEvent {
 
 class AddOneLineToGalleryGrid extends FetchCardsEvent {}
 
-abstract class GalleryPageState {}
-
-class GalleryPageLoadingState implements GalleryPageState {}
-
-class GalleryPageSuccessState implements GalleryPageState {
-  // final List<GalleryCardEntity> cards;
-
-  GalleryPageSuccessState();
-}
-
 class UpdateGalleryPageSuccessState implements GalleryPageState {
   final List<GalleryCardEntity> cards;
 
   UpdateGalleryPageSuccessState(this.cards);
 }
 
-class GalleryPageFailureState implements GalleryPageState {
-  final String message;
-  final int code;
-
-  GalleryPageFailureState({
-    required this.message,
-    required this.code,
-  });
-}
-
 //TODO: Adicionar uma mensagem de Alerta para avisar que algo deu errado.
 class GalleryToastAlertState implements GalleryPageState {}
 
 class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
-  int lastPageNumber = 0;
+  int lastPageNumber = 1;
+  List<GalleryCardEntity> cards = [];
 
   final GalleryCardsDatasource datasource;
 
@@ -57,33 +40,50 @@ class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
     Emitter<GalleryPageState> emit,
   ) async {
     // emit(GalleryPageLoadingState());
-    lastPageNumber = event.page;
+    // lastPageNumber = event.page;
+    var (info, err) = await datasource.getEntities(18, event.page);
 
-    var (li, err) = await datasource.getEntities(event.page);
     if (err != null) {
-      return emit(GalleryPageFailureState(
+      emit(GalleryPageFailureState(
         message: err.messsage,
         code: err.code,
       ));
     }
-    if (event.page <= 1 && li.isEmpty) {
+    if (info == null) {
+    } else if (info.cards.isEmpty) {
       return;
+    } else {
+      cards.addAll(info.cards);
+      emit(UpdateGalleryPageSuccessState(cards));
     }
-
-    emit(UpdateGalleryPageSuccessState(li));
   }
 
   FutureOr<void> addLine(
     AddOneLineToGalleryGrid event,
     Emitter<GalleryPageState> emit,
   ) async {
-    lastPageNumber += 1;
-    if(lastPageNumber > 33) return;
-    var (li, err) = await datasource.getEntities(lastPageNumber);
+    if (lastPageNumber > 10) return; // Limite invisivel TODO: FIX
+    var (info, err) = await datasource.getEntities(3, lastPageNumber + 7);
     if (err != null) {
       emit(GalleryToastAlertState());
       return;
     }
-    emit(UpdateGalleryPageSuccessState(li));
+
+    if (info == null) {
+    } else if (info.cards.isEmpty) {
+      return;
+    } else {
+      if(info.cards.length == 3){
+        lastPageNumber++;
+      } else {
+        // Significa que atingiu o numero máximo de carregamentos e vai barrar logo no primeiro if
+        lastPageNumber = 10;
+      }
+      cards.addAll(info.cards);
+      emit(UpdateGalleryPageSuccessState(cards));
+    }
+    // lastPageNumber += 1;
+    // if (lastPageNumber > 33) return;
+    // emit(UpdateGalleryPageSuccessState(li));
   }
 }

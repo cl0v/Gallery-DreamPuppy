@@ -27,8 +27,8 @@ class CardImageWidget extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: fit,
-        memCacheHeight: size.width.ceil() + 10,
-        memCacheWidth: size.width.ceil() + 10,
+        // memCacheHeight: size.width.ceil() + 10,
+        // memCacheWidth: size.width.ceil() + 10,
         height: height,
         width: width,
         placeholder: (_, __) => const Center(

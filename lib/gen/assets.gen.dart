@@ -9,16 +9,6 @@
 
 import 'package:flutter/widgets.dart';
 
-class $AssetsCaGen {
-  const $AssetsCaGen();
-
-  /// File path: assets/ca/lets-encrypt-r3.pem
-  String get letsEncryptR3 => 'assets/ca/lets-encrypt-r3.pem';
-
-  /// List of all assets
-  List<String> get values => [letsEncryptR3];
-}
-
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -67,7 +57,6 @@ class $AssetsIconsGen {
 class Assets {
   Assets._();
 
-  static const $AssetsCaGen ca = $AssetsCaGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
 }
 

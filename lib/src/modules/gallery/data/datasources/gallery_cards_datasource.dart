@@ -6,8 +6,15 @@ import '../../domain/gallery_card_entity.dart';
 
 abstract class GalleryCardsDatasource {
   /// Fill the gallery with puppy (imgs) cards
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> getEntities(int amount);
+  Future<(GalleryInfo?, GalleryExceptions?)> getEntities(int size, int pageNumber);
   dispose();
+}
+
+class GalleryInfo {
+  final List<GalleryCardEntity> cards;
+  final int max;
+
+  GalleryInfo({required this.cards, required this.max});
 }
 
 class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
@@ -17,27 +24,28 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
 
   //TODO: Provavelmente vou precisar deixar nulo a lista, caso algum erro seja lançado
   @override
-  Future<(List<GalleryCardEntity>, GalleryExceptions?)> getEntities(
+  Future<(GalleryInfo?, GalleryExceptions?)> getEntities(
+    int size,
     int pageNumber,
   ) async {
     var response = await client.get(
-      Uri.parse('$baseUrl/gallery?size=3&page=$pageNumber'),
+      Uri.parse('$baseUrl/gallery?size=$size&page=$pageNumber'),
     );
 
     var body = jsonDecode(response.body);
 
     if ((response.statusCode >= 200 && response.statusCode < 300) &&
         body['items'] is List) {
-      return (
-        (body['items'] as List)
+      final info = GalleryInfo(
+        cards: (body['items'] as List)
             .map<GalleryCardEntity>(GalleryCardEntity.fromJson)
             .toList(),
-        null
+        max: body['total'],
       );
+      return (info, null);
     }
-    //TODO: Verificar se a página é algo diferente da primeira página, caso seja a primeira, pode exibir o acabaram....
     return (
-      <GalleryCardEntity>[],
+      null,
       GalleryExceptions(
         messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
         code: 200,

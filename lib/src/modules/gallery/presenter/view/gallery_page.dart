@@ -4,9 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
-import 'package:gallery/src/modules/gallery/presenter/bloc/gallery_page_bloc.dart';
+import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../kennel/domain/usecases/on_redirect_contact_usecase.dart';
+import '../bloc/page/gallery_page_states.dart';
 import '../components/gallery_body.dart';
 
 enum PageStates {
@@ -33,9 +34,7 @@ class _GalleryPageState extends State<GalleryPage> {
 
   @override
   void initState() {
-    for (int i = 0; i <= 6; i++) {
-      bloc.add(GalleryGridFetchCards(page: i+1));
-    }
+    bloc.add(GalleryGridFetchCards(page: 1));
     super.initState();
   }
 
@@ -46,8 +45,8 @@ class _GalleryPageState extends State<GalleryPage> {
         trailing: IconButton(
           icon: const Icon(Icons.support_agent),
           onPressed: () async {
-            await OnRedirectContactUsecase()
-                .launchWhatsapp(context, '33997312898', 'Oi, preciso de ajuda com o App!');
+            await OnRedirectContactUsecase().launchWhatsapp(
+                context, '33997312898', 'Oi, preciso de ajuda com o App!');
           },
         ),
         leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
@@ -58,7 +57,9 @@ class _GalleryPageState extends State<GalleryPage> {
           bloc: bloc,
           builder: (context, state) {
             if (state is GalleryPageLoadingState) {
-              return const GalleryPageLoadingWidget();
+              return const Center(
+                child: CupertinoActivityIndicator(),
+              );
             } else if (state is GalleryPageFailureState) {
               return GalleryPageErrorWidget(state.message);
             } else {
