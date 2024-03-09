@@ -6,7 +6,8 @@ import '../../domain/gallery_card_entity.dart';
 
 abstract class GalleryCardsDatasource {
   /// Fill the gallery with puppy (imgs) cards
-  Future<(GalleryInfo?, GalleryExceptions?)> getEntities(int size, int pageNumber);
+  Future<(GalleryInfo?, GalleryExceptions?)> getEntities(
+      int size, int pageNumber);
   dispose();
 }
 
@@ -22,7 +23,6 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
 
   GalleryCardsDatasourceImpl(this.client);
 
-  //TODO: Provavelmente vou precisar deixar nulo a lista, caso algum erro seja lançado
   @override
   Future<(GalleryInfo?, GalleryExceptions?)> getEntities(
     int size,
@@ -47,8 +47,8 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
     return (
       null,
       GalleryExceptions(
-        messsage: 'Oops! Acabaram os filhotes, volte amanhã.',
-        code: 200,
+        200,
+        message: 'Oops! Acabaram os filhotes, volte amanhã.',
       ),
     );
   }

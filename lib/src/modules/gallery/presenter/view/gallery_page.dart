@@ -4,9 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/gen/assets.gen.dart';
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart';
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
+import 'package:gallery/src/modules/gallery/presenter/bloc/grid/gallery_grid_bloc.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_bloc.dart';
+import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_events.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../kennel/domain/usecases/on_redirect_contact_usecase.dart';
+import '../bloc/grid/gallery_grid_states.dart';
 import '../bloc/page/gallery_page_states.dart';
 import '../components/gallery_body.dart';
 
@@ -27,14 +30,17 @@ class GalleryPage extends StatefulWidget {
 class _GalleryPageState extends State<GalleryPage> {
   final bloc = GalleryPageBloc(
     GalleryPageLoadingState(),
-    datasource: galleryIoC.get<GalleryCardsDatasource>(),
+    gridBloc: GalleryGridBloc(
+      const GalleryGridUpdateCards([]),
+      datasource: galleryIoC.get<GalleryCardsDatasource>(),
+    ),
   );
 
   PageStates currentState = PageStates.loading;
 
   @override
   void initState() {
-    bloc.add(GalleryGridFetchCards(page: 1));
+    bloc.add(LoadGridGalleryPageEvent());
     super.initState();
   }
 
@@ -46,14 +52,23 @@ class _GalleryPageState extends State<GalleryPage> {
           icon: const Icon(Icons.support_agent),
           onPressed: () async {
             await OnRedirectContactUsecase().launchWhatsapp(
-                context, '33997312898', 'Oi, preciso de ajuda com o App!');
+              context,
+              '33997312898',
+              'Oi, preciso de ajuda com o App!',
+            );
           },
         ),
-        leading: Assets.icons.logo512Png.image(height: 32, width: 32, scale: 1),
-        middle: const Text('Filhotes disponíveis'),
+        leading: Assets.icons.logo512Png.image(
+          height: 32,
+          width: 32,
+          scale: 1,
+        ),
+        middle: const Text(
+          'Filhotes disponíveis',
+        ),
       ),
       child: SafeArea(
-        child: BlocBuilder(
+        child: BlocBuilder<GalleryPageBloc, GalleryPageState>(
           bloc: bloc,
           builder: (context, state) {
             if (state is GalleryPageLoadingState) {
@@ -61,7 +76,10 @@ class _GalleryPageState extends State<GalleryPage> {
                 child: CupertinoActivityIndicator(),
               );
             } else if (state is GalleryPageFailureState) {
-              return GalleryPageErrorWidget(state.message);
+              return GalleryPageErrorWidget(
+                state.code,
+                state.message,
+              );
             } else {
               return GalleryBody(bloc: bloc);
             }
@@ -73,9 +91,11 @@ class _GalleryPageState extends State<GalleryPage> {
 }
 
 class GalleryPageErrorWidget extends StatelessWidget {
+  final int code;
   final String message;
 
   const GalleryPageErrorWidget(
+    this.code,
     this.message, {
     super.key,
   });
@@ -83,7 +103,7 @@ class GalleryPageErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(message),
+      child: Text('[$code] $message'),
     );
   }
 }

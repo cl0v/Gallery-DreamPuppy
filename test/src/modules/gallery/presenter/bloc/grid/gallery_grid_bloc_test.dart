@@ -22,8 +22,7 @@ void main() {
       /// Exemplo 01 - Cassi
       int c = 1;
       Timer.periodic(const Duration(seconds: 1), (timer) {
-        print(c);
-        c++;
+        print(c++);
       });
 
       // Escutar ele e verificar se ta chegando 3 em 3? 1 em 1 até 9 e depois 3 em 3?

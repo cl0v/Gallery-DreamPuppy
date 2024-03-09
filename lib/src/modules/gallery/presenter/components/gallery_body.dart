@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/src/modules/gallery/domain/exceptions.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
-import 'package:gallery/src/modules/gallery/presenter/bloc/grid/gallery_grid_states.dart';
-import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_states.dart';
 import 'package:go_router/go_router.dart';
 
-import '../bloc/page/gallery_page_bloc.dart';
+import '../bloc/grid/gallery_grid_bloc.dart';
+import '../bloc/grid/gallery_grid_events.dart';
+import '../bloc/grid/gallery_grid_exceptions_code.dart';
+import '../bloc/grid/gallery_grid_states.dart';
+
 import 'card_image.dart';
 
 class GalleryBody extends StatefulWidget {
@@ -14,7 +17,7 @@ class GalleryBody extends StatefulWidget {
     required this.bloc,
   });
 
-  final GalleryPageBloc bloc;
+  final GalleryGridBloc bloc;
 
   @override
   State<GalleryBody> createState() => _GalleryBodyState();
@@ -26,25 +29,37 @@ class _GalleryBodyState extends State<GalleryBody> {
   final ScrollController _scrollController = ScrollController();
 
   List<GalleryCardEntity> cards = List<GalleryCardEntity>.empty(growable: true);
-  bool isFetchBlocked = false;
 
   @override
   initState() {
     addScrollListener();
+    addAlertListener();
     super.initState();
   }
 
+  addAlertListener() {
+    widget.bloc.stream.listen((GalleryGridState state) {
+      if (state is GalleryExceptions) {
+        GalleryExceptions exp = state as GalleryExceptions;
+        if (exp.code == acabaramOsFilhotesCode) {
+          // _scrollController.removeListener(() { });
+          // Remover o listening
+        }
+      }
+    });
+  }
+
   addScrollListener() {
+    var c = 0;
+
     /// Quando chega no final da página, ele chama novamente o bloc.add
-    _scrollController.addListener(
+     _scrollController.addListener(
       () {
-        if (_scrollController.position.maxScrollExtent <
+        if (_scrollController.position.maxScrollExtent ==
             _scrollController.offset) {
-          debugPrint('Bateu no fundo $isFetchBlocked');
-          if (isFetchBlocked) return;
-          isFetchBlocked = true;
           // Chama o endpoint que será responsável por armazenar os cards.
-          widget.bloc.add(AddOneLineToGalleryGrid());
+          debugPrint((++c).toString());
+          widget.bloc.add(RequestNewPageGalleryGridEvent());
         }
       },
     );
@@ -52,18 +67,28 @@ class _GalleryBodyState extends State<GalleryBody> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GalleryPageBloc, GalleryPageState>(
+    return BlocBuilder<GalleryGridBloc, GalleryGridState>(
         bloc: widget.bloc,
-        builder: (context, GalleryPageState state) {
-          if (state is UpdateGalleryPageSuccessState) {
+        builder: (context, GalleryGridState state) {
+          /// Para qualquer novo estado, o loading é zerado.
+          int loadingsAmount = 0;
+
+          if (state is GalleryGridUpdateCards) {
             cards = state.cards;
-            isFetchBlocked = false;
           }
+          if (state is GalleryGridUpdatePendingProgressIndicators) {
+            loadingsAmount = state.amount;
+          }
+
+          int itemCount = cards.length + loadingsAmount;
           return GridView.builder(
-            itemCount: cards.length,
+            itemCount: itemCount,
+
             //TODO: Permitir personalização da rolagem da galeria e do reverse (Axis direction e Reverse).
             // A personalização irá ser desfeita ao fechar o App, salvando apenas em caso de confirmar a caixinha de Alerta
-            dragStartBehavior:
+
+            physics: const BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics()),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1,
               crossAxisCount: 3,
@@ -75,6 +100,9 @@ class _GalleryBodyState extends State<GalleryBody> {
             primary: false,
             controller: _scrollController,
             itemBuilder: (BuildContext context, int index) {
+              if (index >= cards.length) {
+                return const CupertinoActivityIndicator();
+              }
               return GestureDetector(
                 onTap: () => context.pushNamed(
                   'puppy',

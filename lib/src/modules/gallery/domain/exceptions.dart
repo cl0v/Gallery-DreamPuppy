@@ -1,6 +1,12 @@
 class GalleryExceptions implements Exception {
-  GalleryExceptions({required this.messsage, required this.code});
-
-  String messsage;
   int code;
+  String message;
+
+  GalleryExceptions(
+    this.code, {
+    required this.message,
+  });
+
+  @override
+  toString() => '[$code] $message';
 }

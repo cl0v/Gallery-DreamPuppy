@@ -1,3 +1,4 @@
+import 'package:gallery/src/modules/gallery/domain/exceptions.dart';
 
 abstract class GalleryPageState {}
 
@@ -7,12 +8,7 @@ class GalleryPageSuccessState implements GalleryPageState {
   GalleryPageSuccessState();
 }
 
-class GalleryPageFailureState implements GalleryPageState {
-  final String message;
-  final int code;
-
-  GalleryPageFailureState({
-    required this.message,
-    required this.code,
-  });
+class GalleryPageFailureState extends GalleryExceptions
+    implements GalleryPageState {
+  GalleryPageFailureState(super.code, {required super.message});
 }

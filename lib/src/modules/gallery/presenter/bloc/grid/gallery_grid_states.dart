@@ -26,7 +26,7 @@ class GalleryGridInform implements GalleryGridState {
   GalleryGridInform(
     this.code, {
     required this.message,
-    required this.extras,
+    this.extras,
   });
 }
 
@@ -34,7 +34,7 @@ class GalleryGridInformError extends GalleryGridInform {
   GalleryGridInformError(
     super.code, {
     required super.message,
-    required super.extras,
+    super.extras,
   });
 }
 
@@ -42,6 +42,6 @@ class GalleryGridInformWarning extends GalleryGridInform {
   GalleryGridInformWarning(
     super.code, {
     required super.message,
-    required super.extras,
+    super.extras,
   });
 }

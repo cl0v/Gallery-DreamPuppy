@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/datasources/gallery_cards_datasource.dart';
+import '../../../domain/gallery_card_entity.dart';
 import 'gallery_grid_events.dart';
 import 'gallery_grid_states.dart';
 
@@ -11,28 +13,80 @@ import 'gallery_grid_states.dart';
 /// Responde com a lista de filhotes.
 /// Avisos e Erros
 
-class GalleryGridBloc extends Bloc<int, GalleryGridState> {
+const int initialFetchAmount = 24; // [link] Precisam ser multiplos inteiros
+const int subsequentFetchesAmount = 6; // [link] Precisam ser multiplos inteiros
+const int pageLimitReached = 14;
+
+class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final GalleryCardsDatasource datasource;
 
   GalleryGridBloc(super.initialState, {required this.datasource}) {
-    on<int>(fetch);
+    on<FillGalleryGridEvent>(fillFirstPage);
+    on<RequestNewPageGalleryGridEvent>(requestPage);
   }
 
+  int pageNumber = 5;
+  List<GalleryCardEntity> cards = [];
+
   /// Encontra a quantidade de filhotes solicitada.
-  Future<void> fetch(
-    int pageNumber,
+  Future<void> fillFirstPage(
+    FillGalleryGridEvent event,
     Emitter<GalleryGridState> emit,
   ) async {
-    if (pageNumber < 1) return;
-    var (info, err) = await datasource.getEntities(21, pageNumber);
-    emit(GalleryGridUpdateCards(List.empty()));
+    var (info, err) = await datasource.getEntities(initialFetchAmount, 1);
 
+    if (err != null) {
+      event.onError(err);
+      emit(
+        GalleryGridInformError(
+          err.code,
+          message: err.message,
+        ),
+      );
+    }
+    if (info == null) {
+    } else if (info.cards.isEmpty) {
+      return;
+    } else {
+      cards.addAll(info.cards);
+      event.onFinish.call();
+      emit(GalleryGridUpdateCards(cards));
+    }
+  }
+
+  // Future<void>
+
+  FutureOr<void> requestPage(RequestNewPageGalleryGridEvent event,
+      Emitter<GalleryGridState> emit) async {
+    // Limite invisivel TODO: FIX
+    if (pageNumber >= pageLimitReached) {
+      debugPrint('Acabaram os filhotes!');
+      return;
+    }
     emit(const GalleryGridUpdatePendingProgressIndicators(3));
-    emit(GalleryGridInformError(
-      404,
-      message: 'Not Found',
-      extras: null,
-    ));
+    var (info, err) = await datasource.getEntities(
+      subsequentFetchesAmount,
+      pageNumber,
+    );
+    if (err != null) {
+      emit(GalleryGridInformWarning(err.code, message: err.message));
+      return;
+    }
+
+    if (info == null) {
+    } else if (info.cards.isEmpty) {
+      emit(GalleryGridInformWarning(111, message: 'Acabaram os filhotes!'));
+      return;
+    } else {
+      if (info.cards.length == subsequentFetchesAmount) {
+        pageNumber++;
+      } else {
+        // Significa que atingiu o numero máximo de carregamentos e vai barrar logo no primeiro if
+        pageNumber = pageLimitReached;
+      }
+      cards.addAll(info.cards);
+      emit(GalleryGridUpdateCards(cards));
+    }
   }
 }
 
