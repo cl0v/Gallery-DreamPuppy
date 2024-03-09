@@ -81,7 +81,12 @@ class _GalleryPageState extends State<GalleryPage> {
                 state.message,
               );
             } else {
-              return GalleryBody(bloc: bloc);
+              return SizedBox(
+                height: double.maxFinite,
+                child: GalleryBody(
+                  bloc: bloc.gridBloc,
+                ),
+              );
             }
           },
         ),
