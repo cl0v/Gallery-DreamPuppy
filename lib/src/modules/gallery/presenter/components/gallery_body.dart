@@ -61,6 +61,9 @@ class _GalleryBodyState extends State<GalleryBody> {
           }
           return GridView.builder(
             itemCount: cards.length,
+            //TODO: Permitir personalização da rolagem da galeria e do reverse (Axis direction e Reverse).
+            // A personalização irá ser desfeita ao fechar o App, salvando apenas em caso de confirmar a caixinha de Alerta
+            dragStartBehavior:
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 1,
               crossAxisCount: 3,

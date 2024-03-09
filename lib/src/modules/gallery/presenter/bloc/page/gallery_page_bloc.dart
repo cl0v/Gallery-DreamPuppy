@@ -24,8 +24,12 @@ class UpdateGalleryPageSuccessState implements GalleryPageState {
 //TODO: Adicionar uma mensagem de Alerta para avisar que algo deu errado.
 class GalleryToastAlertState implements GalleryPageState {}
 
+const int initialFetchAmount = 24;  // [link] Precisam ser multiplos inteiros
+const int subsequentFetchesAmount = 6; // [link] Precisam ser multiplos inteiros
+const int pageLimitReached = 14;
+
 class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
-  int lastPageNumber = 1;
+  int pageNumber = 4;
   List<GalleryCardEntity> cards = [];
 
   final GalleryCardsDatasource datasource;
@@ -41,7 +45,8 @@ class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
   ) async {
     // emit(GalleryPageLoadingState());
     // lastPageNumber = event.page;
-    var (info, err) = await datasource.getEntities(18, event.page);
+    var (info, err) =
+        await datasource.getEntities(initialFetchAmount, event.page);
 
     if (err != null) {
       emit(GalleryPageFailureState(
@@ -62,8 +67,16 @@ class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
     AddOneLineToGalleryGrid event,
     Emitter<GalleryPageState> emit,
   ) async {
-    if (lastPageNumber > 10) return; // Limite invisivel TODO: FIX
-    var (info, err) = await datasource.getEntities(3, lastPageNumber + 7);
+    // Limite invisivel TODO: FIX
+    if (pageNumber >= pageLimitReached) {
+      print('[M. fix 242] Max pages reached Error');
+      return;
+    }
+      print('[Called] Max pages reached Error');
+    var (info, err) = await datasource.getEntities(
+      subsequentFetchesAmount,
+      pageNumber,
+    );
     if (err != null) {
       emit(GalleryToastAlertState());
       return;
@@ -73,11 +86,11 @@ class GalleryPageBloc extends Bloc<FetchCardsEvent, GalleryPageState> {
     } else if (info.cards.isEmpty) {
       return;
     } else {
-      if(info.cards.length == 3){
-        lastPageNumber++;
+      if (info.cards.length == subsequentFetchesAmount) {
+        pageNumber++;
       } else {
         // Significa que atingiu o numero máximo de carregamentos e vai barrar logo no primeiro if
-        lastPageNumber = 10;
+        pageNumber = pageLimitReached;
       }
       cards.addAll(info.cards);
       emit(UpdateGalleryPageSuccessState(cards));

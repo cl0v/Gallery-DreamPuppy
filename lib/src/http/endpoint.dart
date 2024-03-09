@@ -19,6 +19,6 @@ const cloud = "http://localhost:28015";
 
 const prod = "https://api.dreampuppy.com.br";
 
-String get devEnv => prod;
+String get devEnv => uvicorn;
 
 String get baseUrl => kDebugMode ? devEnv : prod;
