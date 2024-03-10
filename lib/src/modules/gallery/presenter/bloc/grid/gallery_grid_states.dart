@@ -1,5 +1,7 @@
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
 
+import '../../../domain/exceptions.dart';
+
 /// Todos os possíveis estados do grid na galeria.
 abstract class GalleryGridState {}
 
@@ -18,14 +20,13 @@ class GalleryGridUpdatePendingProgressIndicators implements GalleryGridState {
 }
 
 /// Exibe erros, avisos, logs, etc...
-class GalleryGridInform implements GalleryGridState {
-  final int code;
-  final String message;
+class GalleryGridInform extends GalleryExceptions implements GalleryGridState {
+
   final dynamic extras;
 
   GalleryGridInform(
-    this.code, {
-    required this.message,
+    super.code, {
+    required super.message,
     this.extras,
   });
 }

@@ -25,6 +25,7 @@ class GalleryPageBloc extends Bloc<GalleryPageEvent, GalleryPageState> {
     _,
     Emitter<GalleryPageState> emit,
   ) async {
+    emit(GalleryPageLoadingState());
     gridBloc.add(
       FillGalleryGridEvent(
         onFinish: () {

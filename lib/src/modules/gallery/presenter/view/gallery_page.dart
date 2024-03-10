@@ -78,8 +78,10 @@ class _GalleryPageState extends State<GalleryPage> {
               );
             } else if (state is GalleryPageFailureState) {
               return GalleryPageErrorWidget(
-                state.code,
-                state.message,
+                state.toString(),
+                onAction: () => bloc.add(
+                  LoadGridGalleryPageEvent(),
+                ),
               );
             } else {
               return SizedBox(
@@ -97,19 +99,34 @@ class _GalleryPageState extends State<GalleryPage> {
 }
 
 class GalleryPageErrorWidget extends StatelessWidget {
-  final int code;
-  final String message;
+  final String text;
+  final VoidCallback onAction;
 
   const GalleryPageErrorWidget(
-    this.code,
-    this.message, {
+    this.text, {
+    required this.onAction,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('[$code] $message'),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 18.0),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              textAlign: TextAlign.center,
+            ),
+            CupertinoButton(
+              onPressed: onAction,
+              child: const Text('Tentar novamente'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

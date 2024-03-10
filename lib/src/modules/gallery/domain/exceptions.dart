@@ -1,5 +1,5 @@
 class GalleryExceptions implements Exception {
-  int code;
+  int? code;
   String message;
 
   GalleryExceptions(
@@ -8,5 +8,5 @@ class GalleryExceptions implements Exception {
   });
 
   @override
-  toString() => '[$code] $message';
+  toString() => code != null ? '[$code] $message' : message;
 }
