@@ -1,0 +1,1 @@
+const supportWhatsAppDefaultNumber = '33997312898';

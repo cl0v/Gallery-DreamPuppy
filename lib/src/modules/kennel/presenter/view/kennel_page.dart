@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery/src/utils/constants.dart';
 import 'package:gap/gap.dart';
 
 import 'package:gallery/gen/assets.gen.dart';
@@ -38,10 +39,21 @@ class _KennelPageState extends State<KennelPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Sobre o Canil'),
-        previousPageTitle: 'Detalhes',
-      ),
+      navigationBar: CupertinoNavigationBar(
+          middle: const Text('Sobre o Canil'),
+          previousPageTitle: 'Detalhes',
+          trailing: IconButton(
+              onPressed: () {
+                OnRedirectContactUsecase().launchWhatsapp(
+                  context,
+                  supportWhatsAppDefaultNumber,
+                  'Gostaria de abrir uma reclamação para com o canil ${widget.kennelId}.',
+                );
+              },
+              icon: Icon(
+                Icons.warning_rounded,
+                color: Colors.yellow.shade700,
+              ))),
       child: SafeArea(
         child: FutureBuilder<KennelDetails>(
             future: _future,

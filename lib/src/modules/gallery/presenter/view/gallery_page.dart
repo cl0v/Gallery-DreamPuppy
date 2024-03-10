@@ -7,6 +7,7 @@ import 'package:gallery/src/modules/gallery/gallery_module.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/grid/gallery_grid_bloc.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_bloc.dart';
 import 'package:gallery/src/modules/gallery/presenter/bloc/page/gallery_page_events.dart';
+import 'package:gallery/src/utils/constants.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../kennel/domain/usecases/on_redirect_contact_usecase.dart';
 import '../bloc/grid/gallery_grid_states.dart';
@@ -53,7 +54,7 @@ class _GalleryPageState extends State<GalleryPage> {
           onPressed: () async {
             await OnRedirectContactUsecase().launchWhatsapp(
               context,
-              '33997312898',
+              supportWhatsAppDefaultNumber,
               'Oi, preciso de ajuda com o App!',
             );
           },
