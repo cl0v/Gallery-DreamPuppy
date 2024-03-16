@@ -28,6 +28,7 @@ class PriceAndButtonBarComponent extends StatelessWidget {
                     ),
                 children: [
               TextSpan(
+                // Ta muito feio esse design
                 text: 'R\$ ',
                 style: DefaultTextStyle.of(context).style.copyWith(
                     fontSize: 28,

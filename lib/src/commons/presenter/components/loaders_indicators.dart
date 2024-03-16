@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:gallery/gen/assets.gen.dart';
 
 class CircularLoadingWidget extends StatelessWidget {
@@ -9,9 +7,10 @@ class CircularLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Platform.isIOS
-        ? const CupertinoActivityIndicator()
-        : const CircularProgressIndicator();
+    return const CupertinoActivityIndicator();
+    // return Platform.isIOS
+    //     ? const CupertinoActivityIndicator()
+    //     : const CircularProgressIndicator();
   }
 }
 

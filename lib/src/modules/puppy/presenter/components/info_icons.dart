@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gallery/gen/assets.gen.dart';
@@ -23,7 +22,9 @@ class InfoIconsComponent extends StatelessWidget {
   final PuppyDetailsEntity puppyDetails;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     var gender = GenderFromIntFormatter.call(puppyDetails.gender);
     var birth = BirthDateFormatter.call(puppyDetails.birth);
     var microchip = MicrochipFormatter.call(puppyDetails.microchip);
@@ -48,13 +49,17 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                   text: 'Raça: ',
-                  style: DefaultTextStyle.of(context).style.copyWith(
+                  style: DefaultTextStyle.of(
+                    context,
+                  ).style.copyWith(
                         fontSize: fontSize,
                       ),
                   children: [
                     TextSpan(
                       text: puppyDetails.breed,
-                      style: DefaultTextStyle.of(context).style.copyWith(
+                      style: DefaultTextStyle.of(
+                        context,
+                      ).style.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                     ),
@@ -73,13 +78,17 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                   text: 'Gênero: ',
-                  style: DefaultTextStyle.of(context).style.copyWith(
+                  style: DefaultTextStyle.of(
+                    context,
+                  ).style.copyWith(
                         fontSize: fontSize,
                       ),
                   children: [
                     TextSpan(
                       text: gender.text,
-                      style: DefaultTextStyle.of(context).style.copyWith(
+                      style: DefaultTextStyle.of(
+                        context,
+                      ).style.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
                     ),
@@ -101,13 +110,17 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Nascimento: ',
-                style: DefaultTextStyle.of(context).style.copyWith(
+                style: DefaultTextStyle.of(
+                  context,
+                ).style.copyWith(
                       fontSize: fontSize,
                     ),
                 children: [
                   TextSpan(
                     text: birth,
-                    style: DefaultTextStyle.of(context).style.copyWith(
+                    style: DefaultTextStyle.of(
+                      context,
+                    ).style.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -117,7 +130,7 @@ class InfoIconsComponent extends StatelessWidget {
             ),
           ),
           const Gap(4),
-          /*InfoWithIconWidget(
+          InfoWithIconWidget(
             icon: Tooltip(
               preferBelow: false,
               message: 'Histórico de vacinação',
@@ -131,8 +144,19 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Vacinas: ',
-                style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                style: DefaultTextStyle.of(
+                  context,
+                ).style.copyWith(fontSize: fontSize),
                 children: [
+                  TextSpan(
+                    text: 'Em breve',
+                    style: DefaultTextStyle.of(
+                      context,
+                    ).style.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  /*
                   TextSpan(
                     text: '${vaccines.amount}x ',
                     style: const TextStyle(fontWeight: FontWeight.bold),
@@ -141,6 +165,7 @@ class InfoIconsComponent extends StatelessWidget {
                     text: vaccines.brand,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  */
                   const TextSpan(text: '.'),
                 ],
               ),
@@ -164,8 +189,19 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Vermífugos: ',
-                style: const TextStyle(color: Colors.black, fontSize: fontSize),
+                style: DefaultTextStyle.of(
+                  context,
+                ).style.copyWith(fontSize: fontSize),
                 children: [
+                  TextSpan(
+                    text: 'Em breve',
+                    style: DefaultTextStyle.of(
+                      context,
+                    ).style.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  /*
                   TextSpan(
                     text: '${vermifuges.amount}x ',
                     style: const TextStyle(fontWeight: FontWeight.bold),
@@ -174,13 +210,14 @@ class InfoIconsComponent extends StatelessWidget {
                     text: vermifuges.brand,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
+                  */
                   const TextSpan(text: '.'),
                 ],
               ),
               // child: Text(formatVaccinationRecordUsecase(
               //     pet.vaccineRecord)),
             ),
-          ),*/
+          ),
           const Gap(4),
           InfoWithIconWidget(
             icon: Tooltip(
@@ -196,13 +233,17 @@ class InfoIconsComponent extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: 'Microchip: ',
-                style: DefaultTextStyle.of(context).style.copyWith(
+                style: DefaultTextStyle.of(
+                  context,
+                ).style.copyWith(
                       fontSize: fontSize,
                     ),
                 children: [
                   TextSpan(
                     text: microchip,
-                    style: DefaultTextStyle.of(context).style.copyWith(
+                    style: DefaultTextStyle.of(
+                      context,
+                    ).style.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
@@ -267,7 +308,9 @@ class InfoWithIconWidget extends StatelessWidget {
   final Widget icon;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
