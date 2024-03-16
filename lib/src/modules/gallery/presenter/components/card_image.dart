@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
+import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 
 class CardImageWidget extends StatelessWidget {
   const CardImageWidget({

@@ -5,7 +5,7 @@ import 'package:gallery/src/utils/constants.dart';
 import 'package:gap/gap.dart';
 
 import 'package:gallery/gen/assets.gen.dart';
-import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
+import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 
 import '../../data/kennel_datasource.dart';
 import '../../domain/entities/kennel_entity.dart';

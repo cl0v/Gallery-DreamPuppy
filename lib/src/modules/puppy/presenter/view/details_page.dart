@@ -1,15 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:gallery/src/commons/presenter/components/circular_loading.dart';
+import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
-import 'package:gallery/src/modules/puppy/presenter/components/price_n_button_bar.dart';
 import 'package:gallery/src/modules/puppy/puppy_module.dart';
-import 'package:gap/gap.dart';
 import '../../data/puppy_datasource.dart';
-import '../components/imgs_carousel.dart';
-import '../components/info_icons.dart';
 
-var description = "Entre em contato com o Canil para mais informações.";
+import 'details_body.dart';
 
 class DetailsPage extends StatefulWidget {
   final int petId;
@@ -55,62 +50,12 @@ class _DetailsPageState extends State<DetailsPage> {
               );
             } else if (snapshot.hasData && snapshot.data != null) {
               var puppy = snapshot.data as PuppyDetailsEntity;
-              return _SuccessBody(puppy);
+              return PuppyDetailsBody(puppy);
             } else {
               return const Center(child: Text('Nothing to see here'));
             }
           },
         ),
-      ),
-    );
-  }
-}
-
-class _SuccessBody extends StatelessWidget {
-  final PuppyDetailsEntity puppy;
-
-  const _SuccessBody(this.puppy);
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ImgsCarouselComponent(
-            height: 400,
-            pictures: puppy.images,
-          ),
-          const Gap(8),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: PriceAndButtonBarComponent(puppy: puppy)),
-          const Gap(16),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Divider(),
-          ),
-          description.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 22.0),
-                  child: Text(
-                    description,
-                    style: DefaultTextStyle.of(context)
-                        .style
-                        .copyWith(fontSize: 16),
-                  ),
-                )
-              : const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12.0),
-                  child: Divider(),
-                ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.0),
-            child: Divider(),
-          ),
-          const Gap(16),
-          InfoIconsComponent(puppyDetails: puppy),
-        ],
       ),
     );
   }

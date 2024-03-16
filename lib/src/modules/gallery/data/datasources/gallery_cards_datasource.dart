@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:gallery/src/http/endpoint.dart';
 import 'package:gallery/src/modules/gallery/domain/exceptions.dart';
 import 'package:http/http.dart';
@@ -35,6 +36,7 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
         Uri.parse('$baseUrl/gallery?size=$size&page=$pageNumber'),
       );
     } on SocketException catch (err) {
+      debugPrint('$err');
       return (null, GalleryExceptions(null, message: 'Problemas com a internet. Verifique a conexão e tente novamente!'));
     }
 

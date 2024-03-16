@@ -53,7 +53,7 @@ class _GalleryBodyState extends State<GalleryBody> {
     var c = 0;
 
     /// Quando chega no final da página, ele chama novamente o bloc.add
-     _scrollController.addListener(
+    _scrollController.addListener(
       () {
         if (_scrollController.position.maxScrollExtent ==
             _scrollController.offset) {
@@ -116,6 +116,15 @@ class _GalleryBodyState extends State<GalleryBody> {
                     imageUrl: cards[index].url,
                     radius: 5,
                   ),
+
+                  //  Stack(
+                  //   children: [
+                  //     CardImageWidget(
+                  //       imageUrl: cards[index].url,
+                  //       radius: 5,
+                  //     ),
+                  //     Text(cards[index].id.toString()),
+                  //   ],
                 ),
               );
             },
