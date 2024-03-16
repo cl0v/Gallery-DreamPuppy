@@ -49,15 +49,19 @@ class _GalleryPageState extends State<GalleryPage> {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        trailing: IconButton(
-          icon: const Icon(Icons.support_agent),
-          onPressed: () async {
-            await OnRedirectContactUsecase().launchWhatsapp(
-              context,
-              supportWhatsAppDefaultNumber,
-              'Oi, preciso de ajuda com o App!',
-            );
-          },
+        trailing: Tooltip(
+          // O google anvisou que está faltando suporte para screen readers para acessibilidade
+          message: 'Pedir ajuda ao suporte pelo WhatsApp',
+          child: IconButton(
+            icon: const Icon(Icons.support_agent),
+            onPressed: () async {
+              await OnRedirectContactUsecase().launchWhatsapp(
+                context,
+                supportWhatsAppDefaultNumber,
+                'Oi, preciso de ajuda com o App!',
+              );
+            },
+          ),
         ),
         leading: Assets.icons.logo512Png.image(
           height: 32,

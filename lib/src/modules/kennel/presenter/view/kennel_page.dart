@@ -42,18 +42,22 @@ class _KennelPageState extends State<KennelPage> {
       navigationBar: CupertinoNavigationBar(
           middle: const Text('Sobre o Canil'),
           previousPageTitle: 'Detalhes',
-          trailing: IconButton(
-              onPressed: () {
-                OnRedirectContactUsecase().launchWhatsapp(
-                  context,
-                  supportWhatsAppDefaultNumber,
-                  'Gostaria de abrir uma reclamação para com o canil ${widget.kennelId}.',
-                );
-              },
-              icon: Icon(
-                Icons.warning_rounded,
-                color: Colors.yellow.shade700,
-              ))),
+          trailing: Tooltip(
+            // O google anvisou que está faltando suporte para screen readers para acessibilidade
+            message: 'Abrir uma reclamação para com o canil',
+            child: IconButton(
+                onPressed: () {
+                  OnRedirectContactUsecase().launchWhatsapp(
+                    context,
+                    supportWhatsAppDefaultNumber,
+                    'Gostaria de abrir uma reclamação para com o canil ${widget.kennelId}.',
+                  );
+                },
+                icon: Icon(
+                  Icons.warning_rounded,
+                  color: Colors.yellow.shade700,
+                )),
+          )),
       child: SafeArea(
         child: FutureBuilder<KennelDetails>(
             future: _future,
