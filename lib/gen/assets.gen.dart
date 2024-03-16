@@ -55,6 +55,9 @@ class $AssetsIconsGen {
   AssetGenImage get registeredTrademarkIcon =>
       const AssetGenImage('assets/icons/registered_trademark_icon.png');
 
+  /// File path: assets/icons/weight-icon.svg
+  String get weightIcon => 'assets/icons/weight-icon.svg';
+
   /// List of all assets
   List<dynamic> get values => [
         cpu,
@@ -64,7 +67,8 @@ class $AssetsIconsGen {
         icons8Whatsapp48,
         logo512Png,
         logo512Svg,
-        registeredTrademarkIcon
+        registeredTrademarkIcon,
+        weightIcon
       ];
 }
 

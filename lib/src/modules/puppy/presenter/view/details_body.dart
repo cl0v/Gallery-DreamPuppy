@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 import 'package:gallery/src/modules/puppy/presenter/components/price_n_button_bar.dart';
 import 'package:gap/gap.dart';
-import '../../domain/entities/pet_details.dart';
+import '../../domain/entities/puppy_details_entity.dart';
 import '../components/info_icons.dart';
 
 var description = "Entre em contato com o Canil para mais informações.";

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'pet_details.dart';
+part of 'puppy_details_entity.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -27,6 +27,7 @@ mixin _$PuppyDetailsEntity {
   int get gender => throw _privateConstructorUsedError;
   String get birth => throw _privateConstructorUsedError;
   bool get microchip => throw _privateConstructorUsedError;
+  int? get weight => throw _privateConstructorUsedError;
   @JsonKey(name: 'minimum_age_departure_in_days')
   int get minimumAgeDepartureInDays => throw _privateConstructorUsedError;
   List<String> get images => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $PuppyDetailsEntityCopyWith<$Res> {
       int gender,
       String birth,
       bool microchip,
+      int? weight,
       @JsonKey(name: 'minimum_age_departure_in_days')
       int minimumAgeDepartureInDays,
       List<String> images});
@@ -76,6 +78,7 @@ class _$PuppyDetailsEntityCopyWithImpl<$Res, $Val extends PuppyDetailsEntity>
     Object? gender = null,
     Object? birth = null,
     Object? microchip = null,
+    Object? weight = freezed,
     Object? minimumAgeDepartureInDays = null,
     Object? images = null,
   }) {
@@ -108,6 +111,10 @@ class _$PuppyDetailsEntityCopyWithImpl<$Res, $Val extends PuppyDetailsEntity>
           ? _value.microchip
           : microchip // ignore: cast_nullable_to_non_nullable
               as bool,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
       minimumAgeDepartureInDays: null == minimumAgeDepartureInDays
           ? _value.minimumAgeDepartureInDays
           : minimumAgeDepartureInDays // ignore: cast_nullable_to_non_nullable
@@ -136,6 +143,7 @@ abstract class _$$PuppyDetailsEntityImplCopyWith<$Res>
       int gender,
       String birth,
       bool microchip,
+      int? weight,
       @JsonKey(name: 'minimum_age_departure_in_days')
       int minimumAgeDepartureInDays,
       List<String> images});
@@ -159,6 +167,7 @@ class __$$PuppyDetailsEntityImplCopyWithImpl<$Res>
     Object? gender = null,
     Object? birth = null,
     Object? microchip = null,
+    Object? weight = freezed,
     Object? minimumAgeDepartureInDays = null,
     Object? images = null,
   }) {
@@ -191,6 +200,10 @@ class __$$PuppyDetailsEntityImplCopyWithImpl<$Res>
           ? _value.microchip
           : microchip // ignore: cast_nullable_to_non_nullable
               as bool,
+      weight: freezed == weight
+          ? _value.weight
+          : weight // ignore: cast_nullable_to_non_nullable
+              as int?,
       minimumAgeDepartureInDays: null == minimumAgeDepartureInDays
           ? _value.minimumAgeDepartureInDays
           : minimumAgeDepartureInDays // ignore: cast_nullable_to_non_nullable
@@ -216,6 +229,7 @@ class _$PuppyDetailsEntityImpl
       required this.gender,
       required this.birth,
       required this.microchip,
+      this.weight,
       @JsonKey(name: 'minimum_age_departure_in_days')
       required this.minimumAgeDepartureInDays,
       required final List<String> images})
@@ -239,6 +253,8 @@ class _$PuppyDetailsEntityImpl
   @override
   final bool microchip;
   @override
+  final int? weight;
+  @override
   @JsonKey(name: 'minimum_age_departure_in_days')
   final int minimumAgeDepartureInDays;
   final List<String> _images;
@@ -251,7 +267,7 @@ class _$PuppyDetailsEntityImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PuppyDetailsEntity(id: $id, breed: $breed, price: $price, pedigree: $pedigree, gender: $gender, birth: $birth, microchip: $microchip, minimumAgeDepartureInDays: $minimumAgeDepartureInDays, images: $images)';
+    return 'PuppyDetailsEntity(id: $id, breed: $breed, price: $price, pedigree: $pedigree, gender: $gender, birth: $birth, microchip: $microchip, weight: $weight, minimumAgeDepartureInDays: $minimumAgeDepartureInDays, images: $images)';
   }
 
   @override
@@ -266,6 +282,7 @@ class _$PuppyDetailsEntityImpl
       ..add(DiagnosticsProperty('gender', gender))
       ..add(DiagnosticsProperty('birth', birth))
       ..add(DiagnosticsProperty('microchip', microchip))
+      ..add(DiagnosticsProperty('weight', weight))
       ..add(DiagnosticsProperty(
           'minimumAgeDepartureInDays', minimumAgeDepartureInDays))
       ..add(DiagnosticsProperty('images', images));
@@ -285,6 +302,7 @@ class _$PuppyDetailsEntityImpl
             (identical(other.birth, birth) || other.birth == birth) &&
             (identical(other.microchip, microchip) ||
                 other.microchip == microchip) &&
+            (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.minimumAgeDepartureInDays,
                     minimumAgeDepartureInDays) ||
                 other.minimumAgeDepartureInDays == minimumAgeDepartureInDays) &&
@@ -302,6 +320,7 @@ class _$PuppyDetailsEntityImpl
       gender,
       birth,
       microchip,
+      weight,
       minimumAgeDepartureInDays,
       const DeepCollectionEquality().hash(_images));
 
@@ -329,6 +348,7 @@ abstract class _PuppyDetailsEntity implements PuppyDetailsEntity {
       required final int gender,
       required final String birth,
       required final bool microchip,
+      final int? weight,
       @JsonKey(name: 'minimum_age_departure_in_days')
       required final int minimumAgeDepartureInDays,
       required final List<String> images}) = _$PuppyDetailsEntityImpl;
@@ -350,6 +370,8 @@ abstract class _PuppyDetailsEntity implements PuppyDetailsEntity {
   String get birth;
   @override
   bool get microchip;
+  @override
+  int? get weight;
   @override
   @JsonKey(name: 'minimum_age_departure_in_days')
   int get minimumAgeDepartureInDays;

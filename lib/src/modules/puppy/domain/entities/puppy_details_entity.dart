@@ -14,6 +14,7 @@ class PuppyDetailsEntity with _$PuppyDetailsEntity {
     required int gender,
     required String birth,
     required bool microchip,
+    int? weight,
     @JsonKey(name: 'minimum_age_departure_in_days')
     required int minimumAgeDepartureInDays,
     required List<String> images,

@@ -1,4 +1,4 @@
-import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
+import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 
 class VaccinesFormatter {
   ({int amount, String brand}) call(List<Vaccine> vaccines) {

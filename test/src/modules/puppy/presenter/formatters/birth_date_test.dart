@@ -2,10 +2,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gallery/src/modules/puppy/presenter/formatters/birth_date.dart';
 
 void main() {
-  var subject = BirthDateFormatter();
-  testWidgets('birth date ...', (tester) async {
-    expect(subject.call(json['birth']!), '30 Dez');
-    expect(subject.call(json2['birth']!), '11 Jan');
+  test('birth date', () async {
+    expect(BirthDateFormatter.call(json['birth']!), '30 Dez 23');
+    expect(BirthDateFormatter.call(json2['birth']!), '11 Jan 24');
   });
 }
 
@@ -15,5 +14,5 @@ var json = {
 
 var json2 = {
   //2024-01-11T18:25:43.511000
-"birth": "2024-01-11T18:25:43",
+  "birth": "2024-01-11T18:25:43",
 };

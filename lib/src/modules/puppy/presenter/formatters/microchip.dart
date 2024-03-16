@@ -1,5 +1,5 @@
-class MicrochipFormatter {
-  String call(bool isMicrochipped) {
-    return isMicrochipped ? 'incluso' : 'NÃO incluso';
+abstract class MicrochipFormatter {
+  static String call(bool isMicrochipped) {
+    return isMicrochipped ? 'incluso' : 'Não incluso';
   }
 }

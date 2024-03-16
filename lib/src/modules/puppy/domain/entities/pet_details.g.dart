@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pet_details.dart';
+part of 'puppy_details_entity.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -16,6 +16,7 @@ _$PuppyDetailsEntityImpl _$$PuppyDetailsEntityImplFromJson(
       gender: json['gender'] as int,
       birth: json['birth'] as String,
       microchip: json['microchip'] as bool,
+      weight: json['weight'] as int?,
       minimumAgeDepartureInDays: json['minimum_age_departure_in_days'] as int,
       images:
           (json['images'] as List<dynamic>).map((e) => e as String).toList(),
@@ -31,6 +32,7 @@ Map<String, dynamic> _$$PuppyDetailsEntityImplToJson(
       'gender': instance.gender,
       'birth': instance.birth,
       'microchip': instance.microchip,
+      'weight': instance.weight,
       'minimum_age_departure_in_days': instance.minimumAgeDepartureInDays,
       'images': instance.images,
     };

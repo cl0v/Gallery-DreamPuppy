@@ -1,10 +1,14 @@
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:gallery/src/http/endpoint.dart';
-import '../domain/entities/pet_details.dart';
+import '../domain/entities/puppy_details_entity.dart';
 
 abstract class PuppyDetailsDatasource {
+
   Future<PuppyDetailsEntity> getEntity(int id);
+  
+  //TODO: Implementar chamada por uuid para poder liberar compartilhamento.
+  // Future<PuppyDetailsEntity> getEntityFromUUID(String uuid);
 
   Future<String> getKennelId(int id);
 }
@@ -16,9 +20,9 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
     this.client,
   );
 
+
   @override
   Future<PuppyDetailsEntity> getEntity(int id) async {
-    //TODO: Esta chamando novamente
     var response = await client.get(Uri.parse('$baseUrl/puppies/$id'));
 
     client.close();

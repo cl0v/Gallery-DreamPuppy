@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
-import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
+import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 import 'package:gallery/src/modules/puppy/puppy_module.dart';
 import '../../data/puppy_datasource.dart';
 

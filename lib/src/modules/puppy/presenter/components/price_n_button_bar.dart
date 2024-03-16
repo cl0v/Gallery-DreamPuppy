@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
+import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../domain/usecases/on_contact_kennel_pressed.dart';

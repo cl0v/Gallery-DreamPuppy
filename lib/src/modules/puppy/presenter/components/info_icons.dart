@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gallery/gen/assets.gen.dart';
-import 'package:gallery/src/modules/puppy/domain/entities/pet_details.dart';
+import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 import 'package:gallery/src/modules/puppy/presenter/formatters/gender_from_int.dart';
+import 'package:gallery/src/modules/puppy/presenter/formatters/weight.dart';
 import 'package:gap/gap.dart';
 
 import '../formatters/birth_date.dart';
@@ -21,10 +24,12 @@ class InfoIconsComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var gender = GenderFromIntFormatter().call(puppyDetails.gender);
+    var gender = GenderFromIntFormatter.call(puppyDetails.gender);
+    var birth = BirthDateFormatter.call(puppyDetails.birth);
+    var microchip = MicrochipFormatter.call(puppyDetails.microchip);
+    var weight = WeightFormatter.call(puppyDetails.weight);
     // var vaccines = VaccinesFormatter().call(puppyDetails.vaccines);
     // var vermifuges = VermifugesFormatter().call(puppyDetails.vermifuges);
-    var microchip = MicrochipFormatter().call(puppyDetails.microchip);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
@@ -101,7 +106,7 @@ class InfoIconsComponent extends StatelessWidget {
                     ),
                 children: [
                   TextSpan(
-                    text: BirthDateFormatter().call(puppyDetails.birth),
+                    text: birth,
                     style: DefaultTextStyle.of(context).style.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -180,7 +185,7 @@ class InfoIconsComponent extends StatelessWidget {
           InfoWithIconWidget(
             icon: Tooltip(
               preferBelow: false,
-              message: 'Genética | Linhagem',
+              message: 'Microchip',
               child: SizedBox(
                 height: 24,
                 child: Assets.icons.cpu
@@ -198,6 +203,45 @@ class InfoIconsComponent extends StatelessWidget {
                   TextSpan(
                     text: microchip,
                     style: DefaultTextStyle.of(context).style.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const TextSpan(text: '.'),
+                ],
+              ),
+            ),
+          ),
+          const Gap(4),
+          InfoWithIconWidget(
+            icon: Tooltip(
+              preferBelow: false,
+              message: 'Última pesagem',
+              child: SizedBox(
+                height: 24,
+                child: SvgPicture.asset(
+                  Assets.icons.weightIcon.toString(),
+                  colorFilter: const ColorFilter.mode(
+                    Colors.blueGrey,
+                    BlendMode.srcIn,
+                  ),
+                ),
+              ),
+            ),
+            child: RichText(
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                text: 'Peso: ',
+                style: DefaultTextStyle.of(
+                  context,
+                ).style.copyWith(
+                      fontSize: fontSize,
+                    ),
+                children: [
+                  TextSpan(
+                    text: weight,
+                    style: DefaultTextStyle.of(
+                      context,
+                    ).style.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
