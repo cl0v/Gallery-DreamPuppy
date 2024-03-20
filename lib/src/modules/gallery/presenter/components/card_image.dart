@@ -21,7 +21,6 @@ class CardImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(radius)),
       child: CachedNetworkImage(
@@ -34,10 +33,10 @@ class CardImageWidget extends StatelessWidget {
         placeholder: (_, __) => const Center(
           child: CircularLoadingWidget(),
         ),
-        errorWidget: (_, __, err) {
+        errorWidget: (_, str, err) {
           //TODO: Implementar log de erro quando a imagem não carrega, exemplo de imagem [https://devapigallery.blob.core.windows.net/ae4888a3465944b382b30fa444eff6aa/e8c039d278654a3fa59653dbcf80cb71.jpeg]
           return GestureDetector(
-            onTap: () => debugPrint('Deu probleminha'),
+            onTap: () => debugPrint('Deu probleminha: $str $err'),
             child: Container(
               color: Colors.red.shade50,
               child: Icon(

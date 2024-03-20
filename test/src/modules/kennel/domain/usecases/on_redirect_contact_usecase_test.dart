@@ -1,36 +1,61 @@
+import 'dart:ui';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gallery/src/modules/kennel/domain/usecases/on_redirect_contact_usecase.dart';
 
 void main() {
   var usecase = OnRedirectContactUsecase();
-  group('Test native uri always valid', () {
-    test('Native whatsapp uri', () {
+  test('Color delete', () {
+    expect(Color.fromARGB(255, 184, 166, 121), '#323232');
+  });
+  group('Test Whatsapp', () {
+    test('iOS uri', () {
       expect(
           usecase.getNativeWhatsAppUri('‪‪34998979582‬‬', ''),
           equals(
-            Uri.parse('whatsapp://send/?phone=5534998979582'),
+            Uri.parse('whatsapp://send/?phone=5534998979582&text='),
           ));
       expect(
           usecase.getNativeWhatsAppUri('34998979582', ''),
           equals(
-            Uri.parse('whatsapp://send/?phone=5534998979582'),
+            Uri.parse('whatsapp://send/?phone=5534998979582&text='),
           ));
     });
-    test('Native instagram uri', () {
+    test('Android uri', () {
+      expect(
+          usecase.getAndroidWhatsAppUri('‪‪34998979582‬‬', ''),
+          equals(
+            Uri.parse('https://wa.me/phone=5534998979582/?text='),
+          ));
+      expect(
+          usecase.getAndroidWhatsAppUri('34998979582', ''),
+          equals(
+            Uri.parse('https://wa.me/5534998979582/?text='),
+          ));
+    });
+    test('Web uri', () {
+      expect(
+          usecase.getWebWhatsAppUri('33998525199', ''),
+          equals(
+            Uri.parse(
+                'https://api.whatsapp.com/send/?phone=5533998525199&text='),
+          ));
+    });
+  });
+
+  group('Test Instagram', () {
+    test('iOS uri', () {
       expect(
           usecase.getNativeInstagramUri('dreampuppy.com.br'),
           equals(
             Uri.parse('instagram://user?username=dreampuppy.com.br'),
           ));
     });
-  });
-
-  group('Test web uri always valid', () {
-    test('Web whatsapp uri', () {
+    test('Adroid Uri', (){
       expect(
-          usecase.getWebWhatsAppUri('33998525199', ''),
+          usecase.getAndroidInstagramUri('dreampuppy.com.br'),
           equals(
-            Uri.parse('https://api.whatsapp.com/send/?phone=5533998525199'),
+            Uri.parse('instagram://user?username=dreampuppy.com.br'),
           ));
     });
     test('Web instagram uri', () {

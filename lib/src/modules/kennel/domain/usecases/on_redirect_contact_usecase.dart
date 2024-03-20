@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,13 +26,19 @@ class OnRedirectContactUsecase {
   Future<void> launch(
     BuildContext context,
     Uri mainUrl,
-    Uri? secondUrl,
+    Uri secondUrl,
+    Uri androidUrl,
     String errMsg,
     int errCode,
   ) async {
-    if (await canLaunchUrl(mainUrl)) {
+    if (Platform.isAndroid && await canLaunchUrl(androidUrl)) {
+      await launchUrl(
+        androidUrl,
+        mode: LaunchMode.externalApplication,
+      );
+    } else if (await canLaunchUrl(mainUrl)) {
       await launchUrl(mainUrl, mode: LaunchMode.externalApplication);
-    } else if (secondUrl != null && await canLaunchUrl(secondUrl)) {
+    } else if (await canLaunchUrl(secondUrl)) {
       await launchUrl(secondUrl, mode: LaunchMode.inAppWebView);
     } else {
       if (!context.mounted) return;
@@ -40,12 +48,16 @@ class OnRedirectContactUsecase {
 
   @visibleForTesting
   Future<void> launchInstagram(BuildContext context, String instagram) async {
+    instagram = instagram.trim();
     final nativeInstagram = getNativeInstagramUri(instagram);
     final webInstagram = getWebInstagramUri(instagram);
-  launch(
+    final androidInstagram = getWebInstagramUri(instagram);
+    // final androidInstagram = getAndroidInstagramUri(instagram);
+    launch(
       context,
       nativeInstagram,
       webInstagram,
+      androidInstagram,
       'Não foi possível redirecionar para o Instagram do canil',
       ContactType.instagram.index,
     );
@@ -56,38 +68,49 @@ class OnRedirectContactUsecase {
           'Olá, vim pela DreamPuppy. O filhote do anúncio ainda está disponível?']) async {
     debugPrint(
         '//TODO: Adicionar uma mensagem personalizada e de pedido de suporte');
+    whatsapp = whatsapp.trim().replaceAll(RegExp(r'[^0-9]'), '');
+
     final nativeWhatsapp = getNativeWhatsAppUri(whatsapp, message);
     final webWhatsapp = getWebWhatsAppUri(whatsapp, message);
+    final androidWhatsapp = getAndroidWhatsAppUri(whatsapp, message);
     await launch(
       context,
       nativeWhatsapp,
       webWhatsapp,
+      androidWhatsapp,
       'Não foi possível redirecionar para o WhatsApp do canil',
       ContactType.whatsapp.index,
     );
   }
 
   @visibleForTesting
-  Uri getNativeWhatsAppUri(String number, String message) {
-    number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
-    return Uri.parse("whatsapp://send/?phone=55$number&text=$message");
-  }
+  Uri getNativeWhatsAppUri(String number, String message) =>
+      Uri.parse("whatsapp://send?phone=55$number&text=$message");
 
   @visibleForTesting
-  Uri getWebWhatsAppUri(String number, String message) {
-    number = number.trim().replaceAll(RegExp(r'[^0-9]'),'');
-    return Uri.parse("https://api.whatsapp.com/send/?phone=55$number&text=$message");
-  }
+  Uri getWebWhatsAppUri(String number, String message) =>
+      Uri.parse("https://api.whatsapp.com/send/?phone=55$number&text=$message");
+
+  @visibleForTesting
+  Uri getAndroidWhatsAppUri(String number, String message) =>
+      Uri.parse("https://wa.me/55$number?text=$message");
 
   @visibleForTesting
   Uri getNativeInstagramUri(String user) {
-    user = user.trim();
     return Uri.parse("instagram://user?username=$user");
   }
 
   @visibleForTesting
+  Uri getAndroidInstagramUri(String user) {
+    throw UnimplementedError(
+      'Not working properly, please use getWebInstagramUri instead',
+    );
+    var uri = Uri.parse("instagram://user?username=$user");
+    return uri;
+  }
+
+  @visibleForTesting
   Uri getWebInstagramUri(String user) {
-    user = user.trim();
     return Uri.parse("https://www.instagram.com/$user");
   }
 

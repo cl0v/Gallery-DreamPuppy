@@ -59,10 +59,12 @@ class PriceAndButtonBarComponent extends StatelessWidget {
             ])),
         Semantics(
           label: 'onGoToKennelPage',
+          //TODO: Substituir esse botão pelo do material para Android, pois a google solicita para acessibilidade 44dp para 48
           child: CupertinoButton.filled(
             onPressed: () async {
-              var usecase =
-                  await OnGetKennelContactsPressedUsecase().call(puppy.id);
+              var usecase = await OnGetKennelContactsPressedUsecase().call(
+                puppy.id,
+              );
               var shouldRedirect = false;
               do {
                 if (!context.mounted) return;
@@ -75,7 +77,7 @@ class PriceAndButtonBarComponent extends StatelessWidget {
               } while (shouldRedirect);
             },
             padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: const Text('Sobre o Canil'), // "Falar com o Canil"
+            child: const Text('Falar com Canil'), // "Falar com o Canil"
           ),
         ),
       ],
