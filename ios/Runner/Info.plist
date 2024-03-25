@@ -6,6 +6,8 @@
 		<true/>
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+		<string>Localização necessária para listar os filhotes com base na proximidade do Canil.</string>
 		<key>CFBundleDisplayName</key>
 		<string>DreamPuppy - Gallery</string>
 		<key>CFBundleExecutable</key>

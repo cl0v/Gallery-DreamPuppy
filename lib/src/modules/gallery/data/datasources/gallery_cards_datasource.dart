@@ -33,11 +33,24 @@ class GalleryCardsDatasourceImpl implements GalleryCardsDatasource {
     late Response response;
     try {
       response = await client.get(
-        Uri.parse('$baseUrl/gallery?size=$size&page=$pageNumber'),
+        Uri.parse(
+          '$baseUrl/gallery?size=$size&page=$pageNumber',
+        ),
+        // headers: {
+        //   "lat": "-12.8719219",
+        //   "lon": "-40.8185112",
+        // },
       );
     } on SocketException catch (err) {
       debugPrint('$err');
-      return (null, GalleryExceptions(null, message: 'Problemas com a internet. Verifique a conexão e tente novamente!'));
+      return (
+        null,
+        GalleryExceptions(
+          null,
+          message:
+              'Problemas com a internet. Verifique a conexão e tente novamente!',
+        )
+      );
     }
 
     var body = jsonDecode(response.body);
