@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gallery/src/modules/gallery/domain/coordinates.dart';
 
 import '../../../data/datasources/gallery_cards_datasource.dart';
 import '../../../domain/gallery_card_entity.dart';
@@ -20,6 +21,8 @@ const int pageLimitReached = 14;
 class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
   final GalleryCardsDatasource datasource;
 
+  GeoCoordinates? _coordinates;
+
   GalleryGridBloc(super.initialState, {required this.datasource}) {
     on<FillGalleryGridEvent>(fillFirstPage);
     on<RequestNewPageGalleryGridEvent>(requestPage);
@@ -33,7 +36,12 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
     FillGalleryGridEvent event,
     Emitter<GalleryGridState> emit,
   ) async {
-    var (info, err) = await datasource.getEntities(initialFetchAmount, 1);
+    _coordinates = event.coordinates;
+    var (info, err) = await datasource.getEntities(
+      initialFetchAmount,
+      1,
+      _coordinates,
+    );
 
     if (err != null) {
       event.onError(err);
@@ -67,6 +75,7 @@ class GalleryGridBloc extends Bloc<GalleryGridEvent, GalleryGridState> {
     var (info, err) = await datasource.getEntities(
       subsequentFetchesAmount,
       pageNumber,
+      _coordinates,
     );
     if (err != null) {
       emit(GalleryGridInformWarning(err.code, message: err.message));
