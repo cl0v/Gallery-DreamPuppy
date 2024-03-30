@@ -9,7 +9,8 @@
 		<key>NSLocationWhenInUseUsageDescription</key>
 		<string>Localização necessária para listar os filhotes com base na proximidade do Canil.</string>
 		<key>CFBundleDisplayName</key>
-		<string>DreamPuppy - Gallery</string>
+		<!-- TODO: URGENTE: Descobrir se atrapalha a pesquisa rapida. Gostaria que a pessoa pesquisasse por galeria e achasse -->
+		<string>Dream Puppy Gallery</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
