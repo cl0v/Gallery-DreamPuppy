@@ -24,3 +24,12 @@ class ImagePlaceholderLoadingWidget extends StatelessWidget {
         : Assets.anims.loadingSmall.image();
   }
 }
+
+class OnlyGifPlaceholderLoadingWidget extends StatelessWidget {
+  const OnlyGifPlaceholderLoadingWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Assets.anims.loadingSmall.image(fit: BoxFit.contain);
+  }
+}

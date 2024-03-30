@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 import 'package:gallery/src/modules/puppy/puppy_module.dart';
+import 'package:go_router/go_router.dart';
 import '../../data/puppy_datasource.dart';
 
 import 'details_body.dart';
@@ -31,10 +33,23 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+      navigationBar: CupertinoNavigationBar(
         previousPageTitle: 'Galeria',
         automaticallyImplyLeading: true,
-        middle: Text('Detalhes'),
+        middle: const Text('Detalhes'),
+        trailing: Tooltip(
+          // O google anvisou que está faltando suporte para screen readers para acessibilidade
+          message: 'Pedir ajuda ao suporte pelo WhatsApp',
+          child: IconButton(
+            icon: const Icon(
+              Icons.help,
+              size: 28,
+            ),
+            onPressed: () {
+              context.pushNamed('wiki');
+            },
+          ),
+        ),
       ),
       child: SafeArea(
         child: FutureBuilder<PuppyDetailsEntity>(
@@ -50,7 +65,7 @@ class _DetailsPageState extends State<DetailsPage> {
               );
             } else if (snapshot.hasData && snapshot.data != null) {
               var puppy = snapshot.data as PuppyDetailsEntity;
-              return PuppyDetailsBody(puppy);
+              return PuppyDetailsBody(puppy: puppy);
             } else {
               return const Center(child: Text('Nothing to see here'));
             }

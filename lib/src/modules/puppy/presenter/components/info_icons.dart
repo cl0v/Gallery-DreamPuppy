@@ -16,19 +16,19 @@ const fontSize = 17.0;
 class InfoIconsComponent extends StatelessWidget {
   const InfoIconsComponent({
     super.key,
-    required this.puppyDetails,
+    required this.puppy,
   });
 
-  final PuppyDetailsEntity puppyDetails;
+  final PuppyDetailsEntity? puppy;
 
   @override
   Widget build(
     BuildContext context,
   ) {
-    var gender = GenderFromIntFormatter.call(puppyDetails.gender);
-    var birth = BirthDateFormatter.call(puppyDetails.birth);
-    var microchip = MicrochipFormatter.call(puppyDetails.microchip);
-    var weight = WeightFormatter.call(puppyDetails.weight);
+    var gender = GenderFromIntFormatter.call(puppy?.gender);
+    var birth = BirthDateFormatter.call(puppy?.birth);
+    var microchip = MicrochipFormatter.call(puppy?.microchip);
+    var weight = WeightFormatter.call(puppy?.weight, puppy == null);
     // var vaccines = VaccinesFormatter().call(puppyDetails.vaccines);
     // var vermifuges = VermifugesFormatter().call(puppyDetails.vermifuges);
 
@@ -36,17 +36,17 @@ class InfoIconsComponent extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
         children: [
-          plotBreedWidget(context),
+          plotBreedWidget(context, puppy),
           const Gap(4),
-          plotGenderWidget(gender, context),
+          plotGenderWidget(context, gender),
           const Gap(4),
           plotWeightWidget(context, weight),
           const Gap(4),
           plotBirthWidget(context, birth),
           const Gap(4),
-          plotVaccinesWidget(context),
+          plotVaccinesWidget(context, puppy),
           const Gap(4),
-          plotVermifugesWidget(context),
+          plotVermifugesWidget(context, puppy),
           const Gap(4),
           plotMicrochipWidget(context, microchip),
         ],
@@ -54,7 +54,11 @@ class InfoIconsComponent extends StatelessWidget {
     );
   }
 
-  InfoWithIconWidget plotVaccinesWidget(BuildContext context) {
+  InfoWithIconWidget plotVaccinesWidget(
+      BuildContext context, PuppyDetailsEntity? puppy) {
+    String docsTxt =
+        'Vacinas tomadas pelo filhote no dia da entrega, próximas vacinas a consultar';
+    String vacinnes = puppy == null ? docsTxt : 'Em breve';
     return InfoWithIconWidget(
       icon: Tooltip(
         preferBelow: false,
@@ -74,7 +78,7 @@ class InfoIconsComponent extends StatelessWidget {
           ).style.copyWith(fontSize: fontSize),
           children: [
             TextSpan(
-              text: 'Em breve',
+              text: vacinnes,
               style: DefaultTextStyle.of(
                 context,
               ).style.copyWith(
@@ -136,7 +140,9 @@ class InfoIconsComponent extends StatelessWidget {
   }
 
   InfoWithIconWidget plotGenderWidget(
-      ({Icon icon, String text}) gender, BuildContext context) {
+    BuildContext context,
+    ({Icon icon, String text}) gender,
+  ) {
     return InfoWithIconWidget(
       icon: Tooltip(
         preferBelow: false,
@@ -167,7 +173,13 @@ class InfoIconsComponent extends StatelessWidget {
     );
   }
 
-  InfoWithIconWidget plotBreedWidget(BuildContext context) {
+  InfoWithIconWidget plotBreedWidget(
+    BuildContext context,
+    PuppyDetailsEntity? puppy,
+  ) {
+    String breed =
+        puppy == null ? 'Identificador da Raça do filhote' : puppy.breed;
+
     return InfoWithIconWidget(
       icon: Tooltip(
         preferBelow: false,
@@ -188,7 +200,7 @@ class InfoIconsComponent extends StatelessWidget {
                 ),
             children: [
               TextSpan(
-                text: puppyDetails.breed,
+                text: breed,
                 style: DefaultTextStyle.of(
                   context,
                 ).style.copyWith(
@@ -201,7 +213,13 @@ class InfoIconsComponent extends StatelessWidget {
     );
   }
 
-  InfoWithIconWidget plotVermifugesWidget(BuildContext context) {
+  InfoWithIconWidget plotVermifugesWidget(
+    BuildContext context,
+    PuppyDetailsEntity? puppy,
+  ) {
+    String docsTxt =
+        'Vermífugos tomadas pelo filhote no dia da entrega. Próximos a consultar';
+    String vermifuges = puppy == null ? docsTxt : 'Em breve';
     return InfoWithIconWidget(
       icon: Tooltip(
         preferBelow: false,
@@ -222,7 +240,7 @@ class InfoIconsComponent extends StatelessWidget {
           ).style.copyWith(fontSize: fontSize),
           children: [
             TextSpan(
-              text: 'Em breve',
+              text: vermifuges,
               style: DefaultTextStyle.of(
                 context,
               ).style.copyWith(
