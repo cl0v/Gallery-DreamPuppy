@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:gallery/src/modules/gallery/presenter/view/gallery_page.dart';
+import 'package:gallery/src/modules/wiki-docs/wiki_page.dart';
 import 'package:go_router/go_router.dart';
 import 'src/modules/kennel/presenter/view/kennel_page.dart';
 import 'src/modules/puppy/presenter/view/details_page.dart';
@@ -11,9 +12,10 @@ abstract class AppRouter {
 
 GoRouter appRouter = GoRouter(
   debugLogDiagnostics: kDebugMode,
-  routes: [
+  routes: <GoRoute>[
     GoRoute(
       path: '/',
+      // redirect: (_, __) => '/docs',
       builder: (context, state) => const GalleryPage(),
     ),
     GoRoute(
@@ -30,6 +32,12 @@ GoRouter appRouter = GoRouter(
         kennelId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
       ),
     ),
+    GoRoute(
+        name: 'wiki',
+        path: '/docs', // Ou docs/
+        builder: (c, s) => WikiPage()
+        // redirect: , # Para o /docs/page/details-page-user-guide
+        )
     // ...AuthRouter.instance.routes,
   ],
 );

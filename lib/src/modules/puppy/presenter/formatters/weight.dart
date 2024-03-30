@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 /// Ponto indicando casa dos milhares. 1.350 (g)
 /// Icone de pesinho
 abstract class WeightFormatter {
-  static String call(int? weight) {
+  static String call(int? weight, bool isPuppyNull) {
+    if(isPuppyNull) return 'Ultimo peso do filhote registrado';
     if (weight == null) return 'Não informado';
     var r = splitStringEveryThird(weight.toString()).join('.');
     return '$r (g)';
