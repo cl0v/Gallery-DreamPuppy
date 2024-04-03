@@ -1,6 +1,6 @@
 abstract class BirthDateFormatter {
   static String call(String? dateStr) {
-    if(dateStr == null) return 'Data de nascimento do filhote';
+    if(dateStr == null) return 'Dia do nascimento';
     var date = DateTime.parse(dateStr);
     final month = date.month;
     final monthS = [

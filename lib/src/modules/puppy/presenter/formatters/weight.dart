@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 /// Icone de pesinho
 abstract class WeightFormatter {
   static String call(int? weight, bool isPuppyNull) {
-    if(isPuppyNull) return 'Ultimo peso do filhote registrado';
+    if(isPuppyNull) return 'Ultimo peso registrado, valor atualizado frequentemente';
     if (weight == null) return 'Não informado';
     var r = splitStringEveryThird(weight.toString()).join('.');
     return '$r (g)';

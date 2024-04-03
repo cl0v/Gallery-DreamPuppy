@@ -21,7 +21,9 @@ class _WikiPageState extends State<WikiPage> {
     //   body: SafeArea(
     //     child:Container()));
     return const CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(),
+      navigationBar: CupertinoNavigationBar(
+        middle: Text('Manual'),
+      ),
       //   leading: CupertinoButton(
       //       child: const Text('Voltar'), onPressed: () => context.pop()),
       // ),

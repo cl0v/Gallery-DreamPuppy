@@ -57,7 +57,7 @@ class InfoIconsComponent extends StatelessWidget {
   InfoWithIconWidget plotVaccinesWidget(
       BuildContext context, PuppyDetailsEntity? puppy) {
     String docsTxt =
-        'Vacinas tomadas pelo filhote no dia da entrega, próximas vacinas a consultar';
+        'Vacinas tomadas até o dia da entrega, próximas vacinas a consultar';
     String vacinnes = puppy == null ? docsTxt : 'Em breve';
     return InfoWithIconWidget(
       icon: Tooltip(
@@ -70,7 +70,7 @@ class InfoIconsComponent extends StatelessWidget {
         ),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
           text: 'Vacinas: ',
           style: DefaultTextStyle.of(
@@ -115,7 +115,7 @@ class InfoIconsComponent extends StatelessWidget {
         ),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
           text: 'Nascimento: ',
           style: DefaultTextStyle.of(
@@ -150,7 +150,7 @@ class InfoIconsComponent extends StatelessWidget {
         child: gender.icon,
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
             text: 'Gênero: ',
             style: DefaultTextStyle.of(
@@ -190,7 +190,7 @@ class InfoIconsComponent extends StatelessWidget {
         ),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
             text: 'Raça: ',
             style: DefaultTextStyle.of(
@@ -218,7 +218,7 @@ class InfoIconsComponent extends StatelessWidget {
     PuppyDetailsEntity? puppy,
   ) {
     String docsTxt =
-        'Vermífugos tomadas pelo filhote no dia da entrega. Próximos a consultar';
+        'Vermífugos tomadas até o dia da entrega. Próximos a consultar';
     String vermifuges = puppy == null ? docsTxt : 'Em breve';
     return InfoWithIconWidget(
       icon: Tooltip(
@@ -232,7 +232,7 @@ class InfoIconsComponent extends StatelessWidget {
             )),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
           text: 'Vermífugos: ',
           style: DefaultTextStyle.of(
@@ -279,7 +279,7 @@ class InfoIconsComponent extends StatelessWidget {
         ),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
           text: 'Microchip: ',
           style: DefaultTextStyle.of(
@@ -320,7 +320,7 @@ class InfoIconsComponent extends StatelessWidget {
         ),
       ),
       child: RichText(
-        overflow: TextOverflow.ellipsis,
+        overflow: puppy != null ? TextOverflow.ellipsis : TextOverflow.visible,
         text: TextSpan(
           text: 'Peso: ',
           style: DefaultTextStyle.of(
