@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:gallery/modules.dart';
 import 'package:gallery/src/modules/gallery/gallery_module.dart';
@@ -20,18 +19,27 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   void initState() {
-    appIoC.registerFactory<Client>(() => Client());
-    appIoC.registerSingleton<GalleryModule>(DefaultGalleryModule());
-    appIoC.registerSingleton<PuppyModule>(DefaultPuppyModule());
-    appIoC.registerSingleton<KennelModule>(DefaultKennelModule());
-    appIoC.get<GalleryModule>().init();
-    appIoC.get<PuppyModule>().init();
-    appIoC.get<KennelModule>().init();
+    appIoC.registerFactory<http.Client>(() => http.Client());
+    _registerIoCs();
+    _initModules();
+
+    super.initState();
+  }
+
+  _registerIoCs() {
     //! TODO: DONT WASTE TIME
     // TODO: Usar o modulo de autenticação ja pronto no arquive
     // appIoC.registerSingleton<AuthModule>(DefaultAuthModule(authIoC));
 
-    super.initState();
+    appIoC.registerSingleton<GalleryModule>(DefaultGalleryModule());
+    appIoC.registerSingleton<PuppyModule>(DefaultPuppyModule());
+    appIoC.registerSingleton<KennelModule>(DefaultKennelModule());
+  }
+
+  _initModules() {
+    appIoC.get<GalleryModule>().init();
+    appIoC.get<PuppyModule>().init();
+    appIoC.get<KennelModule>().init();
   }
 
   @override
