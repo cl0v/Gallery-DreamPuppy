@@ -5,11 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'src/modules/kennel/presenter/view/kennel_page.dart';
 import 'src/modules/puppy/presenter/view/details_page.dart';
 
-abstract class AppRouter {
-  List<String> get names => [];
-  List<GoRoute> get routes => [];
-}
-
 GoRouter appRouter = GoRouter(
   debugLogDiagnostics: kDebugMode,
   routes: <GoRoute>[
@@ -35,7 +30,7 @@ GoRouter appRouter = GoRouter(
     GoRoute(
         name: 'wiki',
         path: '/docs', // Ou docs/
-        builder: (c, s) => WikiPage()
+        builder: (c, s) => const WikiPage()
         // redirect: , # Para o /docs/page/details-page-user-guide
         )
     // ...AuthRouter.instance.routes,

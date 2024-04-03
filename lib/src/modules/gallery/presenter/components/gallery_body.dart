@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gallery/src/modules/gallery/domain/exceptions.dart';
 import 'package:gallery/src/modules/gallery/domain/gallery_card_entity.dart';
-import 'package:go_router/go_router.dart';
+import 'package:gallery/src/modules/puppy/presenter/view/details_page.dart';
+// import 'package:go_router/go_router.dart';
 
 import '../bloc/grid/gallery_grid_bloc.dart';
 import '../bloc/grid/gallery_grid_events.dart';
@@ -104,12 +105,11 @@ class _GalleryBodyState extends State<GalleryBody> {
                 return const CupertinoActivityIndicator();
               }
               return GestureDetector(
-                onTap: () => context.pushNamed(
-                  'puppy',
-                  pathParameters: {
-                    'id': cards[index].id.toString(),
-                  },
-                ),
+                onTap: () => Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => DetailsPage(
+                    petId: cards[index].id,
+                  ),
+                )),
                 child: Semantics(
                   label: 'petCardImg$index',
                   child: CardImageWidget(
