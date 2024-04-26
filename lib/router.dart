@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:gallery/src/modules/gallery/presenter/view/gallery_page.dart';
 import 'package:gallery/src/modules/wiki-docs/wiki_page.dart';
+import 'package:gallery/src/utils/url_uuid_extractor.dart';
 import 'package:go_router/go_router.dart';
 import 'src/modules/kennel/presenter/view/kennel_page.dart';
 import 'src/modules/puppy/presenter/view/details_page.dart';
@@ -12,27 +13,30 @@ GoRouter appRouter = GoRouter(
       path: '/',
       // redirect: (_, __) => '/docs',
       builder: (context, state) => const GalleryPage(),
+      routes: [
+        GoRoute(
+          name: 'filhotes',
+          path: 'filhotes/:id',
+          builder: (context, state) => DetailsPage(
+            petUuid: extractUuidFromUrl(state.pathParameters['id'] as String),
+          ),
+        ),
+        GoRoute(
+          name: 'kennel',
+          path: 'kennel/:id',
+          builder: (context, state) => KennelPage(
+            kennelId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
+          ),
+        ),
+        GoRoute(
+            name: 'wiki',
+            path: 'docs', // Ou docs/
+            builder: (c, s) => const WikiPage()
+            // redirect: , # Para o /docs/page/details-page-user-guide
+            )
+      ],
     ),
-    GoRoute(
-      name: 'puppy',
-      path: '/puppy/:id',
-      builder: (context, state) => DetailsPage(
-        petId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
-      ),
-    ),
-    GoRoute(
-      name: 'kennel',
-      path: '/kennel/:id',
-      builder: (context, state) => KennelPage(
-        kennelId: int.tryParse(state.pathParameters['id'] as String) ?? 0,
-      ),
-    ),
-    GoRoute(
-        name: 'wiki',
-        path: '/docs', // Ou docs/
-        builder: (c, s) => const WikiPage()
-        // redirect: , # Para o /docs/page/details-page-user-guide
-        )
+
     // ...AuthRouter.instance.routes,
   ],
 );

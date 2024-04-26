@@ -9,11 +9,11 @@ import '../../data/puppy_datasource.dart';
 import 'details_body.dart';
 
 class DetailsPage extends StatefulWidget {
-  final int petId;
+  final String petUuid;
 
   const DetailsPage({
     super.key,
-    required this.petId,
+    required this.petUuid,
   });
 
   @override
@@ -25,7 +25,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   void initState() {
-    _future = puppyIoC.get<PuppyDetailsDatasource>().getEntity(widget.petId);
+    _future = puppyIoC.get<PuppyDetailsDatasource>().getEntityByUuid(widget.petUuid);
 
     super.initState();
   }

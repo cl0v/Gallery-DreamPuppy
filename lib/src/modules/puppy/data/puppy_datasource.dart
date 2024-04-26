@@ -6,6 +6,7 @@ import '../domain/entities/puppy_details_entity.dart';
 abstract class PuppyDetailsDatasource {
 
   Future<PuppyDetailsEntity> getEntity(int id);
+  Future<PuppyDetailsEntity> getEntityByUuid(String uuid);
   
   //TODO: Implementar chamada por uuid para poder liberar compartilhamento.
   // Future<PuppyDetailsEntity> getEntityFromUUID(String uuid);
@@ -38,5 +39,15 @@ class PuppyDetailsDatasourceImpl implements PuppyDetailsDatasource {
     client.close();
 
     return response.body;
+  }
+  
+  @override
+  Future<PuppyDetailsEntity> getEntityByUuid(String uuid) async{
+    var response = await client.get(Uri.parse('$baseUrl/puppies/$uuid'));
+
+    client.close();
+
+    var body = jsonDecode(utf8.decode(response.bodyBytes));
+    return PuppyDetailsEntity.fromJson(body);
   }
 }

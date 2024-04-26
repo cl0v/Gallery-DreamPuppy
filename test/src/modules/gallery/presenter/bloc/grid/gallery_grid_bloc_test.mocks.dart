@@ -7,6 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:gallery/src/modules/gallery/data/datasources/gallery_cards_datasource.dart'
     as _i2;
+import 'package:gallery/src/modules/gallery/domain/coordinates.dart' as _i5;
 import 'package:gallery/src/modules/gallery/domain/exceptions.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -32,6 +33,7 @@ class MockGalleryCardsDatasource extends _i1.Mock
   _i3.Future<(_i2.GalleryInfo?, _i4.GalleryExceptions?)> getEntities(
     int? size,
     int? pageNumber,
+    _i5.GeoCoordinates? coordinates,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -39,6 +41,7 @@ class MockGalleryCardsDatasource extends _i1.Mock
           [
             size,
             pageNumber,
+            coordinates,
           ],
         ),
         returnValue:
