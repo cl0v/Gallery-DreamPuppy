@@ -53,7 +53,7 @@ class OnRedirectContactUsecase {
 
   Future<void> launchWhatsapp(BuildContext context, String whatsapp,
       [String message =
-          'Olá, vim pela DreamPuppy. O filhote do anúncio ainda está disponível?']) async {
+          'O filhote do anúncio ainda está disponível?']) async {
     debugPrint(
         '//TODO: Adicionar uma mensagem personalizada e de pedido de suporte');
     final nativeWhatsapp = getNativeWhatsAppUri(whatsapp, message);

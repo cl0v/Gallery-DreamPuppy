@@ -7,7 +7,7 @@ import 'package:gallery/src/http/endpoint.dart';
 import '../domain/entities/kennel_entity.dart';
 
 abstract class KennelDatasource {
-  Future<KennelDetails> fetch(int id);
+  Future<KennelDetails> fetch(dynamic id);
 }
 
 class KennelDatasourceImpl implements KennelDatasource {
@@ -16,7 +16,7 @@ class KennelDatasourceImpl implements KennelDatasource {
   KennelDatasourceImpl(this.client);
 
   @override
-  Future<KennelDetails> fetch(int id) async {
+  Future<KennelDetails> fetch(dynamic id) async {
     var response = await client.get(Uri.parse('$baseUrl/kennels/$id'));
 
     client.close();

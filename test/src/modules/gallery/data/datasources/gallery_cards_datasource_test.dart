@@ -26,14 +26,14 @@ void main() {
           (_) async => response,
         );
 
-        var (data, err) = await datasource.getEntities(amount);
+        var (data, err) = await datasource.getEntities(amount, 1);
 
         expect(err, equals(null));
-        expect(data.first.id, equals(11));
-        expect(data.first.url, equals("https://i.imgur.com/4nusSJC.jpeg"));
-        expect(data.last.id, equals(116));
+        expect(data?.cards.first.id, equals(11));
+        expect(data?.cards.first.url, equals("https://i.imgur.com/4nusSJC.jpeg"));
+        expect(data?.cards.last.id, equals(116));
         expect(
-            data.last.url,
+            data?.cards.last.url,
             equals(
               "https://devapigallery.blob.core.windows.net/bbac8099910041cfa3cd8f9f869d25f3/546877e157a44b4d9f8728f20bc0183c.jpeg",
             ));

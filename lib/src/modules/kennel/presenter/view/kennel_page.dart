@@ -22,7 +22,7 @@ class KennelPage extends StatefulWidget {
     required this.kennelId,
   });
 
-  final int kennelId;
+  final dynamic kennelId;
   @override
   State<KennelPage> createState() => _KennelPageState();
 }
@@ -32,6 +32,7 @@ class _KennelPageState extends State<KennelPage> {
   @override
   void initState() {
     // TODO: implement initState
+    print('Iniciouuuuuu');
     _future = kennelIoC.get<KennelDatasource>().fetch(widget.kennelId);
     super.initState();
   }
