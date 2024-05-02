@@ -53,7 +53,7 @@ class OnRedirectContactUsecase {
     final webInstagram = getWebInstagramUri(instagram);
     final androidInstagram = getWebInstagramUri(instagram);
     // final androidInstagram = getAndroidInstagramUri(instagram);
-    launch(
+    await launch(
       context,
       nativeInstagram,
       webInstagram,
@@ -89,7 +89,7 @@ class OnRedirectContactUsecase {
 
   @visibleForTesting
   Uri getWebWhatsAppUri(String number, String message) =>
-      Uri.parse("https://api.whatsapp.com/send/?phone=55$number&text=$message");
+      Uri.parse("https://api.whatsapp.com/send?phone=55$number&text=$message");
 
   @visibleForTesting
   Uri getAndroidWhatsAppUri(String number, String message) =>

@@ -21,7 +21,7 @@ GalleryCardEntity _$GalleryCardEntityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GalleryCardEntity {
   int get id => throw _privateConstructorUsedError;
-  String get uuid => throw _privateConstructorUsedError;
+  String? get uuid => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $GalleryCardEntityCopyWith<$Res> {
           GalleryCardEntity value, $Res Function(GalleryCardEntity) then) =
       _$GalleryCardEntityCopyWithImpl<$Res, GalleryCardEntity>;
   @useResult
-  $Res call({int id, String uuid, String url});
+  $Res call({int id, String? uuid, String url});
 }
 
 /// @nodoc
@@ -53,7 +53,7 @@ class _$GalleryCardEntityCopyWithImpl<$Res, $Val extends GalleryCardEntity>
   @override
   $Res call({
     Object? id = null,
-    Object? uuid = null,
+    Object? uuid = freezed,
     Object? url = null,
   }) {
     return _then(_value.copyWith(
@@ -61,10 +61,10 @@ class _$GalleryCardEntityCopyWithImpl<$Res, $Val extends GalleryCardEntity>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      uuid: null == uuid
+      uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -81,7 +81,7 @@ abstract class _$$GalleryCardEntityImplCopyWith<$Res>
       __$$GalleryCardEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String uuid, String url});
+  $Res call({int id, String? uuid, String url});
 }
 
 /// @nodoc
@@ -96,7 +96,7 @@ class __$$GalleryCardEntityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? uuid = null,
+    Object? uuid = freezed,
     Object? url = null,
   }) {
     return _then(_$GalleryCardEntityImpl(
@@ -104,10 +104,10 @@ class __$$GalleryCardEntityImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      uuid: null == uuid
+      uuid: freezed == uuid
           ? _value.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -122,7 +122,7 @@ class _$GalleryCardEntityImpl
     with DiagnosticableTreeMixin
     implements _GalleryCardEntity {
   const _$GalleryCardEntityImpl(
-      {required this.id, required this.uuid, required this.url});
+      {required this.id, this.uuid, required this.url});
 
   factory _$GalleryCardEntityImpl.fromJson(Map<String, dynamic> json) =>
       _$$GalleryCardEntityImplFromJson(json);
@@ -130,7 +130,7 @@ class _$GalleryCardEntityImpl
   @override
   final int id;
   @override
-  final String uuid;
+  final String? uuid;
   @override
   final String url;
 
@@ -181,7 +181,7 @@ class _$GalleryCardEntityImpl
 abstract class _GalleryCardEntity implements GalleryCardEntity {
   const factory _GalleryCardEntity(
       {required final int id,
-      required final String uuid,
+      final String? uuid,
       required final String url}) = _$GalleryCardEntityImpl;
 
   factory _GalleryCardEntity.fromJson(Map<String, dynamic> json) =
@@ -190,7 +190,7 @@ abstract class _GalleryCardEntity implements GalleryCardEntity {
   @override
   int get id;
   @override
-  String get uuid;
+  String? get uuid;
   @override
   String get url;
   @override

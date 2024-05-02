@@ -8,7 +8,7 @@ part 'gallery_card_entity.g.dart';
 class GalleryCardEntity with _$GalleryCardEntity {
   const factory GalleryCardEntity({
     required int id,
-    required String uuid,
+    String? uuid,
     required String url,
   }) = _GalleryCardEntity;
 

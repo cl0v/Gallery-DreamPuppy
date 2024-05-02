@@ -11,6 +11,8 @@
 		<string>iPets</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
+		<key>NSLocationWhenInUseUsageDescription</key>
+    	<string>Sua localização é necessária para listar os filhotes mais próximos</string>
 		<key>CFBundleIdentifier</key>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 		<key>CFBundleInfoDictionaryVersion</key>

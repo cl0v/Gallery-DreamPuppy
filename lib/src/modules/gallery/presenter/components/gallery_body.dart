@@ -107,7 +107,7 @@ class _GalleryBodyState extends State<GalleryBody> {
               return GestureDetector(
                 onTap: () => Navigator.of(context).push(CupertinoPageRoute(
                   builder: (context) => DetailsPage(
-                    petUuid: cards[index].uuid,
+                    petUuid: cards[index].uuid ?? cards[index].id.toString(),
                   ),
                 )),
                 child: Semantics(

@@ -71,7 +71,8 @@ class GalleryPageBloc extends Bloc<GalleryPageEvent, GalleryPageState> {
     Emitter<GalleryPageState> emit,
   ) async {
     emit(GalleryPageLoadingState());
-
+    //TODO: A primeira vez das coordenadas não está sendo exibido
+    debugPrint('A primeira vez das coordenadas não está sendo exibido');
     GeoCoordinates? coordinates;
     
     try {
