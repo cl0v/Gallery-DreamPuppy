@@ -30,7 +30,7 @@ void main() {
         print(state.toString());
       });
 
-      bloc.add((3));
+      bloc.add((RequestNewPageGalleryGridEvent()));
 
       await Future.delayed(const Duration(seconds: 8));
     },
@@ -52,7 +52,7 @@ void main() {
   test('Garante que está chegando filhotes de 1 em 1 ', skip: false, () async {
     // # Testar o fetch e 
 
-    bloc.add(3);
+    bloc.add(RequestNewPageGalleryGridEvent());
     await expectLater(
       bloc.stream,
       emitsInOrder(

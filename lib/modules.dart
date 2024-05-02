@@ -15,7 +15,7 @@ abstract class AuthModule extends Module {
 }
 
 abstract class GalleryModule extends Module {
-GalleryModule(super.ioc);
+  GalleryModule(super.ioc);
 }
 
 abstract class PuppyModule extends Module {

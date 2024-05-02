@@ -6,10 +6,9 @@
 		<true />
 		<key>CFBundleDevelopmentRegion</key>
 		<string>$(DEVELOPMENT_LANGUAGE)</string>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Localização necessária para listar os filhotes com base na proximidade do Canil.</string>
+		<key>ITSAppUsesNonExemptEncryption</key><false/>
 		<key>CFBundleDisplayName</key>
-		<string>Dream Puppy Gallery</string>
+		<string>iPets</string>
 		<key>CFBundleExecutable</key>
 		<string>$(EXECUTABLE_NAME)</string>
 		<key>CFBundleIdentifier</key>
@@ -17,7 +16,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>dreampuppy</string>
+		<string>iPets</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>

@@ -47,8 +47,10 @@ class _AppWidgetState extends State<AppWidget> {
     return CupertinoApp.router(
       routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
-      title: 'DreamPuppy - Galeria de Filhotes',
-      theme: const CupertinoThemeData(),
+      title: 'iPets',
+      theme: const CupertinoThemeData(
+        brightness: Brightness.light,
+      ),
     );
   }
 }
