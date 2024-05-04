@@ -25,7 +25,8 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   void initState() {
-    _future = puppyIoC.get<PuppyDetailsDatasource>().getEntityByUuid(widget.petUuid);
+    _future =
+        puppyIoC.get<PuppyDetailsDatasource>().getEntityByUuid(widget.petUuid);
 
     super.initState();
   }
@@ -33,13 +34,13 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
+      navigationBar: const CupertinoNavigationBar(
         previousPageTitle: 'Galeria',
         automaticallyImplyLeading: true,
-        middle: const Text('Detalhes'),
-        trailing: Tooltip(
+        middle: Text('Detalhes'),
+        /*trailing: Tooltip(
           // O google anvisou que está faltando suporte para screen readers para acessibilidade
-          message: 'Pedir ajuda ao suporte pelo WhatsApp',
+          message: 'Ver informações sobre a página',
           child: IconButton(
             icon: const Icon(
               Icons.help,
@@ -49,7 +50,7 @@ class _DetailsPageState extends State<DetailsPage> {
               context.pushNamed('wiki');
             },
           ),
-        ),
+        ),*/
       ),
       child: SafeArea(
         child: FutureBuilder<PuppyDetailsEntity>(

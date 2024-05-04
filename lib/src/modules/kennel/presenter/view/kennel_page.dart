@@ -31,8 +31,6 @@ class _KennelPageState extends State<KennelPage> {
   late Future<KennelDetails> _future;
   @override
   void initState() {
-    // TODO: implement initState
-    print('Iniciouuuuuu');
     _future = kennelIoC.get<KennelDatasource>().fetch(widget.kennelId);
     super.initState();
   }
