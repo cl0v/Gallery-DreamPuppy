@@ -17,9 +17,12 @@ GoRouter appRouter = GoRouter(
         GoRoute(
           name: 'filhotes',
           path: 'filhotes/:id',
-          builder: (context, state) => DetailsPage(
+          builder: (context, state) {
+            print('Entrou por deep?');
+            return DetailsPage(
             petUuid: extractUuidFromUrl(state.pathParameters['id'] as String),
-          ),
+          );
+          },
         ),
         GoRoute(
           name: 'kennel',

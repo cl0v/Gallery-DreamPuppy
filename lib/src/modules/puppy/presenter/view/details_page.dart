@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:gallery/src/commons/presenter/components/loaders_indicators.dart';
 import 'package:gallery/src/modules/puppy/domain/entities/puppy_details_entity.dart';
 import 'package:gallery/src/modules/puppy/puppy_module.dart';
-import 'package:go_router/go_router.dart';
 import '../../data/puppy_datasource.dart';
 
 import 'details_body.dart';

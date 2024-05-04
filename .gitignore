@@ -4,9 +4,9 @@
 .dart_tool/
 .packages
 build/
-android/
+# android/
 # If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+# pubspec.lock
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
@@ -67,9 +67,9 @@ app.*.symbols
 app.*.map.json
 
 # Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+# /android/app/debug
+# /android/app/profile
+# /android/app/release
 *.lock
 test/widget_test.dart
 assets/ca/lets-encrypt-r3.pem
