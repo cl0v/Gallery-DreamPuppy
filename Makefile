@@ -11,9 +11,10 @@ run:
 	make default-minimal-run
 
 cleanrun:
-	xcrun simctl uninstall 2497924F-222E-49E7-A6CB-36B2F3808DB1 com.dreampuppy
+	# adb uninstall com.dreampuppy.gallery
+	xcrun simctl uninstall booted com.dreampuppy
 	flutter clean
 	flutter run
 
 openurl:
-	xcrun simctl openurl 2497924F-222E-49E7-A6CB-36B2F3808DB1  https://www.dreampuppy.com.br/filhotes/2
+	xcrun simctl openurl booted  https://www.dreampuppy.com.br/filhotes/2
