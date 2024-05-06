@@ -18,7 +18,7 @@ GoRouter appRouter = GoRouter(
           name: 'filhotes',
           path: 'filhotes/:id',
           builder: (context, state) => DetailsPage(
-            petUuid: extractUuidFromUrl(state.pathParameters['id'] as String),
+            petUuid: extractUuidFromPath(state.pathParameters['id'] as String),
           ),
         ),
         GoRoute(

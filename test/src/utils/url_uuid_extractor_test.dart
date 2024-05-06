@@ -5,15 +5,15 @@ void main() {
   test(
       'Garante que o link de compartilhamente receba apenas o UUID do filhote e ignore a raça',
       () async {
-    var url = 'https://www.dreampuppy.com.br/filhotes/rottweiler-759d452acd6d4754a7443d4cbdd66c60';
-    var extracted = extractUuidFromUrl(url);
+    var url = 'rottweiler-759d452acd6d4754a7443d4cbdd66c60';
+    var extracted = extractUuidFromPath(url);
     expect(extracted, equals('759d452acd6d4754a7443d4cbdd66c60'));
   });
   test(
       'Garante que o link de compartilhamente receba apenas o UUID do filhote',
       () async {
-    var url = 'https://www.dreampuppy.com.br/filhotes/759d452acd6d4754a7443d4cbdd66c60';
-    var extracted = extractUuidFromUrl(url);
+    var url = '759d452acd6d4754a7443d4cbdd66c60';
+    var extracted = extractUuidFromPath(url);
     expect(extracted, equals('759d452acd6d4754a7443d4cbdd66c60'));
   });
 }
